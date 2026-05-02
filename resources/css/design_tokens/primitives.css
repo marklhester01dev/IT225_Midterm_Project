@@ -1,0 +1,182 @@
+:root {
+  /* VALUES */
+  --val-minus-1: -1px;
+  --val-null: 0px;
+  --val-05px: 0.5px;
+  --val-1px: 1px;
+  --val-2px: 2px;
+  --val-minus-2: -2px;
+  --val-4px: 4px;
+  --val-minus-4: -4px;
+  --val-6px: 6px;
+  --val-8px: 8px;
+  --val-10px: 10px;
+  --val-minus-10: -10px;
+  --val-12px: 12px;
+  --val-14px: 14px;
+  --val-16px: 16px;
+  --val-minus-16: -16px;
+  --val-18px: 18px;
+  --val-20px: 20px;
+  --val-22px: 22px;
+  --val-24px: 24px;
+  --val-minus-24: -24px;
+  --val-26px: 26px;
+  --val-28px: 28px;
+  --val-32px: 32px;
+  --val-36px: 36px;
+  --val-40px: 40px;
+  --val-44px: 44px;
+  --val-48px: 48px;
+  --val-52px: 52px;
+  --val-56px: 56px;
+  --val-60px: 60px;
+  --val-64px: 64px;
+  --val-68px: 68px;
+  --val-72px: 72px;
+  --val-76px: 76px;
+  --val-80px: 80px;
+  --val-84px: 84px;
+  --val-88px: 88px;
+  --val-92px: 92px;
+  --val-96px: 96px;
+  --val-128px: 128px;
+  --val-256px: 256px;
+  --val-512px: 512px;
+  --val-1024px: 1024px;
+  --val-1200px: 1200px;
+  --val-1600px: 1600px;
+  --val-infinity: 9999px;
+
+  /*  TYPOGRAPHY - height */
+  --height-4XS: 14;
+  --height-3XS: 18;
+  --height-2XS: 20;
+  --height-XS: 24;
+  --height-SM: 28;
+  --height-MD: 34;
+  --height-LG: 52;
+  --height-LG-3X: 64;
+  --height-LG-4x: 84;
+  --height-LG-5X: 108;
+  --height-LG-6X: 132;
+
+  /*  TYPOGRAPHY - size */
+  --size-4XS: 8px;
+  --size-3XS: 10px;
+  --size-XXS: 12px;
+  --size-XS: 14px;
+  --size-SM: 16px;
+  --size-MD: 18px;
+  --size-LG: 20px;
+  --size-LG-2X: 36px;
+  --size-LG-3X: 48px;
+  --size-LG-4X: 64px;
+  --size-LG-5X: 72px;
+  --size-LG-6X: 96px;
+
+  /*  TYPOGRAPHY - weight */
+  --weight-LIGHT: 300;
+  --weight-REGULAR: 400;
+  --weight-MEDIUM: 500;
+  --weight-SEMI-BOLD: 600;
+  --weight-BOLD: 700;
+
+  /*  TYPOGRAPHY - typeface */
+  --tf-DISPLAY: Manrope, Inter, Arial;
+  --tf-HEADING: Manrope, Inter, Arial;
+  --tf-BODY: Inter, Manrope, Arial;
+  --tf-CAPTION: Inter, Manrope, Arial;
+
+  /* COLORS - Accent */
+  --accent-blue-25: #f5f9ff;
+  --accent-blue-50: #ecf5ff;
+  --accent-blue-100: #d7eaff;
+  --accent-blue-200: #b0d4ff;
+  --accent-blue-300: #88bfff;
+  --accent-blue-400: #61aaff;
+  --accent-blue-500: #3994ff;
+  --accent-blue-600: #1873de;
+  --accent-blue-700: #0053b5;
+  --accent-blue-800: #00418e;
+  --accent-blue-900: #002a5c;
+  --accent-white-900: #ffffff;
+
+  /* COLORS - Neutral */
+  --gray-strong-25: #bcc3e3;
+  --gray-strong-50: #9da6cb;
+  --gray-strong-100: #8791b7;
+  --gray-strong-200: #6a749c;
+  --gray-strong-300: #475175;
+  --gray-strong-400: #384162;
+  --gray-strong-500: #2f3757;
+  --gray-strong-600: #242a46;
+  --gray-strong-700: #1b2037;
+  --gray-strong-800: #151a2d;
+  --gray-strong-900: #0e1223;
+
+  /* COLORS - Brand Primary 1*/
+  --black-25: #f2f2f2;
+  --black-50: #e6e6e6;
+  --black-100: #cccccc;
+  --black-200: #b3b3b3;
+  --black-300: #999999;
+  --black-400: #808080;
+  --black-500: #666666;
+  --black-600: #4d4d4d;
+  --black-700: #333333;
+  --black-800: #1a1a1a;
+  --black-900: #000000;
+
+  /* COLORS - Brand Primary 2*/
+  --gray-soft-25: #fafafa;
+  --gray-soft-50: #f0f1f3;
+  --gray-soft-100: #e0e2e7;
+  --gray-soft-200: #c2c6ce;
+  --gray-soft-300: #a3a9b6;
+  --gray-soft-400: #858d9d;
+  --gray-soft-500: #667085;
+  --gray-soft-600: #59647a;
+  --gray-soft-700: #525d73;
+  --gray-soft-800: #4a556c;
+  --gray-soft-900: #404a60;
+
+  /* COLORS - Feedback Success*/
+  --positive-25: #f4fcf7;
+  --positive-50: #e9faf0;
+  --positive-100: #d3f4e0;
+  --positive-200: #a7e9c1;
+  --positive-300: #7bdfa3;
+  --positive-400: #4fd484;
+  --positive-500: #23c965;
+  --positive-600: #08b94e;
+  --positive-700: #02983e;
+  --positive-800: #00732e;
+  --positive-900: #00481d;
+
+  /* COLORS - Feedback Warning*/
+  --negative-25: #fff8f7;
+  --negative-50: #fff1f0;
+  --negative-100: #ffe2e0;
+  --negative-200: #ffc6c2;
+  --negative-300: #ffa9a3;
+  --negative-400: #ff8d85;
+  --negative-500: #ff554a;
+  --negative-600: #ea483d;
+  --negative-700: #d7392e;
+  --negative-800: #c8271c;
+  --negative-900: #b71409;
+
+  /* COLORS - Feedback Pending*/
+  --warning-25: #fffcf6;
+  --warning-50: #fff9ed;
+  --warning-100: #fff3db;
+  --warning-200: #ffe6b7;
+  --warning-300: #ffda92;
+  --warning-400: #ffcd6e;
+  --warning-500: #ffc14a;
+  --warning-600: #eba622;
+  --warning-700: #d18a02;
+  --warning-800: #9f6800;
+  --warning-900: #5a3b00;
+}

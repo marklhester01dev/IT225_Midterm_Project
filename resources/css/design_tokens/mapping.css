@@ -1,0 +1,215 @@
+/* Mapping */
+:root {
+  /* PROPERTIES - Radius */
+  --radius-NONE: var(--val-null);
+  --radius-XSM: var(--val-1px);
+  --radius-SM: var(--val-2px);
+  --radius-SM-2X: var(--val-4px);
+  --radius-SM-3X: var(--val-6px);
+  --radius-SM-4X: var(--val-8px);
+  --radius-MD: var(--val-12px);
+  --radius-MD-2X: var(--val-16px);
+  --radius-MD-3X: var(--val-18px);
+  --radius-MD-LG: var(--val-20px);
+  --radius-MD-LG-2X: var(--val-24px);
+  --radius-MD-LG-3X: var(--val-32px);
+  --radius-MD-LG-4X: var(--val-40px);
+  --radius-INFINITY: var(--val-infinity);
+
+  /* PROPERTIES - Stroke */
+  --stroke-NULL: var(--val-null);
+  --stroke-XSM: var(--val-05px);
+  --stroke-SM: var(--val-1px);
+  --stroke-MD: var(--val-2px);
+  --stroke-LG: var(--val-4px);
+  --stroke-XL: var(--val-8px);
+
+  /* PROPERTIES - Padding */
+  --padding-minus-1: var(--val-minus-1);
+  --padding-null: var(--val-null);
+  --padding-1px: var(--val-1px);
+  --padding-2px: var(--val-2px);
+  --padding-4px: var(--val-4px);
+  --padding-6px: var(--val-6px);
+  --padding-8px: var(--val-8px);
+  --padding-10px: var(--val-10px);
+  --padding-minus-10: var(--val-minus-10);
+  --padding-12px: var(--val-12px);
+  --padding-14px: var(--val-14px);
+  --padding-16px: var(--val-16px);
+  --padding-minus-16: var(--val-minus-16);
+  --padding-18px: var(--val-18px);
+  --padding-20px: var(--val-20px);
+  --padding-24px: var(--val-24px);
+  --padding-minus-24: var(--val-minus-24);
+  --padding-28px: var(--val-28px);
+  --padding-32px: var(--val-32px);
+  --padding-36px: var(--val-36px);
+  --padding-40px: var(--val-40px);
+  --padding-44px: var(--val-44px);
+  --padding-48px: var(--val-48px);
+  --padding-52px: var(--val-52px);
+  --padding-56px: var(--val-56px);
+  --padding-60px: var(--val-60px);
+  --padding-64px: var(--val-64px);
+  --padding-68px: var(--val-68px);
+  --padding-72px: var(--val-72px);
+  --padding-76px: var(--val-76px);
+  --padding-80px: var(--val-80px);
+  --padding-84px: var(--val-84px);
+  --padding-88px: var(--val-88px);
+  --padding-92px: var(--val-92px);
+  --padding-96px: var(--val-96px);
+  --padding-128px: var(--val-128px);
+  --padding-256px: var(--val-256px);
+  --padding-512px: var(--val-512px);
+  --padding-1024px: var(--val-1024px);
+  --padding-1200px: var(--val-1200px);
+  --padding-1600px: var(--val-1600px);
+
+  /* PROPERTIES - Gap */
+  --gap-minus-1: var(--val-minus-1);
+  --gap-null: var(--val-null);
+  --gap-1px: var(--val-1px);
+  --gap-2px: var(--val-2px);
+  --gap-minus-2: var(--val-minus-2);
+  --gap-4px: var(--val-4px);
+  --gap-minus-4: var(--val-minus-4);
+  --gap-6px: var(--val-6px);
+  --gap-8px: var(--val-8px);
+  --gap-10px: var(--val-10px);
+  --gap-minus-10: var(--val-minus-10);
+  --gap-12px: var(--val-12px);
+  --gap-14px: var(--val-14px);
+  --gap-16px: var(--val-16px);
+  --gap-minus-16: var(--val-minus-16);
+  --gap-18px: var(--val-18px);
+  --gap-20px: var(--val-20px);
+  --gap-24px: var(--val-24px);
+  --gap-minus-24: var(--val-minus-24);
+  --gap-28px: var(--val-28px);
+  --gap-32px: var(--val-32px);
+  --gap-36px: var(--val-36px);
+  --gap-40px: var(--val-40px);
+  --gap-44px: var(--val-44px);
+  --gap-48px: var(--val-48px);
+  --gap-52px: var(--val-52px);
+  --gap-56px: var(--val-56px);
+  --gap-60px: var(--val-60px);
+  --gap-64px: var(--val-64px);
+  --gap-68px: var(--val-68px);
+  --gap-72px: var(--val-72px);
+  --gap-76px: var(--val-76px);
+  --gap-80px: var(--val-80px);
+  --gap-84px: var(--val-84px);
+  --gap-88px: var(--val-88px);
+  --gap-92px: var(--val-92px);
+  --gap-96px: var(--val-96px);
+  --gap-128px: var(--val-128px);
+  --gap-256px: var(--val-256px);
+  --gap-512px: var(--val-512px);
+  --gap-1024px: var(--val-1024px);
+  --gap-1200px: var(--val-1200px);
+  --gap-1600px: var(--val-1600px);
+
+  /* Continue at the Icon */
+  /* ICON - List */
+  --list-icon-primary: var(--black-700);
+  --list-text-primary: var(--gray-soft-25);
+  --list-text-primary-reverse: var(--black-800);
+  --list-icon-stroke-primary: var(--black-300);
+
+  /* ICON -  Info */
+  --info-icon-white: var(--gray-soft-25);
+  --info-icon-gray: var(--gray-soft-500);
+  --info-icon-black: var(--black-800);
+  --info-icon-success: var(--positive-700);
+  --info-icon-warning: var(--negative-500);
+  --info-icon-pending: var(--warning-700);
+  --info-icon-note: var(--accent-blue-500);
+  --icon-color: var(--black-800);
+  --icon-field: var(--gray-soft-500);
+  --icon-color-reversed: var(--gray-soft-25);
+  --icon-best-selling: var(--warning-500);
+
+  /* ICON -  Action */
+  --action-btn: var(--gray-soft-25);
+  --action-btn-reverse: var(--black-800);
+
+  /* TYPOGRAPHY -  Display */
+  --display-text-primary: var(--black-800);
+
+  /* TYPOGRAPHY -  Heading */
+  --heading-primary: var(--black-800);
+  --heading-primary-reverse: var(--gray-soft-25);
+
+  /* TYPOGRAPHY -  Caption */
+  --caption-btn-primary: var(--gray-soft-25);
+  --caption-btn-primary-reverse: var(--black-800);
+  --caption-text-primary: var(--black-800);
+  --caption-text-primary-reverse: var(--gray-soft-25);
+  --caption-text-gray: var(--gray-soft-500);
+
+  /* TYPOGRAPHY -  Body */
+  --body-text-primary: var(--black-800);
+  --body-text-primary-reverse: var(--gray-soft-25);
+  --body-text-gray: var(--gray-soft-500);
+
+  /* TYPOGRAPHY -  Body: Info */
+  --info-text-black: var(--black-800);
+  --info-text-gray: var(--gray-soft-500);
+  --info-text-success: var(--positive-700);
+  --info-text-warning: var(--negative-500);
+  --info-text-pending: var(--warning-700);
+  --info-text-note: var(--accent-blue-500);
+
+  /* COMPONENTS - Navigation */
+  --nav-stroke: var(--gray-soft-50);
+  --floating-nav-unactivated: var(--black-900);
+  --floating-nav-activated: var(--black-700);
+
+  /* COMPONENTS - Background */
+  --background-default: var(--gray-soft-25);
+  --background-card: var(--gray-soft-50);
+  --background-reverse: var(--black-800);
+  --background-hover: var(--gray-soft-25);
+  --background-active: var(--gray-soft-50);
+  --background-focused: var(--black-800);
+  --tooltip-accent: var(--black-800);
+  --screen-background: var(--accent-white-900);
+
+  /* COMPONENTS - Table */
+  --header-primary: var(--gray-soft-800);
+  --table-primary-bg: var(--gray-soft-25);
+  --table-text-primary: var(--black-800);
+  --table-line-primary: var(--black-800);
+  --table-row-column-bg: var(--gray-soft-50);
+
+  /* COMPONENTS - Stock Level */
+  --high-stock: var(--positive-500);
+  --medium-stock: var(--warning-700);
+  --low-stock: var(--negative-500);
+
+  /* COMPONENTS - Input */
+  --input-disable: var(--black-500);
+  --input-focused: var(--black-900);
+  --input-error: var(--negative-500);
+  --input-success: var(--positive-500);
+  --input-background: var(--accent-white-900);
+  --input-stroke: var(--gray-soft-200);
+
+  /* COMPONENTS - Card */
+  --card-stroke: var(--gray-soft-500);
+  --card-glass-morphism-stroke: var(--accent-white-900);
+
+  /* COMPONENTS - Form */
+  --stroke-login: var(--black-800);
+  --form-bg: var(--accent-white-900);
+
+  /* COMPONENTS - Button: Fill*/
+  --btn-primary: var(--black-800);
+  --btn-primary-active: var(--black-900);
+  --btn-reversed: var(--gray-soft-50);
+  --btn-reversed-active: var(--gray-soft-100);
+  --btn-stroke: var(--black-800);
+}
