@@ -1,88 +1,88 @@
 :root {
   /* VALUES */
-  --val-minus-1: -1px;
-  --val-null: 0px;
-  --val-05px: 0.5px;
-  --val-1px: 1px;
-  --val-2px: 2px;
-  --val-minus-2: -2px;
-  --val-4px: 4px;
-  --val-minus-4: -4px;
-  --val-6px: 6px;
-  --val-8px: 8px;
-  --val-10px: 10px;
-  --val-minus-10: -10px;
-  --val-12px: 12px;
-  --val-14px: 14px;
-  --val-16px: 16px;
-  --val-minus-16: -16px;
-  --val-18px: 18px;
-  --val-20px: 20px;
-  --val-22px: 22px;
-  --val-24px: 24px;
-  --val-minus-24: -24px;
-  --val-26px: 26px;
-  --val-28px: 28px;
-  --val-32px: 32px;
-  --val-36px: 36px;
-  --val-40px: 40px;
-  --val-44px: 44px;
-  --val-48px: 48px;
-  --val-52px: 52px;
-  --val-56px: 56px;
-  --val-60px: 60px;
-  --val-64px: 64px;
-  --val-68px: 68px;
-  --val-72px: 72px;
-  --val-76px: 76px;
-  --val-80px: 80px;
-  --val-84px: 84px;
-  --val-88px: 88px;
-  --val-92px: 92px;
-  --val-96px: 96px;
-  --val-128px: 128px;
-  --val-256px: 256px;
-  --val-512px: 512px;
-  --val-1024px: 1024px;
-  --val-1200px: 1200px;
-  --val-1600px: 1600px;
-  --val-infinity: 9999px;
+  --val-minus-1: -0.0625rem;
+  --val-null: 0rem;
+  --val-05px: 0.03125rem;
+  --val-1px: 0.0625rem;
+  --val-2px: 0.125rem;
+  --val-minus-2: -0.125rem;
+  --val-4px: 0.25rem;
+  --val-minus-4: -0.25rem;
+  --val-6px: 0.375rem;
+  --val-8px: 0.5rem;
+  --val-10px: 0.625rem;
+  --val-minus-10: -0.625rem;
+  --val-12px: 0.75rem;
+  --val-14px: 0.875rem;
+  --val-16px: 1rem;
+  --val-minus-16: -1rem;
+  --val-18px: 1.125rem;
+  --val-20px: 1.25rem;
+  --val-22px: 1.375rem;
+  --val-24px: 1.5rem;
+  --val-minus-24: -1.5rem;
+  --val-26px: 1.625rem;
+  --val-28px: 1.75rem;
+  --val-32px: 2rem;
+  --val-36px: 2.25rem;
+  --val-40px: 2.5rem;
+  --val-44px: 2.75rem;
+  --val-48px: 2.8125rem;
+  --val-52px: 3.25rem;
+  --val-56px: 3.5rem;
+  --val-60px: 3.75rem;
+  --val-64px: 4rem;
+  --val-68px: 4.25rem;
+  --val-72px: 4.5rem;
+  --val-76px: 4.75rem;
+  --val-80px: 5rem;
+  --val-84px: 5.25rem;
+  --val-88px: 5.5rem;
+  --val-92px: 5.75rem;
+  --val-96px: 6rem;
+  --val-128px: 8rem;
+  --val-256px: 16rem;
+  --val-512px: 32rem;
+  --val-1024px: 64rem;
+  --val-1200px: 75rem;
+  --val-1600px: 100rem;
+  --val-infinity: 9999rem;
 
-  /*  TYPOGRAPHY - height */
-  --height-4XS: 14;
-  --height-3XS: 18;
-  --height-2XS: 20;
-  --height-XS: 24;
-  --height-SM: 28;
-  --height-MD: 34;
-  --height-LG: 52;
-  --height-LG-3X: 64;
-  --height-LG-4x: 84;
-  --height-LG-5X: 108;
-  --height-LG-6X: 132;
+  /* TYPOGRAPHY - line-height (rem) */
+  --lh-4XS: 0.875rem;
+  --lh-3XS: 1.125rem;
+  --lh-2XS: 1.25rem;
+  --lh-XS: 1.5rem;
+  --lh-SM: 1.75rem;
+  --lh-MD: 2.125rem;
+  --lh-LG: 3.25rem;
+  --lh-LG-3X: 4rem;
+  --lh-LG-4x: 5.25rem;
+  --lh-LG-5X: 6.75rem;
+  --lh-LG-6X: 8.25rem;
 
-  /*  TYPOGRAPHY - size */
-  --size-4XS: 8px;
-  --size-3XS: 10px;
-  --size-XXS: 12px;
-  --size-XS: 14px;
-  --size-SM: 16px;
-  --size-MD: 18px;
-  --size-LG: 20px;
-  --size-LG-2X: 36px;
-  --size-LG-3X: 48px;
-  --size-LG-4X: 64px;
-  --size-LG-5X: 72px;
-  --size-LG-6X: 96px;
+  /* TYPOGRAPHY - size (rem) */
+  --size-4XS: 0.5rem;
+  --size-3XS: 0.625rem;
+  --size-XXS: 0.75rem;
+  --size-XS: 0.875rem;
+  --size-SM: 1rem;
+  --size-MD: 1.125rem;
+  --size-LG: 1.25rem;
+  --size-LG-2X: 2.25rem;
+  --size-LG-3X: 3rem;
+  --size-LG-4X: 4rem;
+  --size-LG-5X: 4.5rem;
+  --size-LG-6X: 6rem;
 
-  /*  TYPOGRAPHY - weight */
+  /* TYPOGRAPHY - weight */
   --weight-LIGHT: 300;
   --weight-REGULAR: 400;
   --weight-MEDIUM: 500;
   --weight-SEMI-BOLD: 600;
   --weight-BOLD: 700;
 
-  /*  TYPOGRAPHY - typeface */
+  /* TYPOGRAPHY - typeface */
   --tf-DISPLAY: Manrope, Inter, Arial;
   --tf-HEADING: Manrope, Inter, Arial;
   --tf-BODY: Inter, Manrope, Arial;
@@ -147,10 +147,10 @@
   --positive-100: #d3f4e0;
   --positive-200: #a7e9c1;
   --positive-300: #7bdfa3;
-  --positive-400: #4fd484;
+  --positive-400: 4fd484;
   --positive-500: #23c965;
   --positive-600: #08b94e;
-  --positive-700: #02983e;
+  --positive-500: #02983e;
   --positive-800: #00732e;
   --positive-900: #00481d;
 
@@ -169,7 +169,7 @@
 
   /* COLORS - Feedback Pending*/
   --warning-25: #fffcf6;
-  --warning-50: #fff9ed;
+  --warning-50: #ff9ed;
   --warning-100: #fff3db;
   --warning-200: #ffe6b7;
   --warning-300: #ffda92;

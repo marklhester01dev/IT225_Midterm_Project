@@ -67,6 +67,49 @@
   --padding-1200px: var(--val-1200px);
   --padding-1600px: var(--val-1600px);
 
+  /* PROPERTIES - Margin */
+  --margin-minus-1: var(--val-minus-1);
+  --margin-null: var(--val-null);
+  --margin-1px: var(--val-1px);
+  --margin-2px: var(--val-2px);
+  --margin-4px: var(--val-4px);
+  --margin-6px: var(--val-6px);
+  --margin-8px: var(--val-8px);
+  --margin-10px: var(--val-10px);
+  --margin-minus-10: var(--val-minus-10);
+  --margin-12px: var(--val-12px);
+  --margin-14px: var(--val-14px);
+  --margin-16px: var(--val-16px);
+  --margin-minus-16: var(--val-minus-16);
+  --margin-18px: var(--val-18px);
+  --margin-20px: var(--val-20px);
+  --margin-24px: var(--val-24px);
+  --margin-minus-24: var(--val-minus-24);
+  --margin-28px: var(--val-28px);
+  --margin-32px: var(--val-32px);
+  --margin-36px: var(--val-36px);
+  --margin-40px: var(--val-40px);
+  --margin-44px: var(--val-44px);
+  --margin-48px: var(--val-48px);
+  --margin-52px: var(--val-52px);
+  --margin-56px: var(--val-56px);
+  --margin-60px: var(--val-60px);
+  --margin-64px: var(--val-64px);
+  --margin-68px: var(--val-68px);
+  --margin-72px: var(--val-72px);
+  --margin-76px: var(--val-76px);
+  --margin-80px: var(--val-80px);
+  --margin-84px: var(--val-84px);
+  --margin-88px: var(--val-88px);
+  --margin-92px: var(--val-92px);
+  --margin-96px: var(--val-96px);
+  --margin-128px: var(--val-128px);
+  --margin-256px: var(--val-256px);
+  --margin-512px: var(--val-512px);
+  --margin-1024px: var(--val-1024px);
+  --margin-1200px: var(--val-1200px);
+  --margin-1600px: var(--val-1600px);
+
   /* PROPERTIES - Gap */
   --gap-minus-1: var(--val-minus-1);
   --gap-null: var(--val-null);
@@ -165,6 +208,7 @@
 
   /* COMPONENTS - Navigation */
   --nav-stroke: var(--gray-soft-50);
+  --message-stroke: var(--black-800);
   --floating-nav-unactivated: var(--black-900);
   --floating-nav-activated: var(--black-700);
 
@@ -194,6 +238,7 @@
   --input-disable: var(--black-500);
   --input-focused: var(--black-900);
   --input-error: var(--negative-500);
+  --input-error-light: var(--negative-400);
   --input-success: var(--positive-500);
   --input-background: var(--accent-white-900);
   --input-stroke: var(--gray-soft-200);
@@ -212,4 +257,7 @@
   --btn-reversed: var(--gray-soft-50);
   --btn-reversed-active: var(--gray-soft-100);
   --btn-stroke: var(--black-800);
+
+  /* EFFECTS - Blur */
+  --blur-layer-soft: var(--val-6px);
 }
