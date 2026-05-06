@@ -1,0 +1,26 @@
+body {
+  background: var(--background-default);
+  min-height: 100vh;
+  min-height: 100svh;
+  position: relative;
+}
+
+.container {
+  position: relative;
+  flex-direction: row;
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  padding: var(--padding-80px) var(--padding-16px) var(--padding-16px)
+    var(--padding-16px);
+  transition: padding 0.2s ease;
+}
+
+@media (min-width: 767px) {
+  .main {
+    padding: var(--padding-24px) var(--padding-24px) var(--padding-24px)
+      var(--padding-274px);
+  }
+}

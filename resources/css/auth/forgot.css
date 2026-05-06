@@ -1,10 +1,11 @@
+/* Forgot Password CSS - Based on login.css */
 body {
   display: flex;
   align-items: center;
   justify-content: center;
   height: 100vh;
   height: 100svh;
-  background: url(../images/stall/Night_Shot_5.svg);
+  background: url(../../images/stall/Night_Shot_5.svg);
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
@@ -24,7 +25,6 @@ form {
   font-family: var(--tf-BODY);
   font-size: var(--size-XS);
   line-height: var(--lh-2XS);
-  background-color: var(--negative-200);
   background-color: var(--background-default);
   color: var(--caption-text-primary);
   font-weight: var(--weight-MEDIUM);
@@ -66,8 +66,6 @@ form {
 .form_container {
   border: var(--stroke-XSM) solid var(--stroke-login);
   width: 100%;
-  /* min-width: 320px;
-  max-width: 400px; */
   height: 100%;
 }
 
@@ -85,10 +83,7 @@ form {
   background-color: var(--screen-background);
   width: 100%;
   height: 100%;
-  border-top-left-radius: var(--radius-SM-3X);
-  border-bottom-left-radius: var(--radius-SM-3X);
-  border-top-right-radius: var(--radius-SM-3X);
-  border-bottom-right-radius: var(--radius-SM-3X);
+  border-radius: var(--radius-SM-3X);
   gap: var(--gap-20px);
 }
 
@@ -140,13 +135,6 @@ form {
   border-bottom-right-radius: var(--radius-MD);
 }
 
-/* Desktop */
-.form_logo_container,
-.form_logo {
-  border-top-right-radius: var(--radius-MD);
-  border-bottom-right-radius: var(--radius-MD);
-}
-
 .input_container {
   margin-bottom: var(--margin-16px);
   width: 100%;
@@ -156,20 +144,6 @@ form {
   display: flex;
   flex-direction: column;
   gap: var(--gap-4px);
-}
-
-.input_container a {
-  display: block;
-  margin-left: auto;
-  text-decoration: none;
-  font-size: var(--size-XXS);
-  color: var(--info-text-gray);
-  font-family: var(--tf-BODY);
-  line-height: var(--lh-2XS);
-}
-
-.input_container a:hover {
-  text-decoration: underline;
 }
 
 input {

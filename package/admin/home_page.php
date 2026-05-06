@@ -3,7 +3,7 @@ session_start();
 
 // Redirect to login if not authenticated
 if (!isset($_SESSION['user'])) {
-    header("Location: ../index.php");
+    header("Location: ../../index.php");
     exit();
 }
 
@@ -104,36 +104,24 @@ $best_monthly = $conn->query("
      <meta name="description" content="Al Coffee System Dashboard & Inventory - Monitor daily sales, track inventory levels, and analyze top-selling products. Access real-time insights to optimize your coffee business operations.">
      <!-- SEO -->
 
-    <link rel="stylesheet" href="../resources/css/general.css">
-    <link rel="stylesheet" href="../resources/css/design_tokens/primitives.css">
-    <link rel="stylesheet" href="../resources/css/design_tokens/mapping.css">
-    <link rel="stylesheet" href="../resources/css/partials/header.css">
-<link rel="stylesheet" href="../resources/css/partials/side_nav.css">
-     <link rel="stylesheet" href="../resources/css/dashboard.css">
+    <link rel="stylesheet" href="../../resources/css/general.css">
+    <link rel="stylesheet" href="../../resources/css/design_tokens/primitives.css">
+    <link rel="stylesheet" href="../../resources/css/design_tokens/mapping.css">
+    <link rel="stylesheet" href="../../resources/css/partials/header.css">
+    <link rel="stylesheet" href="../../resources/css/partials/side_nav.css">
+     <link rel="stylesheet" href="../../resources/css/main_interface.css">
+     <link rel="stylesheet" href="../../resources/css/dashboard.css">
 
-    <link rel="icon" type="image/svg+xml" href="../resources/images/logo/logo_black.svg">
+    <link rel="icon" type="image/svg+xml" href="../../resources/images/logo/logo_black.svg">
     
     <title>Dashboard - Al Coffee</title>
 </head>
 <body>
 
-<header class="header--flex">
-    <div class="header_left-container header_left-container--flex">
-        
-            <img class="burger_icon_mobile" src="../resources/images/icons/Menu/Hamburger_LG.svg" alt="Menu">
-
-    </div>
-
-    <div class="header_right-container header_right-container--flex"> 
-        <a href="admin/admin.php">
-             <img src="../resources/images/logo/Logo_Black.svg" alt="Admin Menu" class="business_logo_mobile">
-        </a>
-    </div>
-</header>
-
 <div class="container">
-    <?php require 'partials/header.php'; ?>
-    <?php require 'partials/sidenav.php'; ?>
+    <?php include '../partials/header.php'; ?>
+    <?php require '../partials/sidenav.php'; ?>
+    
     <!-- Main content -->
     <div class="main">
 
@@ -192,7 +180,7 @@ $best_monthly = $conn->query("
                 <tr>
                     <td style="text-align: left;">
                         <?php if (!empty($i['image'])): ?>
-                            <img src="../resources/images/uploads/<?= htmlspecialchars($i['image']) ?>"
+                            <img src="../../resources/images/uploads/<?= htmlspecialchars($i['image']) ?>"
                                  style="width: 36px; height: 36px; object-fit: cover; border-radius: 4px; vertical-align: middle; margin-right: 8px;">
                         <?php endif; ?>
                         <?= htmlspecialchars($i['ingredient_name']) ?>
@@ -221,7 +209,7 @@ $best_monthly = $conn->query("
             <?php while ($b = $best_daily->fetch_assoc()): ?>
                 <tr>
                     <td style="text-align: left;">
-                        <img src="../resources/images/uploads/<?= htmlspecialchars($b['image']) ?>"
+                        <img src="../../resources/images/uploads/<?= htmlspecialchars($b['image']) ?>"
                              class="prod-img-thumb">
                         &nbsp;<?= htmlspecialchars($b['product_name']) ?>
                     </td>
@@ -246,7 +234,7 @@ $best_monthly = $conn->query("
             <?php while ($b = $best_weekly->fetch_assoc()): ?>
                 <tr>
                     <td style="text-align: left;">
-                        <img src="../resources/images/uploads/<?= htmlspecialchars($b['image']) ?>"
+                        <img src="../../resources/images/uploads/<?= htmlspecialchars($b['image']) ?>"
                              class="prod-img-thumb">
                         &nbsp;<?= htmlspecialchars($b['product_name']) ?>
                     </td>
@@ -271,7 +259,7 @@ $best_monthly = $conn->query("
             <?php while ($b = $best_monthly->fetch_assoc()): ?>
                 <tr>
                     <td style="text-align: left;">
-                        <img src="../resources/images/uploads/<?= htmlspecialchars($b['image']) ?>"
+                        <img src="../../resources/images/uploads/<?= htmlspecialchars($b['image']) ?>"
                              class="prod-img-thumb">
                         &nbsp;<?= htmlspecialchars($b['product_name']) ?>
                     </td>
@@ -287,7 +275,7 @@ $best_monthly = $conn->query("
 </div>
 <!-- Container Main -->
         
-<script src="../resources/js/partials/sidebar.js" type="text/javascript" defer></script>
-<script src="../resources/js/partials/menu_mobile.js" type="text/javascript" defer></script>
+<script src="../../resources/js/partials/sidebar.js" type="text/javascript" defer></script>
+<script src="../../resources/js/partials/menu_mobile.js" type="text/javascript" defer></script>
 </body>
 </html>

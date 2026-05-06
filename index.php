@@ -26,7 +26,7 @@ session_start();
     <link rel="stylesheet" href="resources/css/general.css">
     <link rel="stylesheet" href="resources/css/design_tokens/primitives.css">
     <link rel="stylesheet" href="resources/css/design_tokens/mapping.css">
-    <link rel="stylesheet" href="resources/css/login.css">
+    <link rel="stylesheet" href="resources/css/auth/login.css">
 
     <link rel="icon" type="image/svg+xml" href="resources/images/logo/logo_black.svg">
     
@@ -78,7 +78,7 @@ session_start();
             <input type="password" name="password"
             placeholder="******" id="password" required>
               <span class="input_message"></span>
-               <a href="package/forgot_password.php">Forgot Password?</a>
+               <a href="package/auth/forgot_password.php">Forgot Password?</a>
 </div>
 <!-- Input Container -->
 
@@ -88,7 +88,7 @@ session_start();
         <div class="help_register-container help_register-container--flex">
             <p class="register-text">
             Don't have an account?</p>
-            <a href="package/register.php" class="register-link">Create Account</a>
+            <a href="package/auth/register.php" class="register-link">Create Account</a>
         </div>
     </div>
     <!-- Container -->

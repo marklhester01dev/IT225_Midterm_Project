@@ -10,9 +10,9 @@ const ICON_WIDTH = "90px";
 const FULL_WIDTH = "250px";
 
 const PADDING_ICON =
-  "var(--padding-24px) var(--padding-24px) var(--padding-24px) var(--padding-114px)";
+  "var(--padding-80px) var(--padding-24px) var(--padding-24px) var(--padding-114px)";
 const PADDING_FULL =
-  "var(--padding-24px) var(--padding-24px) var(--padding-24px) var(--padding-274px)";
+  "var(--padding-80px) var(--padding-24px) var(--padding-24px) var(--padding-274px)";
 
 const setState = (iconMode) => {
   isIconMode = iconMode;

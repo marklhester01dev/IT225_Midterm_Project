@@ -17,16 +17,13 @@
 
 .sidenav_mobile {
   display: none;
-  padding-top: var(--padding-60px);
-  width: 100%;
   background: var(--screen-background);
   position: absolute;
   left: 0;
   right: 0;
-  top: 0;
+  top: var(--val-60px);
   z-index: 9997;
 }
-
 .sidenav_main-container .sidenav_main,
 .sidenav_footer-container .logout_container--flex {
   padding: var(--padding-16px);
@@ -86,9 +83,12 @@
   flex: 1;
 }
 
+.sidenav.collapsed .sidenav_logo-admin {
+  display: none;
+}
+
 .sidenav_logo-admin--flex {
   justify-content: flex-start;
-  transition: display 0.2s ease;
 }
 
 .sidenav_header-container--flex {
@@ -103,9 +103,16 @@
   background-color: var(--btn-hover);
 }
 
-.sidenav_main-container .sidenav_main:active,
-.sidenav_movbile_main:active {
+.sidenav_main-container .sidenav_main--active:hover {
+  background-color: var(--btn-primary-active);
+}
+
+.sidenav_main-container .sidenav_main p:active {
   background-color: var(--btn-active);
+}
+
+.sidenav_main-container .sidenav_main--active:active {
+  background-color: var(--btn-primary-active);
 }
 
 .sidenav_footer-container .logout_container:hover,
@@ -137,9 +144,35 @@
   line-height: var(--lh-SM);
 }
 
+.sidenav_main--active {
+  background-color: var(--btn-primary-active);
+}
+
+.sidenav_main--active p {
+  color: var(--caption-text-primary-reverse) !important;
+  opacity: 1;
+}
+
+.sidenav_main--active img,
+.sidenav.collapsed .sidenav_main--active img {
+  filter: brightness(0) invert(1);
+}
+
+.sidenav.collapsed .sidenav_main--active {
+  background-color: var(--btn-primary-active, var(--black-800));
+}
+
 .sidenav_mobile_main p {
   font-size: var(--size-XS);
   line-height: var(--lh-2XS);
+}
+
+.sidenav_mobile_main--active {
+  background-color: var(--btn-primary-active, var(--black-800));
+}
+
+.sidenav_mobile_main--active p {
+  color: var(--caption-text-primary-reverse);
 }
 
 .sidenav_main-container a p,
@@ -181,7 +214,30 @@
 .sidenav.collapsed .tooltip {
   opacity: 0;
   pointer-events: none;
-  transition: opacity 0.2 ease;
+}
+
+/* Icon mode: tooltip when hovering the icon link : FIRST HARD REFRESH*/
+.sidenav.collapsed .sidenav_main:hover .tooltip,
+.sidenav.collapsed
+  .sidenav_footer-container
+  .logout_container--flex:hover
+  .tooltip,
+.sidenav.collapsed .sidenav_main:hover .tooltip,
+.sidenav.collapsed
+  .sidenav_header-container
+  .sidenav_header_icon-container:hover
+  .tooltip {
+  opacity: 1;
+  pointer-events: none;
+}
+
+/* Expanded mode: show Collapse tooltip when hovering the header icon */
+.sidenav:not(.collapsed)
+  .sidenav_header-container
+  .sidenav_header_icon-container:hover
+  .tooltip_collapse {
+  opacity: 1;
+  pointer-events: auto;
 }
 
 .tooltip_collapse {
@@ -248,12 +304,33 @@
   transition: display 0.2s ease;
 }
 
+.alert-nav-badge {
+  position: absolute;
+  top: 90px;
+  right: 16px;
+  background: #e53935;
+  color: #fff;
+  border-radius: 50%;
+  font-size: 10px;
+  font-weight: 700;
+  width: 18px;
+  height: 18px;
+  line-height: 18px;
+  text-align: center;
+  margin-left: 4px;
+  vertical-align: middle;
+}
+
 @media (min-width: 767px) {
   .sidenav {
     display: block;
     position: fixed;
   }
 
+  .alert-nav-badge {
+    top: 0px;
+    right: 0px;
+  }
   .sidenav_mobile {
     display: none;
   }

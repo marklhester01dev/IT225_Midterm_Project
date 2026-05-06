@@ -132,130 +132,33 @@ $logs = $conn->query("SELECT * FROM audit_logs ORDER BY created_at DESC LIMIT 20
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Admin System</title>
 
-    <style>
-        body {
-            margin: 0;
-            font-family: Arial;
-            background: #f4f4f4;
-        }
+ <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <!-- SEO -->
+    <meta name="author" content="Al Coffee">
+    <meta name="description" content="Al Coffee Reports & Analytics - Generate detailed reports, analyze sales and inventory data, and gain real-time insights to support informed decisions and improve overall business performance.">
+     <!-- SEO -->
 
-        .title-bar {
-            background: #222;
-            color: white;
-            padding: 15px;
-        }
+    <link rel="stylesheet" href="../../resources/css/general.css">
+    <link rel="stylesheet" href="../../resources/css/design_tokens/primitives.css">
+    <link rel="stylesheet" href="../../resources/css/design_tokens/mapping.css">
+    <link rel="stylesheet" href="../../resources/css/partials/header.css">
+    <link rel="stylesheet" href="../../resources/css/partials/side_nav.css">
+    <link rel="stylesheet" href="../../resources/css/main_interface.css">
+     <link rel="stylesheet" href="../../resources/css/admin.css">
 
-        .container {
-            display: flex;
-        }
-
-        .sidebar {
-            width: 220px;
-            background: #111;
-            color: white;
-            min-height: 100vh;
-            padding: 15px;
-        }
-
-        .sidebar a {
-            color: white;
-            display: block;
-            margin: 10px 0;
-            text-decoration: none;
-        }
-
-        .sidebar a:hover {
-            background: #333;
-            padding-left: 10px;
-        }
-
-        .main {
-            flex: 1;
-            padding: 20px;
-        }
-
-        .card {
-            background: white;
-            padding: 15px;
-            margin: 10px 0;
-            border-radius: 6px;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            background: white;
-        }
-
-        th {
-            background: #222;
-            color: white;
-            padding: 10px;
-        }
-
-        td {
-            padding: 10px;
-            text-align: center;
-            border-bottom: 1px solid #ddd;
-        }
-
-        img {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            object-fit: cover;
-        }
-
-        input, select {
-            padding: 8px;
-            margin: 5px 0;
-            width: 100%;
-        }
-
-        button {
-            padding: 10px;
-            background: #222;
-            color: white;
-            border: none;
-            cursor: pointer;
-            margin: 5px 0;
-        }
-
-        button:hover {
-            background: #444;
-        }
-
-        .reset-btn {
-            background: red !important;
-        }
-    </style>
+    <link rel="icon" type="image/svg+xml" href="../../resources/images/logo/logo_black.svg">
+     
+<title>Admin — Al Coffee</title>
 </head>
 
 <body>
 
-<!-- Title bar -->
-<div class="title-bar">
-    Al Coffee's Sales and Inventory Management System<br>
-    Welcome <?= htmlspecialchars($username) ?>
-</div>
-
 <div class="container">
 
-    <!-- Sidebar navigation -->
-    <div class="sidebar">
-        <h2>MENU</h2>
-        <a href="../home_page.php">Dashboard</a>
-        <a href="products.php">Products</a>
-        <a href="inventory.php">Inventory</a>
-        <a href="sales.php">Sales</a>
-        <a href="reports_analysis.php">Reports</a>
-        <a href="admin.php">Admin</a>
-        <a href="../logout.php" style="color:red;" onclick="return confirm('Are you sure you want to log out?')">
-            Logout
-        </a>
-    </div>
+    <?php include '../partials/header.php'; ?>
+    <?php require '../partials/sidenav.php'; ?>
 
     <div class="main">
 
@@ -349,7 +252,7 @@ $logs = $conn->query("SELECT * FROM audit_logs ORDER BY created_at DESC LIMIT 20
                 <tr>
                     <td>
                         <?php if ($u['avatar']): ?>
-                            <img src="../../resources/images/uploads/<?= $u['avatar'] ?>">
+                            <img class="avatar_img" src="../../resources/images/uploads/<?= $u['avatar'] ?>" alt="Avatar">
                         <?php endif; ?>
                     </td>
                     <td><?= htmlspecialchars($u['fullname']) ?></td>
@@ -402,6 +305,7 @@ $logs = $conn->query("SELECT * FROM audit_logs ORDER BY created_at DESC LIMIT 20
 
     </div>
 </div>
-
+         <script src="../../resources/js/partials/sidebar.js" type="text/javascript" defer></script>
+        <script src="../../resources/js/partials/menu_mobile.js" type="text/javascript" defer></script>
 </body>
 </html>

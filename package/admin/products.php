@@ -229,47 +229,34 @@ $statuses   = ["Available", "Unavailable"];
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Product Management</title>
-    <link rel="stylesheet" href="../../resources/css/main_css.css">
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <!-- SEO -->
+    <meta name="author" content="Al Coffee">
+    <meta name="description" content="Al Coffee Products Management - Manage product listings, update prices, organize categories, and monitor availability in real time. Ensure efficient product control and streamlined operations for your coffee business.">
+     <!-- SEO -->
 
-    <style>
-        img {
-            width: 60px;
-            height: 60px;
-            object-fit: cover;
-        }
-    </style>
+    <link rel="stylesheet" href="../../resources/css/general.css">
+    <link rel="stylesheet" href="../../resources/css/design_tokens/primitives.css">
+    <link rel="stylesheet" href="../../resources/css/design_tokens/mapping.css">
+    <link rel="stylesheet" href="../../resources/css/partials/header.css">
+    <link rel="stylesheet" href="../../resources/css/partials/side_nav.css">
+    <link rel="stylesheet" href="../../resources/css/main_interface.css">
+    <link rel="stylesheet" href="../../resources/css/products.css">
+
+    <link rel="icon" type="image/svg+xml" href="../../resources/images/logo/logo_black.svg">
+    
+    <title>Product Management - Al Coffee</title>
+
 </head>
 
 <body>
 
-<div class="title-bar">
-    Al Coffee's Sales and Inventory Management System
-</div>
-
 <div class="container">
-
-    <!-- Sidebar navigation -->
-    <div class="sidebar">
-        <h2>MENU</h2>
-        <ul>
-            <li><a href="../home_page.php">Dashboard</a></li>
-            <li><a href="products.php">Products</a></li>
-            <li><a href="inventory.php">Inventory</a></li>
-            <li><a href="sales.php">Sales</a></li>
-            <li><a href="reports_analysis.php">Reports</a></li>
-            <li><a href="admin.php">Admin</a></li>
-            <li>
-                <a href="../logout.php"
-                   style="color:red;"
-                   onclick="return confirm('Are you sure you want to log out?')">
-                    Logout
-                </a>
-            </li>
-        </ul>
-    </div>
-
+    
+    <?php include '../partials/header.php'; ?>
+    <?php require '../partials/sidenav.php'; ?>
+    
     <div class="main">
 
         <h1>PRODUCT REGISTRY</h1>
@@ -381,7 +368,7 @@ $statuses   = ["Available", "Unavailable"];
                 <td>
                     <?php if (!empty($row['image'])): ?>
                         <img src="../../resources/images/uploads/<?= htmlspecialchars($row['image']) ?>"
-                             alt="<?= htmlspecialchars($row['product_name']) ?>">
+                             alt="<?= htmlspecialchars($row['product_name']) ?>" class="product_image" style="width: 60px">
                     <?php endif; ?>
                 </td>
 
@@ -417,6 +404,7 @@ $statuses   = ["Available", "Unavailable"];
 
     </div>
 </div>
-
+        <script src="../../resources/js/partials/sidebar.js" type="text/javascript" defer></script>
+        <script src="../../resources/js/partials/menu_mobile.js" type="text/javascript" defer></script>
 </body>
 </html>

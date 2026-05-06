@@ -212,107 +212,29 @@ if (isset($_GET['export']) && $_GET['export'] === 'excel') {
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
+    <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <!-- SEO -->
+    <meta name="author" content="Al Coffee">
+    <meta name="description" content="Al Coffee Reports & Analytics - Generate detailed reports, analyze sales and inventory data, and gain real-time insights to support informed decisions and improve overall business performance.">
+     <!-- SEO -->
+
+    <link rel="stylesheet" href="../../resources/css/general.css">
+    <link rel="stylesheet" href="../../resources/css/design_tokens/primitives.css">
+    <link rel="stylesheet" href="../../resources/css/design_tokens/mapping.css">
+    <link rel="stylesheet" href="../../resources/css/partials/header.css">
+    <link rel="stylesheet" href="../../resources/css/partials/side_nav.css">
+    <link rel="stylesheet" href="../../resources/css/main_interface.css">
+     <link rel="stylesheet" href="../../resources/css/reports.css">
+
+    <link rel="icon" type="image/svg+xml" href="../../resources/images/logo/logo_black.svg">
+     
 <title>Reports & Analysis — Al Coffee</title>
-<style>
-body { margin: 0; font-family: Arial; background: #f4f4f4; }
-
-/* Title bar */
-.title-bar {
-    background: #222;
-    color: white;
-    padding: 15px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-.title-bar .filter-links a {
-    color: white;
-    text-decoration: none;
-    font-size: 13px;
-    padding: 5px 12px;
-    border: 1px solid #555;
-    border-radius: 4px;
-    margin-left: 6px;
-}
-.title-bar .filter-links a.active-filter {
-    background: white;
-    color: #222;
-    border-color: white;
-    font-weight: bold;
-}
-.title-bar .filter-links a.btn-excel {
-    background: #1d6f42;
-    border-color: #1d6f42;
-    color: white;
-    font-weight: bold;
-}
-.title-bar .filter-links a.btn-excel:hover { background: #155233; }
-
-/* Layout */
-.container { display: flex; }
-.sidebar   { width: 220px; background: #111; color: white; min-height: 100vh; padding: 15px; }
-.sidebar a { display: block; color: white; margin: 10px 0; text-decoration: none; }
-.sidebar a:hover { color: #ccc; }
-.main { flex: 1; padding: 20px; }
-
-/* Hero */
-.hero        { text-align: center; padding: 20px 0 10px; border-bottom: 2px solid #ddd; margin-bottom: 16px; }
-.hero-label  { font-size: 12px; color: #888; letter-spacing: 2px; text-transform: uppercase; }
-.hero-amount { font-size: 46px; font-weight: bold; color: #111; margin: 4px 0 0; }
-
-/* Stat strip */
-.stat-strip              { display: flex; border-top: 2px solid #222; border-bottom: 2px solid #222; background: white; margin-bottom: 24px; }
-.stat-strip .stat-item   { flex: 1; padding: 14px 18px; border-right: 1px solid #ddd; }
-.stat-strip .stat-item:last-child { border-right: none; }
-.stat-item .s-label      { font-size: 10px; text-transform: uppercase; letter-spacing: 1px; color: #888; }
-.stat-item .s-value      { font-size: 22px; font-weight: bold; color: #111; margin-top: 2px; }
-
-/* Section titles */
-.section-title   { font-size: 15px; font-weight: bold; border-left: 4px solid #222; padding-left: 8px; margin: 20px 0 10px; }
-.section-title a { float: right; font-size: 12px; font-weight: normal; color: #888; text-decoration: none; }
-.period-heading  { font-size: 11px; font-weight: bold; letter-spacing: 2px; text-transform: uppercase; color: #555; background: #eee; padding: 6px 10px; margin-top: 16px; }
-
-/* Tables */
-table { width: 100%; background: white; border-collapse: collapse; margin-bottom: 4px; }
-th    { background: #222; color: white; padding: 10px; font-size: 13px; }
-td    { padding: 10px; border-bottom: 1px solid #ddd; text-align: center; font-size: 13px; }
-tr:last-child td { border-bottom: none; }
-
-.prod-img-thumb { width: 40px; height: 40px; object-fit: cover; border-radius: 6px; vertical-align: middle; margin-right: 8px; }
-
-/* Stock text colors */
-.stock-bad  { color: #e53935; font-weight: bold; }
-.stock-mid  { color: #fb8c00; font-weight: bold; }
-.stock-good { color: #43a047; font-weight: bold; }
-
-/* Inventory filter bar */
-.inv-filters           { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; flex-wrap: wrap; }
-.inv-filters select    { padding: 7px 12px; border: 1px solid #ddd; border-radius: 6px; font-size: 13px; background: white; cursor: pointer; }
-.inv-filters select:hover { border-color: #222; }
-.inv-submit-btn        { background: #222; color: white; border: none; border-radius: 6px; padding: 7px 14px; font-size: 13px; font-weight: bold; cursor: pointer; }
-.inv-submit-btn:hover  { background: #444; }
-.inv-clear-btn         { background: white; color: #888; border: 1px solid #ddd; border-radius: 6px; padding: 7px 14px; font-size: 13px; cursor: pointer; text-decoration: none; }
-.inv-clear-btn:hover   { border-color: #222; color: #222; }
-
-/* Active filter tags */
-.filter-active-tag   { font-size: 12px; background: #222; color: white; border-radius: 20px; padding: 3px 10px; display: inline-flex; align-items: center; gap: 6px; }
-.filter-active-tag a { color: #aaa; text-decoration: none; font-weight: bold; }
-.filter-active-tag a:hover { color: white; }
-
-/* Stock status badges */
-.badge-bad  { background: #fef2f2; color: #e53935; font-size: 11px; font-weight: bold; padding: 2px 8px; border-radius: 20px; }
-.badge-mid  { background: #fff8f0; color: #fb8c00; font-size: 11px; font-weight: bold; padding: 2px 8px; border-radius: 20px; }
-.badge-good { background: #f1f8f1; color: #43a047; font-size: 11px; font-weight: bold; padding: 2px 8px; border-radius: 20px; }
-
-.no-data { color: #aaa; font-size: 13px; padding: 12px 0; display: block; }
-</style>
 </head>
 <body>
 
 <!-- TITLE BAR + FILTER LINKS -->
 <div class="title-bar">
-    <span>Al Coffee — Reports &amp; Analysis &nbsp;|&nbsp; Welcome <?= htmlspecialchars($username) ?></span>
     <div class="filter-links">
         <a href="?filter=daily"    class="<?= $filter === 'daily'   ? 'active-filter' : '' ?>">Daily</a>
         <a href="?filter=weekly"   class="<?= $filter === 'weekly'  ? 'active-filter' : '' ?>">Weekly</a>
@@ -323,19 +245,9 @@ tr:last-child td { border-bottom: none; }
 </div>
 
 <div class="container">
-
-    <!-- SIDEBAR -->
-    <div class="sidebar">
-        <h2>MENU</h2>
-        <a href="../home_page.php">Dashboard</a>
-        <a href="products.php">Products</a>
-        <a href="inventory.php">Inventory</a>
-        <a href="sales.php">Sales</a>
-        <a href="reports_analysis.php">Reports</a>
-        <a href="admin.php">Admin</a>
-        <a href="../logout.php" style="color:red;"
-           onclick="return confirm('Are you sure you want to log out?')">Logout</a>
-    </div>
+    
+    <?php include '../partials/header.php'; ?>
+    <?php require '../partials/sidenav.php'; ?>
 
     <div class="main">
 
@@ -520,6 +432,7 @@ tr:last-child td { border-bottom: none; }
 
     </div>
 </div>
-
+        <script src="../../resources/js/partials/reports_sidebar.js" type="text/javascript" defer></script>
+        <script src="../../resources/js/partials/menu_mobile.js" type="text/javascript" defer></script>
 </body>
 </html>

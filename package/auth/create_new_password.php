@@ -3,7 +3,7 @@ session_start();
 
 if (!isset($_GET['user']) || empty($_GET['user'])) {
     $_SESSION['flash'] = ['type' => 'err', 'text' => 'Invalid link.'];
-    header('Location: ../index.php');
+    header('Location: ../../index.php');
     exit;
 }
 
@@ -23,21 +23,21 @@ $username = $_GET['user'];
     <!-- SMTags -->
     <meta property="og:title" content="Create New Password - Al Coffee">
     <meta property="og:description" content="Create New Password - Al Coffee. Set your new password.">
-    <meta property="og:image" content="../resources/images/logo/Logo_Black.svg">
+    <meta property="og:image" content="../../resources/images/logo/Logo_Black.svg">
     <meta property="twitter:card" content="Create New Password - Al Coffee">
     <meta property="twitter:title" content="Create New Password - Al Coffee">
     <meta property="twitter:description" content="Create New Password - Al Coffee. Set your new password.">
-    <meta property="twitter:image" content="../resources/images/logo/Logo_Black.svg">
+    <meta property="twitter:image" content="../../resources/images/logo/Logo_Black.svg">
     <!-- SMTags -->
 
     <title>Create New Password - Al Coffee</title>
-    <link rel="stylesheet" href="../resources/css/general.css">
-    <link rel="stylesheet" href="../resources/css/design_tokens/primitives.css">
-    <link rel="stylesheet" href="../resources/css/design_tokens/mapping.css">
-    <link rel="stylesheet" href="../resources/css/create_new.css">
+    <link rel="stylesheet" href="../../resources/css/general.css">
+    <link rel="stylesheet" href="../../resources/css/design_tokens/primitives.css">
+    <link rel="stylesheet" href="../../resources/css/design_tokens/mapping.css">
+    <link rel="stylesheet" href="../../resources/css/auth/create_new.css">
 
 
-    <link rel="icon" type="image/svg+xml" href="../resources/images/logo/Logo_Black.svg">
+    <link rel="icon" type="image/svg+xml" href="../../resources/images/logo/Logo_Black.svg">
 </head>
 <body>
 
@@ -57,7 +57,7 @@ $username = $_GET['user'];
         
             <div class="container container--flex">
                 <div class="logo_container logo_container--flex">
-                    <img class="login_logo" src="../resources/images/logo/Brown.svg" alt="Brand Logo">
+                    <img class="login_logo" src="../../resources/images/logo/Brown.svg" alt="Brand Logo">
                     <p class="logo_text">al coffee</p>
                 </div>
 
@@ -67,7 +67,7 @@ $username = $_GET['user'];
 
                     <div class="input_container input_container--flex">
                         <div class="label_container label_container--flex">
-                            <img src="../resources/images/icons/Interface/Lock.svg" alt="New Password Icon">
+                            <img src="../../resources/images/icons/Interface/Lock.svg" alt="New Password Icon">
                             <label for="new_password">New Password</label>
                         </div>
                         <input type="password" id="new_password" name="password" placeholder="******" required>
@@ -76,7 +76,7 @@ $username = $_GET['user'];
 
                     <div class="input_container input_container--flex">
                         <div class="label_container label_container--flex">
-                            <img src="../resources/images/icons/Interface/Lock.svg" alt="Confirm Password Icon">
+                            <img src="../../resources/images/icons/Interface/Lock.svg" alt="Confirm Password Icon">
                             <label for="confirm_password">Confirm New Password</label>
                         </div>
                         <input type="password" id="confirm_password" name="confirm_password" placeholder="******" required>
@@ -88,17 +88,17 @@ $username = $_GET['user'];
 
                 <div class="help_register-container help_register-container--flex">
                     <p>Back to login?</p>
-                    <a href="../index.php">Login</a>
+                    <a href="../../index.php">Login</a>
                 </div>
             </div>
         
             <div class="form_logo_container">
-                <img class="form_logo" src="../resources/images/stall/Night_Shot_5.svg" alt="al coffee Stall Captured in Night">
+                <img class="form_logo" src="../../resources/images/stall/Night_Shot_5.svg" alt="al coffee Stall Captured in Night">
             </div>
         </div>
     </div>
 
-    <script src="../resources/js/auth/create_new.js" type="text/javascript" defer></script>
+    <script src="../../resources/js/auth/create_new.js" type="text/javascript" defer></script>
 
 </body>
 </html>

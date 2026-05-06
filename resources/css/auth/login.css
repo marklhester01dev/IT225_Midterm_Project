@@ -1,11 +1,10 @@
-/* register.css - copy of login.css with register-form adjustments */
 body {
   display: flex;
   align-items: center;
   justify-content: center;
   height: 100vh;
   height: 100svh;
-  background: url(../images/stall/Night_Shot_5.svg);
+  background: url(../../images/stall/Night_Shot_5.svg);
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
@@ -52,11 +51,7 @@ form {
   width: 100%;
   height: 100%;
   min-height: 420px;
-  max-height: 640px;
-}
-
-.login_card .container {
-  overflow-y: auto;
+  max-height: 480px;
 }
 
 .login_card--flex {
@@ -70,6 +65,8 @@ form {
 .form_container {
   border: var(--stroke-XSM) solid var(--stroke-login);
   width: 100%;
+  /* min-width: 320px;
+  max-width: 400px; */
   height: 100%;
 }
 

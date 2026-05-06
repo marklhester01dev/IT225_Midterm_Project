@@ -280,371 +280,33 @@ if (!empty($_SESSION['notif'])) {
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Inventory</title>
+      <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <!-- SEO -->
+    <meta name="author" content="Al Coffee">
+    <meta name="description" content="Al Coffee Inventory System - Efficiently manage stock levels, record inventory transactions, track product availability, and generate real-time insights to support accurate and streamlined inventory operations.">
+     <!-- SEO -->
 
-    <link rel="stylesheet" href="../../resources/css/main_css.css">
-    <link rel="stylesheet" href="../../resources/css/homepages.css">
+    <link rel="stylesheet" href="../../resources/css/general.css">
+    <link rel="stylesheet" href="../../resources/css/design_tokens/primitives.css">
+    <link rel="stylesheet" href="../../resources/css/design_tokens/mapping.css">
+    <link rel="stylesheet" href="../../resources/css/partials/header.css">
+    <link rel="stylesheet" href="../../resources/css/partials/side_nav.css">
+    <link rel="stylesheet" href="../../resources/css/main_interface.css">
+     <link rel="stylesheet" href="../../resources/css/inventory.css">
 
-    <style>
-        input, select {
-            padding: 5px;
-            margin: 5px;
-        }
-
-        button {
-            padding: 5px 10px;
-            margin: 3px;
-        }
-
-        .sidebar-logout {
-            color: red;
-        }
-
-        /* Low stock alert banner */
-        #low-stock-alert {
-            position: relative;
-            background: #fff3cd;
-            border: 1px solid #ffc107;
-            border-left: 5px solid #e65100;
-            border-radius: 6px;
-            padding: 14px 40px 14px 16px;
-            margin-bottom: 20px;
-            animation: slideDown 0.3s ease;
-        }
-
-        @keyframes slideDown {
-            from { opacity: 0; transform: translateY(-8px); }
-            to   { opacity: 1; transform: translateY(0); }
-        }
-
-        #low-stock-alert .alert-header {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-weight: 700;
-            font-size: 15px;
-            color: #7a3a00;
-            margin-bottom: 8px;
-        }
-
-        #low-stock-alert .alert-header .bell-icon {
-            font-size: 18px;
-            animation: ring 1s ease 0.5s 2;
-            display: inline-block;
-        }
-
-        @keyframes ring {
-            0%, 100% { transform: rotate(0); }
-            20%       { transform: rotate(-20deg); }
-            40%       { transform: rotate(20deg); }
-            60%       { transform: rotate(-10deg); }
-            80%       { transform: rotate(10deg); }
-        }
-
-        #low-stock-alert .alert-items {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 6px;
-            margin-top: 4px;
-        }
-
-        #low-stock-alert .alert-tag {
-            background: #b71c1c;
-            color: #fff;
-            border-radius: 12px;
-            padding: 3px 10px;
-            font-size: 12px;
-            font-weight: 600;
-            white-space: nowrap;
-        }
-
-        #low-stock-alert .alert-count {
-            font-size: 13px;
-            color: #7a3a00;
-            margin-top: 6px;
-        }
-
-        #low-stock-alert .alert-count a {
-            color: #7a3a00;
-            font-weight: 600;
-        }
-
-        /* Badge shown on sidebar nav link */
-        .alert-nav-badge {
-            display: inline-block;
-            background: #e53935;
-            color: #fff;
-            border-radius: 50%;
-            font-size: 10px;
-            font-weight: 700;
-            width: 18px;
-            height: 18px;
-            line-height: 18px;
-            text-align: center;
-            margin-left: 4px;
-            vertical-align: middle;
-        }
-
-        /* Filter bar */
-        .filter-bar {
-            display: flex;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 8px;
-            margin-bottom: 16px;
-        }
-
-        .filter-bar input[type="text"] {
-            padding: 7px 12px;
-            border: 1px solid #ccc;
-            border-radius: 6px;
-            font-size: 14px;
-            min-width: 180px;
-        }
-
-        .filter-bar select {
-            padding: 7px 12px;
-            border: 1px solid #ccc;
-            border-radius: 6px;
-            font-size: 14px;
-            cursor: pointer;
-        }
-
-        .filter-search-btn {
-            padding: 7px 16px;
-            background: #333;
-            color: #fff;
-            border: none;
-            border-radius: 6px;
-            cursor: pointer;
-            font-size: 14px;
-        }
-
-        .filter-clear-btn {
-            padding: 7px 14px;
-            background: #eee;
-            color: #333;
-            border: 1px solid #ccc;
-            border-radius: 6px;
-            cursor: pointer;
-            font-size: 14px;
-            text-decoration: none;
-        }
-
-        /* Ingredient card list */
-        .ingredient-grid {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            margin-top: 10px;
-        }
-
-        .ingredient-card {
-            display: flex;
-            align-items: center;
-            background: #fff;
-            border: 1px solid #e0e0e0;
-            border-radius: 10px;
-            padding: 12px 16px;
-            gap: 16px;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.06);
-        }
-
-        .ingredient-card img {
-            width: 60px;
-            height: 60px;
-            object-fit: cover;
-            border-radius: 8px;
-            border: 1px solid #eee;
-            flex-shrink: 0;
-        }
-
-        .img-placeholder {
-            width: 60px;
-            height: 60px;
-            background: #f0f0f0;
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 22px;
-            flex-shrink: 0;
-        }
-
-        .card-info          { flex: 1; min-width: 0; }
-        .card-name          { font-weight: 700; font-size: 15px; margin-bottom: 4px; color: #1a1a1a; }
-        .card-stock-label   { font-size: 12px; color: #888; margin-bottom: 4px; }
-
-        /* Stock progress bar */
-        .stock-bar-wrap {
-            background: #eee;
-            border-radius: 6px;
-            height: 6px;
-            width: 100%;
-            margin-bottom: 5px;
-            overflow: hidden;
-        }
-
-        .stock-bar-fill { height: 6px; border-radius: 6px; }
-        .bar-low        { background: #e53935; }
-        .bar-mid        { background: #fb8c00; }
-        .bar-high       { background: #43a047; }
-
-        .card-stock-count {
-            font-size: 13px;
-            font-weight: 700;
-            display: flex;
-            align-items: center;
-            gap: 4px;
-        }
-
-        .card-stock-count.low  { color: #e53935; }
-        .card-stock-count.mid  { color: #fb8c00; }
-        .card-stock-count.high { color: #43a047; }
-
-        .card-right {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-end;
-            gap: 6px;
-            flex-shrink: 0;
-        }
-
-        .card-limit { font-size: 12px; color: #888; }
-
-        .card-unit {
-            font-size: 11px;
-            color: #aaa;
-            background: #f4f4f4;
-            border-radius: 8px;
-            padding: 2px 8px;
-        }
-
-        .card-actions { display: flex; gap: 5px; }
-
-        .btn-edit {
-            padding: 4px 12px;
-            background: #1565c0;
-            color: #fff;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 12px;
-        }
-
-        .btn-delete {
-            padding: 4px 12px;
-            background: #c62828;
-            color: #fff;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 12px;
-        }
-
-        .form-inline { display: inline; }
-
-        /* Toast notification container */
-        #notif-container {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            z-index: 9999;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            max-width: 340px;
-            pointer-events: none;
-        }
-
-        .notif-card {
-            display: flex;
-            align-items: flex-start;
-            gap: 12px;
-            padding: 14px 40px 14px 16px;
-            border-radius: 10px;
-            border: 1.5px solid transparent;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.12);
-            position: relative;
-            font-size: 14px;
-            pointer-events: all;
-            animation: notifSlideIn 0.4s cubic-bezier(.4,0,.2,1) forwards;
-        }
-
-        @keyframes notifSlideIn {
-            from { opacity: 0; transform: translateX(80px); }
-            to   { opacity: 1; transform: translateX(0); }
-        }
-
-        /* Notification color variants */
-        .notif-deleted              { background: #fff0f0; border-color: #f5c2c2; }
-        .notif-deleted .notif-icon  { color: #e53935; }
-        .notif-deleted .notif-title { color: #c62828; }
-
-        .notif-added,
-        .notif-updated                  { background: #f0fff4; border-color: #a8e6b8; }
-        .notif-added .notif-icon,
-        .notif-updated .notif-icon      { color: #2e7d32; }
-        .notif-added .notif-title,
-        .notif-updated .notif-title     { color: #1b5e20; }
-
-        .notif-lowstock                 { background: #fffbea; border-color: #ffe08a; }
-        .notif-lowstock .notif-icon     { color: #f59e0b; }
-        .notif-lowstock .notif-title    { color: #b45309; }
-
-        .notif-icon  { font-size: 20px; flex-shrink: 0; margin-top: 1px; }
-        .notif-body  { flex: 1; }
-        .notif-title { font-weight: 700; font-size: 13.5px; margin-bottom: 3px; }
-        .notif-msg   { color: #444; font-size: 13px; line-height: 1.4; }
-
-        .notif-close-link {
-            position: absolute;
-            top: 10px;
-            right: 12px;
-            font-size: 16px;
-            line-height: 1;
-            color: #999;
-            text-decoration: none;
-            font-weight: 700;
-        }
-
-        .notif-close-link:hover { color: #333; }
-
-        /* Staggered animation delay per notification card */
-        .notif-card:nth-child(1) { animation-delay: 0.00s; }
-        .notif-card:nth-child(2) { animation-delay: 0.10s; }
-        .notif-card:nth-child(3) { animation-delay: 0.20s; }
-        .notif-card:nth-child(4) { animation-delay: 0.30s; }
-        .notif-card:nth-child(5) { animation-delay: 0.40s; }
-    </style>
+    <link rel="icon" type="image/svg+xml" href="../../resources/images/logo/logo_black.svg">
+    
+    <title>Inventory Management - Al Coffee</title>
 </head>
 
 <body>
 
-<div class="title-bar">
-    Al Coffee's Sales and Inventory Management System
-</div>
-
 <div class="container">
+    
+ <?php include '../partials/header.php'; ?>
+ <?php require '../partials/sidenav.php'; ?>
 
-    <!-- Sidebar navigation -->
-    <div class="sidebar">
-        <h2>MENU</h2>
-        <a href="../home_page.php">Dashboard</a>
-        <a href="products.php">Products</a>
-        <a href="inventory.php">
-            Inventory
-            <?php if (count($lowStockAlerts) > 0): ?>
-                <span class="alert-nav-badge"><?= count($lowStockAlerts) ?></span>
-            <?php endif; ?>
-        </a>
-        <a href="sales.php">Sales</a>
-        <a href="reports_analysis.php">Reports</a>
-        <a href="admin.php">Admin</a>
-        <a href="../logout.php" class="sidebar-logout"
-           onclick="return confirm('Are you sure you want to log out?')">Logout</a>
-    </div>
 
     <div class="main">
 
@@ -883,6 +545,7 @@ if (!empty($_SESSION['notif'])) {
 
 </div>
 <?php endif; ?>
-
+        <script src="../../resources/js/partials/sidebar.js" type="text/javascript" defer></script>
+        <script src="../../resources/js/partials/menu_mobile.js" type="text/javascript" defer></script>
 </body>
 </html>

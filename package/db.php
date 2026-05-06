@@ -62,7 +62,7 @@ if ($action === 'login') {
 
             flash('ok', 'Login successful!');
             $stmt->close();
-            header("Location: home_page.php");
+            header("Location: admin/home_page.php");
             exit;
 
         } else {

@@ -201,136 +201,31 @@ unset($_SESSION['flash']);
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Sales — Al Coffee</title>
-    <style>
-        * { box-sizing: border-box; }
-        body { font-family: Arial, sans-serif; margin: 0; background: #f4f4f4; }
+    <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <!-- SEO -->
+    <meta name="author" content="Al Coffee">
+     <meta name="description" content="Al Coffee Sales Management - Track transactions, monitor income, analyze sales trends, and generate real-time reports to support data-driven decisions and efficient sales operations.">
+     <!-- SEO -->
 
-        /* Layout */
-        .title-bar { background: #222; color: white; padding: 15px 20px; }
-        .container  { display: flex; }
-        .sidebar    { width: 220px; background: #111; color: white; min-height: 100vh; padding: 15px; }
-        .sidebar a  { color: white; text-decoration: none; display: block; margin: 10px 0; }
-        .sidebar a:hover { color: #ccc; }
-        .main { flex: 1; padding: 20px; }
+    <link rel="stylesheet" href="../../resources/css/general.css">
+    <link rel="stylesheet" href="../../resources/css/design_tokens/primitives.css">
+    <link rel="stylesheet" href="../../resources/css/design_tokens/mapping.css">
+    <link rel="stylesheet" href="../../resources/css/partials/header.css">
+    <link rel="stylesheet" href="../../resources/css/partials/side_nav.css">
+    <link rel="stylesheet" href="../../resources/css/main_interface.css">
+     <link rel="stylesheet" href="../../resources/css/sales.css">
 
-        /* Flash messages */
-        .flash         { padding: 12px 18px; border-radius: 6px; margin-bottom: 16px; font-weight: 600; font-size: 14px; }
-        .flash-success { background: #e6f7ef; color: #1a7f4b; border: 1px solid #b2dfdb; }
-        .flash-error   { background: #fff0ef; color: #c0392b; border: 1px solid #ffcdd2; }
-
-        /* Summary cards */
-        .summary    { display: flex; gap: 12px; margin-bottom: 20px; flex-wrap: wrap; }
-        .card       { background: white; padding: 16px 22px; border-radius: 8px; border: 1px solid #e0e0e0; }
-        .card-label { font-size: 12px; color: #888; margin-bottom: 4px; }
-        .card-value { font-size: 22px; font-weight: 700; color: #222; }
-
-        /* Sale entry form */
-        .sale-form    { background: white; padding: 20px; border-radius: 8px; margin-bottom: 24px; border: 1px solid #e0e0e0; }
-        .sale-form h3 { margin: 0 0 16px; font-size: 15px; color: #333; }
-
-        /* Entry table */
-        .entry-table    { width: 100%; border-collapse: collapse; background: transparent; }
-        .entry-table th {
-            background: #f5f5f5;
-            color: #555;
-            font-size: 12px;
-            font-weight: 700;
-            padding: 10px 14px;
-            text-align: left;
-            border-bottom: 2px solid #e0e0e0;
-            white-space: nowrap;
-        }
-        .entry-table .hint { font-weight: normal; color: #bbb; font-size: 11px; margin-left: 4px; }
-        .entry-cell        { padding: 14px; vertical-align: top; text-align: left; border: none; }
-
-        .entry-cell select,
-        .entry-cell input[type="number"] {
-            padding: 8px 10px;
-            border: 1px solid #ddd;
-            border-radius: 6px;
-            font-size: 14px;
-            background: #fafafa;
-        }
-        .entry-cell input[type="number"] { width: 75px; }
-
-        /* Add-on chips */
-        .addon-list  { display: flex; flex-wrap: wrap; gap: 6px; }
-        .addon-chip input[type="checkbox"] { display: none; }
-        .addon-chip label {
-            display: inline-flex;
-            align-items: center;
-            gap: 5px;
-            padding: 5px 13px;
-            border: 1px solid #ddd;
-            border-radius: 20px;
-            font-size: 12px;
-            color: #555;
-            background: #f9f9f9;
-            cursor: pointer;
-        }
-        .addon-chip input[type="checkbox"]:checked + label {
-            background: #e6f7ef;
-            border-color: #1a7f4b;
-            color: #1a7f4b;
-            font-weight: 700;
-        }
-        .addon-price { font-size: 11px; color: #888; }
-        .addon-chip input[type="checkbox"]:checked + label .addon-price { color: #1a7f4b; }
-
-        /* Buttons */
-        .btn-primary { background: #222; color: white; border: none; padding: 9px 22px; border-radius: 6px; font-size: 14px; cursor: pointer; font-weight: 600; white-space: nowrap; }
-        .btn-primary:hover { background: #444; }
-        .btn-danger  { background: #e74c3c; color: white; border: none; padding: 5px 12px; border-radius: 4px; cursor: pointer; font-size: 13px; }
-        .btn-reset   { background: #c0392b; color: white; border: none; padding: 7px 16px; border-radius: 5px; cursor: pointer; margin-bottom: 20px; font-size: 13px; }
-
-        /* Sales table */
-        table.sales-table    { width: 100%; border-collapse: collapse; background: white; border-radius: 8px; overflow: hidden; border: 1px solid #e0e0e0; }
-        table.sales-table th { background: #222; color: white; padding: 11px 10px; font-size: 13px; }
-        table.sales-table td { padding: 10px; text-align: center; border-bottom: 1px solid #eee; vertical-align: middle; font-size: 13px; }
-        table.sales-table tr:last-child td { border-bottom: none; }
-
-        /* Product cell */
-        .product-cell              { display: flex; align-items: center; gap: 12px; text-align: left; }
-        .product-thumb             { width: 46px; height: 46px; border-radius: 8px; object-fit: cover; flex-shrink: 0; }
-        .product-thumb-placeholder { width: 46px; height: 46px; border-radius: 8px; background: #d0d4e8; display: flex; align-items: center; justify-content: center; font-size: 20px; flex-shrink: 0; }
-        .product-name              { font-weight: 600; font-size: 14px; color: #1e2235; }
-        .product-category          { font-size: 11px; color: #888; margin-top: 2px; }
-
-        /* Status badges */
-        .badge                   { display: inline-flex; align-items: center; gap: 5px; padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 600; }
-        .badge::before           { content: ''; width: 7px; height: 7px; border-radius: 50%; }
-        .badge-completed         { background: #e6f7ef; color: #1a7f4b; }
-        .badge-completed::before { background: #1a7f4b; }
-        .badge-void,
-        .badge-cancelled         { background: #fff0ef; color: #c0392b; }
-        .badge-void::before,
-        .badge-cancelled::before { background: #c0392b; }
-        .badge-pending           { background: #fff8e6; color: #9a6c00; }
-        .badge-pending::before   { background: #e5a000; }
-
-        /* Add-on tags in table */
-        .addon-tag { display: inline-block; background: #e6f7ef; color: #1a7f4b; font-size: 11px; padding: 2px 8px; border-radius: 10px; margin: 2px; white-space: nowrap; }
-        .no-data   { color: #ccc; font-size: 12px; }
-    </style>
+    <link rel="icon" type="image/svg+xml" href="../../resources/images/logo/logo_black.svg">
+    
+    <title>Sales Management - Al Coffee</title>    
 </head>
 <body>
 
-<div class="title-bar">Welcome <?= htmlspecialchars($username) ?> — Sales Management</div>
-
 <div class="container">
-
-    <!-- Sidebar -->
-    <div class="sidebar">
-        <h2>MENU</h2>
-        <a href="../home_page.php">Dashboard</a>
-        <a href="products.php">Products</a>
-        <a href="inventory.php">Inventory</a>
-        <a href="sales.php">Sales</a>
-        <a href="reports_analysis.php">Reports</a>
-        <a href="admin.php">Admin</a>
-        <a href="../logout.php" style="color: red;">Logout</a>
-    </div>
+    
+    <?php include '../partials/header.php'; ?>
+    <?php require '../partials/sidenav.php'; ?>
 
     <div class="main">
 
@@ -527,6 +422,7 @@ unset($_SESSION['flash']);
 
     </div>
 </div>
-
+        <script src="../../resources/js/partials/sidebar.js" type="text/javascript" defer></script>
+        <script src="../../resources/js/partials/menu_mobile.js" type="text/javascript" defer></script>
 </body>
 </html>
