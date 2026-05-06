@@ -1,0 +1,80 @@
+header {
+  background: var(--screen-background);
+  border-bottom: var(--val-2px) solid var(--nav-stroke);
+  padding: var(--padding-8px) var(--padding-16px);
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  z-index: 9999;
+}
+
+.header--flex {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.header_left-container--flex,
+.header_right-container--flex {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.header_left-container--flex {
+  gap: var(--gap-20px);
+}
+
+.header_right-container {
+  display: block;
+}
+.header_right-container--flex {
+  gap: var(--gap-16px);
+}
+
+.header p {
+  color: var(--caption-text-primary);
+}
+
+.header_right-container a {
+  border-radius: var(--radius-MD-LG-4X);
+}
+
+.burger_icon_mobile {
+  width: var(--val-44px);
+  height: var(--val-44px);
+  padding: var(--padding-8px);
+  border-radius: var(--radius-MD-LG-3X);
+  transition: background-color 0.15s ease;
+  cursor: pointer;
+}
+
+.burger_icon_mobile:hover {
+  background-color: var(--background-hover);
+}
+
+.burger_icon_mobile:active {
+  background-color: var(--background-active);
+}
+
+.business_logo_mobile {
+  width: var(--val-48px);
+  height: var(--val-48px);
+  vertical-align: top;
+  border-radius: var(--radius-MD-LG-3X);
+  border: var(--val-05px) solid var(--icon-field);
+}
+
+@media (min-width: 768px) {
+  header {
+    padding: var(--padding-12px) var(--padding-24px);
+  }
+  .header--flex {
+    display: none;
+  }
+  .header_right-container {
+    display: none;
+  }
+}

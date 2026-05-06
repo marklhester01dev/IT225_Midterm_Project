@@ -1,0 +1,260 @@
+.sidenav {
+  width: 250px;
+  display: none;
+  background: var(--screen-background);
+  border-right: var(--val-2px) solid var(--nav-stroke);
+  min-height: 100vh;
+  padding: var(--padding-16px) var(--padding-16px);
+  position: none;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  z-index: 9998;
+  transition:
+    width 0.2s ease,
+    max-width 0.2s ease;
+}
+
+.sidenav_mobile {
+  display: none;
+  padding-top: var(--padding-60px);
+  width: 100%;
+  background: var(--screen-background);
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  z-index: 9997;
+}
+
+.sidenav_main-container .sidenav_main,
+.sidenav_footer-container .logout_container--flex {
+  padding: var(--padding-16px);
+}
+
+.sidenav_mobile_main {
+  padding: var(--padding-12px) var(--padding-16px);
+}
+
+.sidenav_header-container .sidenav_logo-admin--flex {
+  padding-inline: var(--padding-16px);
+}
+
+.sidenav_main-container .sidenav_main,
+.sidenav_header-container .sidenav_logo-admin--flex,
+.sidenav_footer-container .logout_container--flex {
+  gap: var(--gap-8px);
+  position: relative;
+  border-radius: var(--radius-SM-4X);
+}
+
+.sidenav_main-container .sidenav_main,
+.sidenav_header-container .sidenav_logo-admin--flex,
+.sidenav_footer-container .logout_container--flex,
+.sidenav_mobile_main {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.sidenav_main-container .sidenav_main {
+  justify-content: flex-start;
+}
+
+.sidenav_main-container .sidenav_main,
+.sidenav_footer-container .logout_container {
+  transition: background-color 0.15s ease;
+  cursor: pointer;
+}
+
+.sidenav_header-container {
+  width: 100%;
+}
+
+.line-separator {
+  display: block;
+  width: 100%;
+  height: var(--val-1px);
+  border-radius: var(--radius-XSM);
+  background-color: var(--nav-stroke);
+  margin: var(--margin-12px) var(--margin-null);
+}
+
+.sidenav_logo-admin {
+  width: 100%;
+  flex: 1;
+}
+
+.sidenav_logo-admin--flex {
+  justify-content: flex-start;
+  transition: display 0.2s ease;
+}
+
+.sidenav_header-container--flex {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: row;
+}
+
+.sidenav_main-container .sidenav_main:hover,
+.sidenav_mobile_main:hover {
+  background-color: var(--btn-hover);
+}
+
+.sidenav_main-container .sidenav_main:active,
+.sidenav_movbile_main:active {
+  background-color: var(--btn-active);
+}
+
+.sidenav_footer-container .logout_container:hover,
+.sidenav_mobile_logout:hover {
+  background-color: var(--btn-error-hover);
+}
+
+.sidenav_footer-container .logout_container:active,
+.sidenav_mobile_logout:active {
+  background-color: var(--btn-error-hover);
+}
+
+.sidenav_main-container a p,
+.sidenav_header-container a p,
+.sidenav_mobile_main {
+  color: var(--caption-btn-primary-reverse);
+}
+
+.sidenav_footer-container a p,
+.sidenav_mobile_logout {
+  color: var(--info-text-warning);
+}
+
+.sidenav_main-container a p,
+.sidenav_header-container a p,
+.sidenav_footer-container a p {
+  transition: opacity 0.2s ease;
+  font-size: var(--size-MD);
+  line-height: var(--lh-SM);
+}
+
+.sidenav_mobile_main p {
+  font-size: var(--size-XS);
+  line-height: var(--lh-2XS);
+}
+
+.sidenav_main-container a p,
+.sidenav_header-container a p,
+.sidenav_footer-container a p,
+.sidenav_mobile_main p {
+  display: block;
+  font-family: var(--tf-CAPTION);
+  font-weight: var(--weight-MEDIUM);
+}
+
+.sidenav_header_icon-container {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.tooltip {
+  display: block;
+  font-family: var(--tf-CAPTION);
+  font-size: var(--size-XS);
+  line-height: var(--lh-2XS);
+  font-weight: var(--weight-MEDIUM);
+  background-color: var(--tooltip-accent);
+  color: var(--caption-text-primary-reverse);
+  padding: var(--padding-8px) var(--padding-16px);
+  border-radius: var(--radius-SM-3X);
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+  white-space: nowrap;
+}
+
+.sidenav.collapsed p {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.sidenav.collapsed .tooltip {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2 ease;
+}
+
+.tooltip_collapse {
+  right: -135px;
+}
+
+.tooltip_dashboard {
+  right: -110px;
+}
+
+.tooltip_products {
+  right: -98px;
+}
+
+.tooltip_inventory {
+  right: -100px;
+}
+
+.tooltip_sales {
+  right: -73px;
+}
+
+.tooltip_reports {
+  right: -90px;
+}
+
+.tooltip_admin {
+  right: -80px;
+}
+
+.tooltip_logout {
+  right: -84px;
+}
+
+.sidenav_main-container a img,
+.sidenav_header-container a img,
+.sidenav_footer-container a img {
+  color: var(--icon-color);
+}
+
+.drawer_desktop {
+  width: var(--val-44px);
+  height: var(--val-44px);
+  padding: var(--padding-8px);
+  border-radius: var(--radius-MD-LG-4X);
+  cursor: pointer;
+  margin-left: var(--margin-6px);
+  transition: background-color 0.15s ease;
+}
+
+.drawer_desktop:hover {
+  background-color: var(--btn-hover);
+}
+
+.drawer_desktop:active {
+  background-color: var(--btn-active);
+}
+
+.business_logo_desktop {
+  width: var(--val-48px);
+  height: var(--val-48px);
+  border-radius: var(--radius-MD-LG-3X);
+  border: var(--val-05px) solid var(--icon-field);
+  transition: display 0.2s ease;
+}
+
+@media (min-width: 767px) {
+  .sidenav {
+    display: block;
+    position: fixed;
+  }
+
+  .sidenav_mobile {
+    display: none;
+  }
+}

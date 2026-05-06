@@ -60,8 +60,10 @@
   --padding-88px: var(--val-88px);
   --padding-92px: var(--val-92px);
   --padding-96px: var(--val-96px);
+  --padding-114px: var(--val-114px);
   --padding-128px: var(--val-128px);
   --padding-256px: var(--val-256px);
+  --padding-274px: var(--val-274px);
   --padding-512px: var(--val-512px);
   --padding-1024px: var(--val-1024px);
   --padding-1200px: var(--val-1200px);
@@ -207,7 +209,7 @@
   --info-text-note: var(--accent-blue-500);
 
   /* COMPONENTS - Navigation */
-  --nav-stroke: var(--gray-soft-50);
+  --nav-stroke: var(--gray-soft-100);
   --message-stroke: var(--black-800);
   --floating-nav-unactivated: var(--black-900);
   --floating-nav-activated: var(--black-700);
@@ -216,8 +218,8 @@
   --background-default: var(--gray-soft-25);
   --background-card: var(--gray-soft-50);
   --background-reverse: var(--black-800);
-  --background-hover: var(--gray-soft-25);
-  --background-active: var(--gray-soft-50);
+  --background-hover: var(--gray-soft-50);
+  --background-active: var(--gray-soft-100);
   --background-focused: var(--black-800);
   --tooltip-accent: var(--black-800);
   --screen-background: var(--accent-white-900);
@@ -257,6 +259,10 @@
   --btn-reversed: var(--gray-soft-50);
   --btn-reversed-active: var(--gray-soft-100);
   --btn-stroke: var(--black-800);
+  --btn-error-hover: var(--negative-100);
+  --btn-error-active: var(--negative-500);
+  --btn-hover: var(--gray-soft-50);
+  --btn-active: var(--gray-soft-100);
 
   /* EFFECTS - Blur */
   --blur-layer-soft: var(--val-6px);

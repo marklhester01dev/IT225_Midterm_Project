@@ -97,187 +97,43 @@ $best_monthly = $conn->query("
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Dashboard & Inventory</title>
+    <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <!-- SEO -->
+    <meta name="author" content="Al Coffee">
+     <meta name="description" content="Al Coffee System Dashboard & Inventory - Monitor daily sales, track inventory levels, and analyze top-selling products. Access real-time insights to optimize your coffee business operations.">
+     <!-- SEO -->
 
-    <style>
-        body {
-            margin: 0;
-            font-family: Arial;
-            background: #f4f4f4;
-        }
+    <link rel="stylesheet" href="../resources/css/general.css">
+    <link rel="stylesheet" href="../resources/css/design_tokens/primitives.css">
+    <link rel="stylesheet" href="../resources/css/design_tokens/mapping.css">
+    <link rel="stylesheet" href="../resources/css/partials/header.css">
+<link rel="stylesheet" href="../resources/css/partials/side_nav.css">
+     <link rel="stylesheet" href="../resources/css/dashboard.css">
 
-        .title-bar {
-            background: #222;
-            color: white;
-            padding: 15px;
-        }
-
-        .container {
-            display: flex;
-        }
-
-        /* Sidebar navigation */
-        .sidebar {
-            width: 220px;
-            background: #111;
-            color: white;
-            min-height: 100vh;
-            padding: 15px;
-        }
-
-        .sidebar a {
-            display: block;
-            color: white;
-            margin: 10px 0;
-            text-decoration: none;
-        }
-
-        .main {
-            flex: 1;
-            padding: 20px;
-        }
-
-        /* Data tables */
-        table {
-            width: 100%;
-            background: white;
-            border-collapse: collapse;
-        }
-
-        th {
-            background: #222;
-            color: white;
-            padding: 10px;
-        }
-
-        td {
-            padding: 10px;
-            border-bottom: 1px solid #ddd;
-            text-align: center;
-        }
-
-        /* Stock status colors */
-        .stock-bad  { color: #e53935; }
-        .stock-mid  { color: #fb8c00; }
-        .stock-good { color: #43a047; }
-
-        /* Hero sales display */
-        .hero {
-            text-align: center;
-            padding: 20px 0 10px;
-            border-bottom: 2px solid #ddd;
-            margin-bottom: 16px;
-        }
-
-        .hero-label {
-            font-size: 12px;
-            color: #888;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-        }
-
-        .hero-amount {
-            font-size: 46px;
-            font-weight: bold;
-            color: #111;
-            margin: 4px 0 0;
-        }
-
-        /* Stats summary strip */
-        .stat-strip {
-            display: flex;
-            border-top: 2px solid #222;
-            border-bottom: 2px solid #222;
-            background: white;
-            margin-bottom: 24px;
-        }
-
-        .stat-strip .stat-item {
-            flex: 1;
-            padding: 14px 18px;
-            border-right: 1px solid #ddd;
-        }
-
-        .stat-strip .stat-item:last-child {
-            border-right: none;
-        }
-
-        .stat-item .s-label {
-            font-size: 10px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            color: #888;
-        }
-
-        .stat-item .s-value {
-            font-size: 22px;
-            font-weight: bold;
-            color: #111;
-            margin-top: 2px;
-        }
-
-        /* Section headings */
-        .section-title {
-            font-size: 15px;
-            font-weight: bold;
-            border-left: 4px solid #222;
-            padding-left: 8px;
-            margin: 20px 0 10px;
-        }
-
-        .section-title a {
-            float: right;
-            font-size: 12px;
-            font-weight: normal;
-            color: #888;
-            text-decoration: none;
-        }
-
-        /* Product thumbnail */
-        .prod-img-thumb {
-            width: 50px;
-            height: 50px;
-            object-fit: cover;
-            vertical-align: middle;
-        }
-
-        /* Period label above each best-sellers table */
-        .period-heading {
-            font-size: 11px;
-            font-weight: bold;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            color: #555;
-            background: #eee;
-            padding: 6px 10px;
-            margin-top: 16px;
-        }
-    </style>
+    <link rel="icon" type="image/svg+xml" href="../resources/images/logo/logo_black.svg">
+    
+    <title>Dashboard - Al Coffee</title>
 </head>
 <body>
 
-<div class="title-bar">
-    Al Coffee System Dashboard & Inventory —
-    Welcome <?= htmlspecialchars($username) ?>
-</div>
+<header class="header--flex">
+    <div class="header_left-container header_left-container--flex">
+        
+            <img class="burger_icon_mobile" src="../resources/images/icons/Menu/Hamburger_LG.svg" alt="Menu">
 
-<div class="container">
-
-    <!-- Sidebar -->
-    <div class="sidebar">
-        <h2>MENU</h2>
-        <a href="home_page.php">Dashboard</a>
-        <a href="admin/products.php">Products</a>
-        <a href="admin/inventory.php">Inventory</a>
-        <a href="admin/sales.php">Sales</a>
-        <a href="admin/reports_analysis.php">Reports</a>
-        <a href="admin/admin.php">Admin</a>
-        <a href="logout.php" style="color: red;"
-           onclick="return confirm('Are you sure you want to log out?')">
-            Logout
-        </a>
     </div>
 
+    <div class="header_right-container header_right-container--flex"> 
+        <a href="admin/admin.php">
+             <img src="../resources/images/logo/Logo_Black.svg" alt="Admin Menu" class="business_logo_mobile">
+        </a>
+    </div>
+</header>
+
+<div class="container">
+    <?php require 'partials/header.php'; ?>
+    <?php require 'partials/sidenav.php'; ?>
     <!-- Main content -->
     <div class="main">
 
@@ -429,6 +285,9 @@ $best_monthly = $conn->query("
 
     </div>
 </div>
-
+<!-- Container Main -->
+        
+<script src="../resources/js/partials/sidebar.js" type="text/javascript" defer></script>
+<script src="../resources/js/partials/menu_mobile.js" type="text/javascript" defer></script>
 </body>
 </html>
