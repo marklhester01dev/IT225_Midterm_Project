@@ -126,35 +126,37 @@ $best_monthly = $conn->query("
     <div class="main">
 
         <!-- Today's sales hero -->
-        <div class="hero">
+        <div class="hero hero--flex">
             <div class="hero-label">Today's Sales</div>
-            <div class="hero-amount">₱<?= number_format($daily, 0) ?></div>
+            <div class="hero-amount">
+                <p>₱<?= number_format($daily, 0) ?></p></div>
         </div>
 
         <!-- Summary stats -->
-        <div class="stat-strip">
-            <div class="stat-item">
-                <div class="s-label">This Week's Sales</div>
-                <div class="s-value">₱<?= number_format($weekly, 0) ?></div>
+        <div class="statistics-container statistics-container--grid">
+            <div class="statistics_card statistics_card--flex">
+                <div class="stat_card-label">Weekly Sales</div>
+                <div class="stat-value">₱<?= number_format($weekly, 0) ?></div>
             </div>
-            <div class="stat-item">
-                <div class="s-label">This Month's Sales</div>
-                <div class="s-value">₱<?= number_format($monthly, 0) ?></div>
+            <div class="statistics_card statistics_card--flex">
+                <div class="stat_card-label">Monthly Sales</div>
+                <div class="stat-value">₱<?= number_format($monthly, 0) ?></div>
             </div>
-            <div class="stat-item">
-                <div class="s-label">Today's Orders</div>
-                <div class="s-value"><?= $today_orders ?></div>
+            <div class="statistics_card statistics_card--flex">
+                <div class="stat_card-label">Today's Orders</div>
+                <div class="stat-value"><?= $today_orders ?></div>
             </div>
-            <div class="stat-item">
-                <div class="s-label">Monthly Estimate</div>
-                <div class="s-value">₱<?= number_format($forecast, 0) ?></div>
+            <div class="statistics_card statistics_card--flex">
+                <div class="stat_card-label">Monthly Estimate</div>
+                <div class="stat-value">₱<?= number_format($forecast, 0) ?></div>
             </div>
         </div>
 
+        <div class="table_container table_container--flex">
         <!-- Inventory status table -->
-        <div class="section-title">
-            Inventory Status
-            <a href="admin/inventory.php">Manage All</a>
+        <div class="section-title section-title--flex">
+            <p>Inventory Status</p>
+            <a href="inventory.php">Manage All</a>
         </div>
 
         <table>
@@ -170,7 +172,7 @@ $best_monthly = $conn->query("
                 // Determine stock status based on threshold
                 $thr = $i['low_stock_threshold'] ?? 5;
                 if ($i['stock'] <= $thr) {
-                    $sc = "stock-bad";  $icon = "⚠️"; $label = "Low";
+                    $sc = "stock-bad";  $icon = "❗"; $label = "Low";
                 } elseif ($i['stock'] <= $thr * 3) {
                     $sc = "stock-mid";  $icon = "⚠️"; $label = "Mid";
                 } else {
@@ -178,26 +180,33 @@ $best_monthly = $conn->query("
                 }
                 ?>
                 <tr>
-                    <td style="text-align: left;">
+                    <td class="info-image_column info-image-column--flex">
                         <?php if (!empty($i['image'])): ?>
                             <img src="../../resources/images/uploads/<?= htmlspecialchars($i['image']) ?>"
-                                 style="width: 36px; height: 36px; object-fit: cover; border-radius: 4px; vertical-align: middle; margin-right: 8px;">
+                            class="prod-img-thumb">
                         <?php endif; ?>
                         <?= htmlspecialchars($i['ingredient_name']) ?>
                     </td>
                     <td><?= htmlspecialchars($i['unit'] ?? '') ?></td>
                     <td><?= $i['stock'] ?></td>
                     <td><?= $thr ?></td>
-                    <td><span class="<?= $sc ?>"><?= $icon ?> <?= $label ?></span></td>
+                    <td class="info-status_column"><span class="<?= $sc ?>"><?= $icon ?> <?= $label ?></span></td>
                 </tr>
             <?php endwhile; ?>
         </table>
+        </div>
+        <!-- Table Container -->
 
+        <div class="table_container table_container--flex">
         <!-- Top selling products -->
-        <div class="section-title" style="margin-top: 28px;">Top Selling Products</div>
+        <div class="section-title">
+            <p>Top Selling Products</p></div>
 
         <!-- Daily top sellers -->
-        <div class="period-heading">Daily</div>
+         <div class="period_wrapper period_wrapper--flex">
+         <div class="period_container period-container--flex">
+        <div class="period-heading">
+            <p>Daily<p></div>
         <table>
             <tr>
                 <th>Product</th>
@@ -208,7 +217,7 @@ $best_monthly = $conn->query("
             </tr>
             <?php while ($b = $best_daily->fetch_assoc()): ?>
                 <tr>
-                    <td style="text-align: left;">
+                    <td class="info-image_column info-image-column--flex">
                         <img src="../../resources/images/uploads/<?= htmlspecialchars($b['image']) ?>"
                              class="prod-img-thumb">
                         &nbsp;<?= htmlspecialchars($b['product_name']) ?>
@@ -220,9 +229,12 @@ $best_monthly = $conn->query("
                 </tr>
             <?php endwhile; ?>
         </table>
+        </div>
 
         <!-- Weekly top sellers -->
-        <div class="period-heading">Weekly</div>
+            <div class="period_container period-container--flex">
+        <div class="period-heading">
+            <p>Weekly</p></div>
         <table>
             <tr>
                 <th>Product</th>
@@ -233,7 +245,7 @@ $best_monthly = $conn->query("
             </tr>
             <?php while ($b = $best_weekly->fetch_assoc()): ?>
                 <tr>
-                    <td style="text-align: left;">
+                    <td class="info-image_column info-image-column--flex">
                         <img src="../../resources/images/uploads/<?= htmlspecialchars($b['image']) ?>"
                              class="prod-img-thumb">
                         &nbsp;<?= htmlspecialchars($b['product_name']) ?>
@@ -245,9 +257,12 @@ $best_monthly = $conn->query("
                 </tr>
             <?php endwhile; ?>
         </table>
+            </div>
 
         <!-- Monthly top sellers -->
-        <div class="period-heading">Monthly</div>
+            <div class="period_container period-container--flex">
+        <div class="period-heading">
+            <p>Monthly</p></div>
         <table>
             <tr>
                 <th>Product</th>
@@ -258,7 +273,7 @@ $best_monthly = $conn->query("
             </tr>
             <?php while ($b = $best_monthly->fetch_assoc()): ?>
                 <tr>
-                    <td style="text-align: left;">
+                    <td class="info-image_column info-image-column--flex">
                         <img src="../../resources/images/uploads/<?= htmlspecialchars($b['image']) ?>"
                              class="prod-img-thumb">
                         &nbsp;<?= htmlspecialchars($b['product_name']) ?>
@@ -270,6 +285,11 @@ $best_monthly = $conn->query("
                 </tr>
             <?php endwhile; ?>
         </table>
+        </div>
+        <!-- Table Container -->
+        </div>
+            </div>
+            <!-- Period Wrapper Flex -->
 
     </div>
 </div>

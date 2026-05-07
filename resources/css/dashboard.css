@@ -1,121 +1,226 @@
 /* Data tables */
 table {
   width: 100%;
-  background: white;
+  background: var(--table-primary-bg);
   border-collapse: collapse;
 }
 
 th {
-  background: #222;
-  color: white;
-  padding: 10px;
+  background: var(--header-primary);
+  color: var(--table-row-column-bg);
+  padding: var(--padding-6px);
+  font-family: var(--tf-HEADING);
+  font-weight: var(--weight-SEMI-BOLD);
+  line-height: var(--lh-SM);
 }
 
 td {
-  padding: 10px;
-  border-bottom: 1px solid #ddd;
+  font-family: var(--tf-CAPTION);
+  font-size: var(--size-XS);
+  line-height: 1.6;
+  font-weight: var(--weight-REGULAR);
+  padding: var(--padding-10px);
+  border-bottom: var(--stroke-XSM) solid var(--gray-soft-200);
   text-align: center;
 }
 
-/* Stock status colors */
+.info-status_column {
+  font-weight: var(--weight-BOLD);
+}
+
+.info-image_column {
+  font-weight: var(--weight-SEMI-BOLD);
+  text-align: left;
+}
+
+.info-image-column--flex {
+  display: flex;
+  gap: var(--gap-8px);
+  align-items: center;
+}
+
+.prod-img-thumb {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  vertical-align: middle;
+  text-align: left;
+}
+
 .stock-bad {
-  color: #e53935;
+  color: var(--low-stock);
 }
 .stock-mid {
-  color: #fb8c00;
+  color: var(--medium-stock);
 }
 .stock-good {
-  color: #43a047;
+  color: var(--high-stock);
 }
 
-/* Hero sales display */
+.stock-good,
+.stock-mid,
+.stock-bad {
+  white-space: nowrap;
+}
+
 .hero {
   text-align: center;
-  padding: 20px 0 10px;
-  border-bottom: 2px solid #ddd;
-  margin-bottom: 16px;
+  padding: var(--padding-null) var(--padding-16px) var(--padding-16px)
+    var(--padding16px);
+  border-bottom: var(--stroke-MD) solid var(--gray-soft-200);
 }
 
-.hero-label {
-  font-size: 12px;
-  color: #888;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-}
-
-.hero-amount {
-  font-size: 46px;
-  font-weight: bold;
-  color: #111;
-  margin: 4px 0 0;
-}
-
-/* Stats summary strip */
-.stat-strip {
+.hero--flex {
   display: flex;
-  border-top: 2px solid #222;
-  border-bottom: 2px solid #222;
-  background: white;
-  margin-bottom: 24px;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
 }
 
-.stat-strip .stat-item {
-  flex: 1;
-  padding: 14px 18px;
-  border-right: 1px solid #ddd;
-}
-
-.stat-strip .stat-item:last-child {
-  border-right: none;
-}
-
-.stat-item .s-label {
-  font-size: 10px;
+.hero-label,
+.stat_card-label {
+  font-size: var(--size-XXS);
+  color: var(--caption-text-gray);
+  letter-spacing: var(--val-1px);
+  line-height: 1.6;
+  font-family: var(--tf-DISPLAY);
+  font-weight: var(--weight-MEDIUM);
   text-transform: uppercase;
-  letter-spacing: 1px;
-  color: #888;
 }
 
-.stat-item .s-value {
-  font-size: 22px;
-  font-weight: bold;
-  color: #111;
-  margin-top: 2px;
+.hero-amount p {
+  font-size: var(--size-LG-2X);
+  line-height: 1.2;
+  font-weight: var(--weight-BOLD);
+  font-family: var(--tf-DISPLAY);
+  color: var(--heading-primary);
+  margin-bottom: var(--margin-8px);
 }
 
-/* Section headings */
-.section-title {
-  font-size: 15px;
-  font-weight: bold;
-  border-left: 4px solid #222;
-  padding-left: 8px;
-  margin: 20px 0 10px;
+.statistics-container {
+  width: 100%;
+  border-top: var(--stroke-MD-2X) solid var(--gray-soft-400);
+  border-bottom: var(--stroke-MD-2X) solid var(--gray-soft-400);
+  margin-top: var(--margin-16px);
+}
+
+.statistics-container--grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  align-items: center;
+  justify-content: center;
+  gap: var(--gap-16px);
+}
+
+.statistics_card {
+  width: 100%;
+  height: 100%;
+  padding: var(--padding-16px);
+  background: var(--background-card);
+  border: var(--val-1px) solid var(--card-stroke);
+  border-radius: var(--radius-SM-4X);
+}
+
+.statistics_card--flex {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  flex-direction: column;
+  gap: var(--gap-2px);
+}
+
+.stat-value {
+  font-size: var(--size-LG-1-5);
+  font-family: var(--tf-DISPLAY);
+  font-weight: var(--weight-BOLD);
+  color: var(--body-text-primary);
+}
+
+.table_container {
+  width: 100%;
+  margin-top: var(--margin-32px);
+}
+
+.table_container--flex {
+  display: flex;
+  align-items: space-between;
+  justify-content: center;
+  flex-direction: column;
+  gap: var(--gap-8px);
+}
+
+.section-title--flex {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.section-title p {
+  font-size: var(--size-SM);
+  line-height: 1.6;
+  font-family: var(--tf-HEADING);
+  font-weight: var(--weight-BOLD);
+  border-left: var(--val-4px) solid var(--message-stroke);
+  padding-left: var(--padding-12px);
 }
 
 .section-title a {
-  float: right;
-  font-size: 12px;
-  font-weight: normal;
-  color: #888;
+  font-family: var(--tf-BODY);
+  line-height: 1.6;
+  font-size: var(--size-XS);
+  font-weight: var(--weight-REGULAR);
+  color: var(--info-text-gray);
   text-decoration: none;
 }
 
-/* Product thumbnail */
-.prod-img-thumb {
-  width: 50px;
-  height: 50px;
-  object-fit: cover;
-  vertical-align: middle;
+.section-title a:hover {
+  text-decoration: underline;
 }
 
-/* Period label above each best-sellers table */
-.period-heading {
-  font-size: 11px;
-  font-weight: bold;
-  letter-spacing: 2px;
+.period_wrapper {
+  width: 100%;
+}
+
+.period_wrapper--flex {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--gap-16px);
+}
+
+.period_container {
+  width: 100%;
+}
+
+.period-container--flex {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-2px);
+}
+
+.period-heading p {
+  font-family: var(--tf-BODY);
+  font-size: var(--size-XXS);
+  font-weight: var(--weight-BOLD);
   text-transform: uppercase;
-  color: #555;
-  background: #eee;
-  padding: 6px 10px;
-  margin-top: 16px;
+  color: var(--info-text-gray);
+  line-height: 1.5;
+}
+
+@media (min-width: 767px) {
+  .hero-amount p {
+    font-size: var(--size-LG-3X);
+  }
+  .stat-value {
+    font-size: var(--size-LG-1-75);
+  }
+  .info-image_column {
+    font-size: var(--size-SM);
+  }
+  .stock-bad,
+  .stock-mid,
+  .stock-good {
+    font-size: var(--size-SM);
+  }
 }

@@ -226,7 +226,7 @@
 
   /* COMPONENTS - Table */
   --header-primary: var(--gray-soft-800);
-  --table-primary-bg: var(--gray-soft-25);
+  --table-primary-bg: var(--accent-white-900);
   --table-text-primary: var(--black-800);
   --table-line-primary: var(--black-800);
   --table-row-column-bg: var(--gray-soft-50);
