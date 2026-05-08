@@ -199,7 +199,7 @@ $best_monthly = $conn->query("
 
         <div class="table_container table_container--flex">
         <!-- Top selling products -->
-        <div class="section-title">
+        <div class="section-title section-title--flex">
             <p>Top Selling Products</p></div>
 
         <!-- Daily top sellers -->
@@ -225,7 +225,7 @@ $best_monthly = $conn->query("
                     <td><?= htmlspecialchars($b['category'] ?? '—') ?></td>
                     <td>₱<?= number_format($b['price'] ?? 0, 0) ?></td>
                     <td><?= $b['qty'] ?></td>
-                    <td>₱<?= number_format($b['revenue'], 0) ?></td>
+                    <td class="product_revenue">₱<?= number_format($b['revenue'], 0) ?></td>
                 </tr>
             <?php endwhile; ?>
         </table>
@@ -253,7 +253,7 @@ $best_monthly = $conn->query("
                     <td><?= htmlspecialchars($b['category'] ?? '—') ?></td>
                     <td>₱<?= number_format($b['price'] ?? 0, 0) ?></td>
                     <td><?= $b['qty'] ?></td>
-                    <td>₱<?= number_format($b['revenue'], 0) ?></td>
+                    <td class="product_revenue">₱<?= number_format($b['revenue'], 0) ?></td>
                 </tr>
             <?php endwhile; ?>
         </table>
@@ -281,7 +281,7 @@ $best_monthly = $conn->query("
                     <td><?= htmlspecialchars($b['category'] ?? '—') ?></td>
                     <td>₱<?= number_format($b['price'] ?? 0, 0) ?></td>
                     <td><?= $b['qty'] ?></td>
-                    <td>₱<?= number_format($b['revenue'], 0) ?></td>
+                    <td class="product_revenue">₱<?= number_format($b['revenue'], 0) ?></td>
                 </tr>
             <?php endwhile; ?>
         </table>
@@ -291,7 +291,7 @@ $best_monthly = $conn->query("
             </div>
             <!-- Period Wrapper Flex -->
 
-    </div>
+     </div>
 </div>
 <!-- Container Main -->
         

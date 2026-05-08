@@ -252,52 +252,59 @@ if (isset($_GET['export']) && $_GET['export'] === 'excel') {
     <div class="main">
 
         <!-- HERO -->
-        <div class="hero">
-            <div class="hero-label"><?= ucfirst($filter) ?>'s Sales</div>
-            <div class="hero-amount">&#8369;<?= number_format($totalSales, 0) ?></div>
+        <div class="hero hero--flex">
+            <div class="hero-label"><?= ucfirst($filter) ?> Sales</div>
+            <div class="hero-amount">
+                <p>&#8369;<?= number_format($totalSales, 0) ?></p></div>
         </div>
 
-        <!-- STAT STRIP -->
-        <div class="stat-strip">
-            <div class="stat-item">
-                <div class="s-label">This Week's Sales</div>
-                <div class="s-value">&#8369;<?= number_format($weeklySales, 0) ?></div>
+        <!-- Summary Stats -->
+        <div class="statistics-container statistics-container--grid">
+            <div class="statistics_card statistics_card--flex">
+                <div class="stat_card-label">Weekly Sales</div>
+                <div class="stat-value">&#8369;<?= number_format($weeklySales, 0) ?></div>
             </div>
-            <div class="stat-item">
-                <div class="s-label">This Month's Sales</div>
-                <div class="s-value">&#8369;<?= number_format($monthlySales, 0) ?></div>
+            <div class="statistics_card statistics_card--flex">
+                <div class="stat_card-label">Monthly Sales</div>
+                <div class="stat-value">&#8369;<?= number_format($monthlySales, 0) ?></div>
             </div>
-            <div class="stat-item">
-                <div class="s-label">Today's Orders</div>
-                <div class="s-value"><?= $todayOrders ?></div>
+            <div class="statistics_card statistics_card--flex">
+                <div class="stat_card-label">Today's Orders</div>
+                <div class="stat-value"><?= $todayOrders ?></div>
             </div>
-            <div class="stat-item">
-                <div class="s-label">Total Transactions</div>
-                <div class="s-value"><?= $totalTransactions ?></div>
+            <div class="statistics_card statistics_card--flex">
+                <div class="stat_card-label">Total Transactions</div>
+                <div class="stat-value"><?= $totalTransactions ?></div>
             </div>
         </div>
 
+        <div class="table_container table_container--flex">
         <!-- BEST SELLING CATEGORY -->
-        <div class="section-title">Best Selling Category</div>
+        <div class="section-title section-title--flex">
+            <p>Best Selling Category</p></div>
         <table>
             <tr>
-                <th style="width:60px;">Rank</th>
-                <th style="text-align:left;">Category</th>
+                <th>Rank</th>
+                <th>Category</th>
                 <th>Quantity</th>
                 <th>Total Sales</th>
             </tr>
             <?php $rank = 1; foreach ($categoryRows as $row): ?>
             <tr>
-                <td style="font-weight:bold; color:#888;">#<?= $rank++ ?></td>
-                <td style="text-align:left;"><?= htmlspecialchars($row['category']) ?></td>
+                <td class="product_ranking">#<?= $rank++ ?></td>
+                <td><?= htmlspecialchars($row['category']) ?></td>
                 <td><?= number_format($row['total_quantity']) ?></td>
-                <td>&#8369;<?= number_format($row['total_sales'], 2) ?></td>
+                <td class="product_sales">&#8369;<?= number_format($row['total_sales'], 2) ?></td>
             </tr>
             <?php endforeach; ?>
         </table>
+        </div>
+        <!-- Table Container -->
 
+        <div class="table_container table_container--flex">
         <!-- TOP SELLING PRODUCTS -->
-        <div class="section-title" style="margin-top:28px;">Top Selling Products</div>
+        <div class="section-title section-title--flex">
+            <p>Top Selling Products</p></div>
 
         <?php
         // Reusable helper to render a top products table
@@ -308,7 +315,7 @@ if (isset($_GET['export']) && $_GET['export'] === 'excel') {
             <?php else: ?>
                 <table>
                     <tr>
-                        <th style="text-align:left;">Product</th>
+                        <th>Product</th>
                         <th>Category</th>
                         <th>Price</th>
                         <th>Sold</th>
@@ -316,7 +323,7 @@ if (isset($_GET['export']) && $_GET['export'] === 'excel') {
                     </tr>
                     <?php foreach ($products as $p): ?>
                     <tr>
-                        <td style="text-align:left;">
+                        <td class="info-image_column info-image-column--flex">
                             <?php if (!empty($p['image'])): ?>
                                 <img src="../../resources/images/uploads/<?= htmlspecialchars($p['image']) ?>" class="prod-img-thumb">
                             <?php endif; ?>
@@ -325,31 +332,46 @@ if (isset($_GET['export']) && $_GET['export'] === 'excel') {
                         <td><?= htmlspecialchars($p['category'] ?? '—') ?></td>
                         <td>&#8369;<?= number_format($p['price'] ?? 0, 2) ?></td>
                         <td><?= $p['qty_sold'] ?></td>
-                        <td>&#8369;<?= number_format($p['revenue'], 2) ?></td>
+                        <td class="product_revenue">&#8369;<?= number_format($p['revenue'], 2) ?></td>
                     </tr>
                     <?php endforeach; ?>
                 </table>
             <?php endif;
         };
         ?>
-
-        <div class="period-heading">Daily</div>
+           <div class="period_wrapper period_wrapper--flex">
+         <div class="period_container period-container--flex">
+        <div class="period-heading">
+            <p>Daily</p></div>
         <?php $renderTopTable($topDaily, 'No data for today.'); ?>
-
-        <div class="period-heading">Weekly</div>
+         </div>
+           
+        <div class="period_container period-container--flex">
+        <div class="period-heading">
+            <p>Weekly</p></div>
         <?php $renderTopTable($topWeekly, 'No data this week.'); ?>
+        </div>
 
-        <div class="period-heading">Monthly</div>
+        <div class="period_container period-container--flex">
+        <div class="period-heading">
+            <p>Monthly</p></div>
         <?php $renderTopTable($topMonthly, 'No data this month.'); ?>
+        </div>
+        </div>
+        <!-- Period Wrapper Flex -->
+         </div>
+         <!-- Table Container -->
 
+          <div class="table_container table_container--flex">
         <!-- INVENTORY STATUS -->
-        <div class="section-title" style="margin-top:28px;">
-            Inventory Status
+         <div class="inventory_filter-container inventory_filter-container--flex">
+        <div class="section-title section-title--flex">
+            <p>Inventory Status</p>
             <a href="inventory.php">Manage All</a>
         </div>
 
         <!-- Inventory filter form -->
-        <form method="GET" action="reports_analysis.php" style="margin:0;">
+        <form method="GET" action="reports_analysis.php">
             <input type="hidden" name="filter" value="<?= htmlspecialchars($filter) ?>">
             <div class="inv-filters">
                 <select name="inv_status">
@@ -368,25 +390,31 @@ if (isset($_GET['export']) && $_GET['export'] === 'excel') {
                 </select>
                 <button type="submit" class="inv-submit-btn">Apply Filter</button>
                 <?php if ($invStatus !== '' || $invCategory !== ''): ?>
-                    <a href="?filter=<?= htmlspecialchars($filter) ?>" class="inv-clear-btn">✕ Clear</a>
+                    <a href="?filter=<?= htmlspecialchars($filter) ?>" class="inv-clear-btn">Clear</a>
                 <?php endif; ?>
             </div>
+            </div>
+            <!-- Inventory Filter Container -->
 
             <!-- Active filter tags -->
             <?php if ($invStatus !== '' || $invCategory !== ''): ?>
-            <div style="margin-bottom:12px; display:flex; gap:8px; flex-wrap:wrap;">
+            <div class="filter-container filter-container--flex">
                 <?php if ($invStatus !== ''):
                     $statusLabel = ['badge-bad' => '⚠ Low', 'badge-mid' => '⚠ Medium', 'badge-good' => '✓ Good'][$invStatus] ?? $invStatus;
                 ?>
-                <span class="filter-active-tag">
+                <span class="filter-active-tag filter-active-tag--flex">
                     Status: <?= htmlspecialchars($statusLabel) ?>
-                    <a href="?filter=<?= htmlspecialchars($filter) ?>&inv_category=<?= urlencode($invCategory) ?>">×</a>
+                    <a href="?filter=<?= htmlspecialchars($filter) ?>&inv_category=<?= urlencode($invCategory) ?>">
+                        <img src="../../resources/images/icons/Menu/Close_MD.svg" alt="Remove Status">
+                    </a>
                 </span>
                 <?php endif; ?>
                 <?php if ($invCategory !== ''): ?>
-                <span class="filter-active-tag">
+                <span class="filter-active-tag filter-active-tag--flex">
                     Category: <?= htmlspecialchars($invCategory) ?>
-                    <a href="?filter=<?= htmlspecialchars($filter) ?>&inv_status=<?= urlencode($invStatus) ?>">×</a>
+                    <a href="?filter=<?= htmlspecialchars($filter) ?>&inv_status=<?= urlencode($invStatus) ?>">
+                        <img src="../../resources/images/icons/Menu/Close_MD.svg" alt="Remove Status">
+                    </a>
                 </span>
                 <?php endif; ?>
             </div>
@@ -399,7 +427,7 @@ if (isset($_GET['export']) && $_GET['export'] === 'excel') {
         <?php else: ?>
         <table>
             <tr>
-                <th style="text-align:left;">Ingredient</th>
+                <th>Ingredient</th>
                 <th>Unit</th>
                 <th>Stock</th>
                 <th>Limit</th>
@@ -409,27 +437,28 @@ if (isset($_GET['export']) && $_GET['export'] === 'excel') {
                 $cls = $i['_cls'];
                 $thr = $i['low_stock_threshold'] ?? 5;
 
-                if ($cls === 'badge-bad')     { $icon = '⚠️'; $label = 'Low';  $sc = 'stock-bad'; }
+                if ($cls === 'badge-bad')     { $icon = '❗'; $label = 'Low';  $sc = 'stock-bad'; }
                 elseif ($cls === 'badge-mid') { $icon = '⚠️'; $label = 'Mid';  $sc = 'stock-mid'; }
                 else                         { $icon = '✅'; $label = 'Good'; $sc = 'stock-good'; }
             ?>
             <tr>
-                <td style="text-align:left;">
+                <td class="info-image_column info-image_column--flex">
                     <?php if (!empty($i['image'])): ?>
                         <img src="../../resources/images/uploads/<?= htmlspecialchars($i['image']) ?>"
-                             style="width:36px;height:36px;object-fit:cover;border-radius:4px;vertical-align:middle;margin-right:8px;">
+                             class="prod-img-thumb">
                     <?php endif; ?>
                     <?= htmlspecialchars($i['ingredient_name']) ?>
                 </td>
                 <td><?= htmlspecialchars($i['unit'] ?? '') ?></td>
                 <td><?= $i['stock'] ?></td>
                 <td><?= $thr ?></td>
-                <td><span class="<?= $sc ?>"><?= $icon ?> <?= $label ?></span></td>
+                <td class="info-status_column"><span class="<?= $sc ?>"><?= $icon ?> <?= $label ?></span></td>
             </tr>
             <?php endforeach; ?>
         </table>
         <?php endif; ?>
-
+        </div>
+        <!-- Table Container -->
     </div>
 </div>
         <script src="../../resources/js/partials/reports_sidebar.js" type="text/javascript" defer></script>

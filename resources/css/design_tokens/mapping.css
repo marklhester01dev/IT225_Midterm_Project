@@ -238,6 +238,9 @@
   --low-stock: var(--negative-500);
   --product-available: var(--positive-500);
   --product-unavailable: var(--negative-500);
+  --excel-btn-clr: var(--positive-700);
+  --excel-btn-hover: var(--positive-800);
+  --excel-btn-active: var(--positive-600);
 
   /* COMPONENTS - Input */
   --input-disable: var(--black-500);

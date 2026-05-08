@@ -47,6 +47,10 @@ td {
   text-align: left;
 }
 
+.product_revenue {
+  font-weight: var(--weight-BOLD);
+}
+
 .stock-bad {
   color: var(--low-stock);
 }
@@ -171,10 +175,14 @@ td {
   font-weight: var(--weight-REGULAR);
   color: var(--info-text-gray);
   text-decoration: none;
+  transition:
+    text-decoration 0.2s ease,
+    font-weight 0.2s ease;
 }
 
 .section-title a:hover {
   text-decoration: underline;
+  font-weight: var(--weight-BOLD);
 }
 
 .period_wrapper {
