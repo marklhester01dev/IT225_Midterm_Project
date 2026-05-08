@@ -359,7 +359,7 @@ $statuses   = ["Available", "Unavailable"];
         
 
         <!-- Edit product form, shown only when a product is selected for editing -->
-         <div class="edit_input-container edit_input-container--flex">
+         <div class="edit_input-container edit_input-container--flex  <?= !$editProduct ? 'card--empty' : '' ?>">
         <?php if ($editProduct): ?>
         <h3>Edit Product</h3>
         <form method="POST" enctype="multipart/form-data">

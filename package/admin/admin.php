@@ -163,57 +163,32 @@ $logs = $conn->query("SELECT * FROM audit_logs ORDER BY created_at DESC LIMIT 20
     <div class="main">
 
         <h1>Admin Panel</h1>
-
-        <!-- Edit user form (shown only when edit is triggered) -->
-        <?php if ($editUser): ?>
-        <div class="card">
-            <h2>Edit User</h2>
-
-            <form method="POST" enctype="multipart/form-data">
-                <input type="hidden" name="id" value="<?= $editUser['user_id'] ?>">
-
-                <input type="text" name="fullname" value="<?= htmlspecialchars($editUser['fullname']) ?>" required>
-
-                <select name="role">
-                    <option <?= $editUser['role'] == "admin"    ? "selected" : "" ?>>admin</option>
-                    <option <?= $editUser['role'] == "staff"    ? "selected" : "" ?>>staff</option>
-                    <option <?= $editUser['role'] == "cashier"  ? "selected" : "" ?>>cashier</option>
-                </select>
-
-                <select name="status">
-                    <option <?= $editUser['status'] == "active"   ? "selected" : "" ?>>active</option>
-                    <option <?= $editUser['status'] == "inactive" ? "selected" : "" ?>>inactive</option>
-                </select>
-
-                <input type="file" name="avatar">
-
-                <button name="update_user">Update User</button>
-            </form>
-        </div>
-        <?php endif; ?>
-
         <!-- System settings form -->
-        <div class="card">
-            <h2>System Settings</h2>
+         <div class="card-container card-container--grid">
+        <div class="card card--flex">
+            <h3>System Settings</h3>
 
-            <form method="POST">
+            <form method="POST"  class="form--flex">
+                <div class="input_container input_container--flex">
                 <input type="text" name="store_name"      value="<?= $settings['store_name']      ?? '' ?>" required>
                 <input type="text" name="business_hours"  value="<?= $settings['business_hours']  ?? '' ?>" required>
 
                 <select name="currency">
                     <option value="PHP">PHP</option>
-                    <option value="USD">USD</option>
                 </select>
+                  </div>
+                <!-- Input Container -->
 
-                <button name="update_settings">Save</button>
+                <button class="save-btn" name="update_settings">Save</button>
             </form>
         </div>
 
         <!-- Add new user form -->
-        <div class="card">
-            <h2>Add User</h2>
+        <div class="card card--flex">
+            <h3>Add User</h3>
 
-            <form method="POST" enctype="multipart/form-data">
+            <form method="POST" enctype="multipart/form-data"  class="form--flex">  
+                 <div class="input_container input_container--flex">
                 <input type="text"     name="fullname"  placeholder="Full Name" required>
                 <input type="text"     name="username"  placeholder="Username"  required>
                 <input type="password" name="password"  placeholder="Password"  required>
@@ -230,14 +205,50 @@ $logs = $conn->query("SELECT * FROM audit_logs ORDER BY created_at DESC LIMIT 20
                 </select>
 
                 <input type="file" name="avatar">
-
-                <button name="add_user">Add User</button>
+                 </div>
+                 <!-- Input Container -->
+                <button class="add-btn" name="add_user">Add User</button>
             </form>
         </div>
+        <!-- Card Flex -->
 
+        <!-- Edit user form (shown only when edit is triggered) -->
+        <?php if ($editUser): ?>
+        <div class="card card--flex   <?= !$editUser ? 'card--empty' : '' ?>">
+            <h3>Edit User</h3>
+
+            <form method="POST" enctype="multipart/form-data" class="form--flex">           <div class="input_container input_container--flex">
+                <input type="hidden" name="id" value="<?= $editUser['user_id'] ?>">
+
+                <input type="text" name="fullname" value="<?= htmlspecialchars($editUser['fullname']) ?>" required>
+
+                <select name="role">
+                    <option <?= $editUser['role'] == "admin"    ? "selected" : "" ?>>admin</option>
+                    <option <?= $editUser['role'] == "staff"    ? "selected" : "" ?>>staff</option>
+                    <option <?= $editUser['role'] == "cashier"  ? "selected" : "" ?>>cashier</option>
+                </select>
+
+                <select name="status">
+                    <option <?= $editUser['status'] == "active"   ? "selected" : "" ?>>active</option>
+                    <option <?= $editUser['status'] == "inactive" ? "selected" : "" ?>>inactive</option>
+                </select>
+
+                <input type="file" name="avatar">
+                </div>
+                <!-- Input Container -->
+
+                <button class="update-btn" name="update_user">Update User</button>
+            </form>
+              </div>
+        <!-- Card -->
+        <?php endif; ?>
+          </div>
+    <!-- Card Container -->
+      
+        <div class="table_container table_container--flex">
         <!-- Users table -->
-        <div class="card">
-            <h2>Users</h2>
+        <div class="users_table users_table--flex">
+            <h3>Users</h3>
 
             <table>
                 <tr>
@@ -255,29 +266,32 @@ $logs = $conn->query("SELECT * FROM audit_logs ORDER BY created_at DESC LIMIT 20
                             <img class="avatar_img" src="../../resources/images/uploads/<?= $u['avatar'] ?>" alt="Avatar">
                         <?php endif; ?>
                     </td>
-                    <td><?= htmlspecialchars($u['fullname']) ?></td>
+                    <td class="full_name"><?= htmlspecialchars($u['fullname']) ?></td>
                     <td><?= $u['role'] ?></td>
                     <td><?= $u['status'] ?></td>
                     <td>
                         <!-- Edit button -->
-                        <a href="admin.php?edit=<?= $u['user_id'] ?>">
-                            <button type="button">Edit</button>
+                        <a class="edit-btn-link" href="admin.php?edit=<?= $u['user_id'] ?>">
+                            <button class="edit-btn" type="button">Edit</button>
                         </a>
 
                         <!-- Delete button -->
                         <form method="POST" onsubmit="return confirm('Delete this user?')" style="display:inline;">
                             <input type="hidden" name="id" value="<?= $u['user_id'] ?>">
-                            <button name="delete_user">Delete</button>
+                            <button class="delete-btn" name="delete_user">Delete</button>
                         </form>
                     </td>
                 </tr>
                 <?php endwhile; ?>
             </table>
         </div>
-
+         </div>
+         <!-- Table Container -->
+        
+        <div class="table_container table_container--flex">
         <!-- Audit logs table -->
-        <div class="card">
-            <h2>Audit Logs</h2>
+        <div class="audit_card audit_card--flex">
+            <h3>Audit Logs</h3>
 
             <!-- Reset logs button -->
             <form method="POST" onsubmit="return confirm('Delete ALL logs?');">
@@ -296,14 +310,17 @@ $logs = $conn->query("SELECT * FROM audit_logs ORDER BY created_at DESC LIMIT 20
                 <tr>
                     <td><?= htmlspecialchars($log['user'])    ?></td>
                     <td><?= htmlspecialchars($log['action'])  ?></td>
-                    <td><?= htmlspecialchars($log['details']) ?></td>
+                    <td class="log-details"><?= htmlspecialchars($log['details']) ?></td>
                     <td><?= $log['created_at'] ?></td>
                 </tr>
                 <?php endwhile; ?>
             </table>
         </div>
+        </div>
+        <!-- Table Container -->
 
     </div>
+    <!-- main -->
 </div>
          <script src="../../resources/js/partials/sidebar.js" type="text/javascript" defer></script>
         <script src="../../resources/js/partials/menu_mobile.js" type="text/javascript" defer></script>
