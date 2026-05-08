@@ -232,7 +232,7 @@
   --table-line-primary: var(--black-800);
   --table-row-column-bg: var(--gray-soft-50);
 
-  /* COMPONENTS - Stock Level */
+  /* COMPONENTS - Stock Level and Badges*/
   --high-stock: var(--positive-500);
   --medium-stock: var(--warning-700);
   --low-stock: var(--negative-500);
@@ -241,6 +241,12 @@
   --excel-btn-clr: var(--positive-700);
   --excel-btn-hover: var(--positive-800);
   --excel-btn-active: var(--positive-600);
+  --badge-complete-bg: var(--positive-100);
+  --badge-complete-text: var(--positive-800);
+  --badge-cancelled-bg: var(--negative-100);
+  --badge-cancelled-text: var(--negative-800);
+  --badge-pending-bg: var(--warning-100);
+  --badge-pending-text: var(--warning-800);
 
   /* COMPONENTS - Input */
   --input-disable: var(--black-500);

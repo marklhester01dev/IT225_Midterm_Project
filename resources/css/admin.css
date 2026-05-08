@@ -191,6 +191,7 @@ select,
   background-color: var(--btn-hover);
   color: var(--caption-btn-primary-reverse);
 }
+
 .update-btn:active,
 .add-btn:active,
 .save-btn:active,

@@ -231,22 +231,17 @@ unset($_SESSION['flash']);
 
         <h1>Sales Management</h1>
 
-        <!-- Summary cards -->
-        <div class="summary">
-            <div class="card">
-                <div class="card-label">Total Sales</div>
-                <div class="card-value">&#8369;<?= number_format($totalSales, 2) ?></div>
+        <!-- STATISTICS CONTAINER -->
+        <div class="statistics-container statistics-container--grid">
+            <div class="statistics_card statistics_card--flex">
+                <div class="stat_card-label">Total Sales</div>
+                <div class="stat-value">&#8369;<?= number_format($totalSales, 2) ?></div>
             </div>
-            <div class="card">
-                <div class="card-label">Transactions</div>
-                <div class="card-value"><?= $totalTransactions ?></div>
+            <div class="statistics_card statistics_card--flex">
+                <div class="stat_card-label">Transactions</div>
+                <div class="stat-value"><?= $totalTransactions ?></div>
             </div>
         </div>
-
-        <!-- Reset all sales history -->
-        <form method="POST" onsubmit="return confirm('Reset all sales history? This cannot be undone.');">
-            <button type="submit" name="reset_sales" class="btn-reset">Reset Sales History</button>
-        </form>
 
         <!-- New sale entry form -->
         <div class="sale-form">
@@ -267,7 +262,7 @@ unset($_SESSION['flash']);
                             <!-- Product dropdown grouped by category -->
                             <td class="entry-cell">
                                 <select name="product_id" required>
-                                    <option value="">— Select Product —</option>
+                                    <option value="">Select Product</option>
                                     <?php
                                     $currentCategory = '';
                                     while ($p = $products->fetch_assoc()):
@@ -313,7 +308,7 @@ unset($_SESSION['flash']);
 
                             <!-- Submit -->
                             <td class="entry-cell">
-                                <button type="submit" name="add_sale" class="btn-primary">Add Sale</button>
+                                <button type="submit" name="add_sale" class="add-btn">Add Sale</button>
                             </td>
 
                         </tr>
@@ -323,7 +318,12 @@ unset($_SESSION['flash']);
         </div>
 
         <!-- Sales list -->
-        <h2>Sales List</h2>
+        <h3>Sales List</h3>
+        
+          <!-- Reset all sales history -->
+        <form method="POST" onsubmit="return confirm('Reset all sales history? This cannot be undone.');">
+            <button type="submit" name="reset_sales" class="reset-btn">Reset Sales History</button>
+        </form>
 
         <table class="sales-table">
             <thead>
@@ -409,7 +409,7 @@ unset($_SESSION['flash']);
                         <?php if ($row['status'] === 'Completed'): ?>
                             <form method="POST" style="display: inline;">
                                 <input type="hidden" name="id" value="<?= $row['sales_id'] ?>">
-                                <button type="submit" name="cancel_sale" class="btn-danger">Cancel</button>
+                                <button type="submit" name="cancel_sale" class="cancel-btn">Cancel</button>
                             </form>
                         <?php else: ?>
                             <span class="no-data">—</span>
