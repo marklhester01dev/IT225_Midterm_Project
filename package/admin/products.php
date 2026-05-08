@@ -261,14 +261,23 @@ $statuses   = ["Available", "Unavailable"];
 
         <h1>PRODUCT REGISTRY</h1>
 
+        <div class="inputs_container inputs_container--flex">
+            <div class="add_search_vertical-layout add_search_vertical-layout--flex">
         <!-- Add product form -->
-        <h2>Add Product</h2>
+         <div class="add_input-container add_input-container--flex">
+        <h3>Add Product</h3>
         <form method="POST" enctype="multipart/form-data">
+              <div class="input-btn-wrapper input-btn-wrapper--flex">
+            <div class="input_wrapper input_wrapper--flex">
+                <div class="input_group input_group--flex">
             <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($csrf_token) ?>">
 
             <input type="text" name="name" placeholder="Product Name" required>
             <input type="number" step="0.01" name="price" placeholder="Price" required>
+                    </div>
+                    <!-- Input Group -->
 
+                <div class="input_group input_group--flex">
             <select name="category">
                 <?php foreach ($categories as $cat): ?>
                     <option value="<?= htmlspecialchars($cat) ?>"><?= htmlspecialchars($cat) ?></option>
@@ -280,18 +289,38 @@ $statuses   = ["Available", "Unavailable"];
                     <option value="<?= htmlspecialchars($s) ?>"><?= htmlspecialchars($s) ?></option>
                 <?php endforeach; ?>
             </select>
+                </div>
+                <!-- Input Group -->
 
+                    <div class="input_group input_group--flex">
             <input type="file" name="image" accept="image/jpeg,image/png,image/gif,image/webp">
-            <button name="add_product">Add Product</button>
+                </div>
+                <!-- Input Group -->
+                 </div>
+            <!-- Input Wrapper -->
+                 <div class="input_group input_group--flex">
+            <button class="form_button" name="add_product">Add Product</button>
+                 </div>
+                 <!-- Input Group -->
+              </div>
+              <!-- Input-Btn-Wrapper -->
         </form>
+    </div>
 
         <!-- Search and filter form -->
-        <h2>Search & Filter</h2>
+          <div class="filter_input-container filter_input-container--flex">
+        <h3>Search & Filter</h3>
         <form method="GET">
+              <div class="input-btn-wrapper input-btn-wrapper--flex">
+            <div class="input_wrapper input_wrapper--flex">
+                <div class="input_group input_group--flex">
             <input type="text" name="search"
                    value="<?= htmlspecialchars($search) ?>"
                    placeholder="Search...">
+                </div>
+                <!-- Input Group -->
 
+                <div class="input_group input_group--flex">
             <select name="category">
                 <option value="">Select Category</option>
                 <?php foreach ($categories as $cat): ?>
@@ -311,15 +340,32 @@ $statuses   = ["Available", "Unavailable"];
                     </option>
                 <?php endforeach; ?>
             </select>
-
-            <button>Apply</button>
-            <a href="products.php">Clear</a>
+                </div>
+                <!-- Input Group -->
+                  </div>
+            <!-- Input Wrapper -->
+                    <div class="input_group input_group--flex">
+            <button class="form_button">Apply</button>
+            <a class="clear_form" href="products.php">Clear</a>
+                    </div>
+                    <!-- Input Group -->
+              </div>
+              <!-- Input-btn-wrapper -->
         </form>
+          </div>
+            <!-- Filter Container -->
+
+          
+        
 
         <!-- Edit product form, shown only when a product is selected for editing -->
+         <div class="edit_input-container edit_input-container--flex">
         <?php if ($editProduct): ?>
-        <h2>Edit Product</h2>
+        <h3>Edit Product</h3>
         <form method="POST" enctype="multipart/form-data">
+            <div class="input-btn-wrapper input-btn-wrapper--flex">
+            <div class="input_wrapper input_wrapper--flex">
+                <div class="input_group input_group--flex">
             <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($csrf_token) ?>">
             <input type="hidden" name="id" value="<?= intval($editProduct['product_id']) ?>">
 
@@ -327,7 +373,9 @@ $statuses   = ["Available", "Unavailable"];
                    value="<?= htmlspecialchars($editProduct['product_name']) ?>" required>
             <input type="number" step="0.01" name="price"
                    value="<?= htmlspecialchars($editProduct['price']) ?>" required>
-
+        </div>
+        <!-- Input Group -->
+         <div class="input_group input_group--flex">
             <select name="category">
                 <?php foreach ($categories as $cat): ?>
                     <option value="<?= htmlspecialchars($cat) ?>"
@@ -345,15 +393,33 @@ $statuses   = ["Available", "Unavailable"];
                     </option>
                 <?php endforeach; ?>
             </select>
-
+         </div>
+         <!-- Input Group -->
+                <div class="input_group input_group--flex">
             <input type="file" name="image" accept="image/jpeg,image/png,image/gif,image/webp">
-            <button name="save_edit">Save Changes</button>
+                </div>
+                <!-- Input Group -->
+                </div>
+            <!-- Input Wrapper -->
+                <div class="input_group input_group--flex">
+            <button class="form_button" name="save_edit">Save Changes</button>
+            </div>
+            <!-- Input Group -->
+                </div>
+             <!-- Input-Btn-Wrapper -->
         </form>
         <?php endif; ?>
+                </div>
+                <!-- Edit -->
+                  </div>
+          <!-- Card Vertical Layout -->
+        </div>
+        <!-- Inputs Container -->
 
         <!-- Product list table -->
-        <h2>Product List</h2>
-        <table border="1" width="100%">
+         <div class="product-table product-table--flex">
+        <h3>Product List</h3>
+        <table>
             <tr>
                 <th>Image</th>
                 <th>Name</th>
@@ -368,7 +434,7 @@ $statuses   = ["Available", "Unavailable"];
                 <td>
                     <?php if (!empty($row['image'])): ?>
                         <img src="../../resources/images/uploads/<?= htmlspecialchars($row['image']) ?>"
-                             alt="<?= htmlspecialchars($row['product_name']) ?>" class="product_image" style="width: 60px">
+                             alt="<?= htmlspecialchars($row['product_name']) ?>" class="prod-img-thumb">
                     <?php endif; ?>
                 </td>
 
@@ -378,8 +444,8 @@ $statuses   = ["Available", "Unavailable"];
 
                 <td>
                     <?= $row['status'] === "Available"
-                        ? '<span style="color:green; font-weight:bold;">Available</span>'
-                        : '<span style="color:red; font-weight:bold;">Unavailable</span>' ?>
+                        ? '<span class="available_state">✅Available</span>'
+                        : '<span class="unavailable_state">❌Unavailable</span>' ?>
                 </td>
 
                 <td>
@@ -387,7 +453,7 @@ $statuses   = ["Available", "Unavailable"];
                     <form method="POST" style="display:inline;">
                         <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($csrf_token) ?>">
                         <input type="hidden" name="id" value="<?= intval($row['product_id']) ?>">
-                        <button name="edit">Edit</button>
+                        <button class="edit-btn" name="edit">Edit</button>
                     </form>
 
                     <!-- Delete button with confirmation -->
@@ -395,16 +461,19 @@ $statuses   = ["Available", "Unavailable"];
                           onsubmit="return confirm('Delete this product?')">
                         <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($csrf_token) ?>">
                         <input type="hidden" name="id" value="<?= intval($row['product_id']) ?>">
-                        <button name="delete">Delete</button>
+                        <button class="delete-btn" name="delete">Delete</button>
                     </form>
                 </td>
             </tr>
             <?php endwhile; ?>
         </table>
+        </div>
+        <!-- Table Container -->
 
     </div>
 </div>
         <script src="../../resources/js/partials/sidebar.js" type="text/javascript" defer></script>
         <script src="../../resources/js/partials/menu_mobile.js" type="text/javascript" defer></script>
+        <script src="../../resources/js/product_edit-form.js" type="text/javascript" defer></script>
 </body>
 </html>

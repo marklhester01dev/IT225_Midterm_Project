@@ -104,6 +104,7 @@
   --margin-84px: var(--val-84px);
   --margin-88px: var(--val-88px);
   --margin-92px: var(--val-92px);
+  --margin-94px: var(--val-94px);
   --margin-96px: var(--val-96px);
   --margin-128px: var(--val-128px);
   --margin-256px: var(--val-256px);
@@ -235,6 +236,8 @@
   --high-stock: var(--positive-500);
   --medium-stock: var(--warning-700);
   --low-stock: var(--negative-500);
+  --product-available: var(--positive-500);
+  --product-unavailable: var(--negative-500);
 
   /* COMPONENTS - Input */
   --input-disable: var(--black-500);
