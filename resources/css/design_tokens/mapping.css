@@ -257,8 +257,9 @@
   --input-background: var(--accent-white-900);
   --input-stroke: var(--gray-soft-200);
 
-  /* COMPONENTS - Card */
+  /* COMPONENTS - Card, Banner */
   --card-stroke: var(--gray-soft-500);
+  --banner-stroke-pending: var(--negative-500);
   --card-glass-morphism-stroke: var(--accent-white-900);
 
   /* COMPONENTS - Form */

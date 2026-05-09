@@ -315,32 +315,44 @@ if (!empty($_SESSION['notif'])) {
         <!-- Low stock alert banner -->
         <?php if (!empty($lowStockAlerts)): ?>
         <div id="low-stock-alert">
-            <div class="alert-header">
-                <span class="bell-icon">🔔</span>
-                Low Stock Alert —
-                <?= count($lowStockAlerts) ?> ingredient<?= count($lowStockAlerts) > 1 ? 's' : '' ?>
+            <div class="alert-header alert-header--flex">
+                    <img src="../../resources/images/icons/Communication/Bell.svg" alt="Notification">
+               <p><?= count($lowStockAlerts) ?> ingredient<?= count($lowStockAlerts) > 1 ? 's' : '' ?>
                 need<?= count($lowStockAlerts) === 1 ? 's' : '' ?> restocking
+                </p> 
             </div>
-            <div class="alert-items">
+            <div class="alert-items alert-items--flex">
                 <?php foreach ($lowStockAlerts as $alert): ?>
                     <span class="alert-tag"
                           title="Stock: <?= intval($alert['stock']) ?> / Threshold: <?= intval($alert['low_stock_threshold']) ?>">
-                        🧪 <?= htmlspecialchars($alert['label']) ?> (<?= intval($alert['stock']) ?>)
+                         <?= htmlspecialchars($alert['label']) ?> (<?= intval($alert['stock']) ?>)
                     </span>
                 <?php endforeach; ?>
             </div>
-            <div class="alert-count">
-                <a href="inventory.php?stock_level=low">View all low stock →</a>
+            <div class="alert-count alert-count--flex">
+                <a href="inventory.php?stock_level=low" class="banner_btn banner_btn--flex">
+                    <p>View all low stock</p>
+                    <img class="banner-img" src="../../resources/images/icons/Arrow/Chevron_Right_MD.svg" alt="Chevron Right">
+                </a>
             </div>
         </div>
         <?php endif; ?>
-
+    
+         <div class="card-container card-container--grid">
         <!-- Search and filter bar -->
-        <form method="GET" class="filter-bar">
+    <div class="card card--flex">
+         <h3>Search</h3>
+        <form method="GET">
+             <div class="input-btn-wrapper input-btn-wrapper--flex">
+             <div class="input_wrapper input_wrapper--flex">
+             <div class="input_group input_group--flex">
             <input type="text" name="search"
                    value="<?= htmlspecialchars($search) ?>"
-                   placeholder="🔍 Search ingredient...">
+                   placeholder="Search ingredient...">
+             </div>
+             <!-- Input Group -->
 
+              <div class="input_group input_group--flex">
             <select name="category">
                 <option value="">Select Category</option>
                 <?php foreach ($unitOptions as $opt): ?>
@@ -353,44 +365,86 @@ if (!empty($_SESSION['notif'])) {
 
             <select name="stock_level">
                 <option value="">Select Stock Level</option>
-                <option value="low"  <?= $stockLevel === 'low'  ? 'selected' : '' ?>>🔴 Low</option>
-                <option value="mid"  <?= $stockLevel === 'mid'  ? 'selected' : '' ?>>🟠 Mid</option>
-                <option value="high" <?= $stockLevel === 'high' ? 'selected' : '' ?>>🟢 High</option>
+                <option value="low"  <?= $stockLevel === 'low'  ? 'selected' : '' ?>>Low</option>
+                <option value="mid"  <?= $stockLevel === 'mid'  ? 'selected' : '' ?>>Mid</option>
+                <option value="high" <?= $stockLevel === 'high' ? 'selected' : '' ?>>High</option>
             </select>
+            </div>
+            <!-- Input Group -->
 
-            <button type="submit" class="filter-search-btn">Search</button>
-            <a href="inventory.php" class="filter-clear-btn">Clear</a>
+             </div>
+             <!-- Input Wrapper -->
+             <div class="input_group input_group--flex">
+            <button type="submit" class="search-btn">Search</button>
+            <a href="inventory.php" class="clear-btn">Clear</a>
+             </div>
+             <!-- Input Group -->
+             </div>
+             <!-- Input Btn Wrapper -->
         </form>
+    </div>
+            <!-- Card -->
 
-        <h2>Ingredients Inventory</h2>
+         <div class="card card--flex">
+        <h3>Ingredients Inventory</h3>
 
         <!-- Add ingredient form -->
         <form method="POST" enctype="multipart/form-data">
+             <div class="input-btn-wrapper input-btn-wrapper--flex">
+             <div class="input_wrapper input_wrapper--flex">
+             <div class="input_group input_group--flex">
             <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($csrf_token) ?>">
 
             <input type="text"   name="ingredient_name"    placeholder="Name"          required>
             <input type="number" name="stock"               placeholder="Stock"   min="0" required>
-            <input type="number" name="low_stock_threshold" placeholder="Low Threshold" min="0" required>
+            </div>
+            <!--Input Group -->
 
+             <div class="input_group input_group--flex">
+            <input type="number" name="low_stock_threshold" placeholder="Low Threshold" min="0" required>
+            
             <select name="unit">
                 <?php foreach ($unitOptions as $opt): ?>
                     <option value="<?= htmlspecialchars($opt) ?>"><?= htmlspecialchars($opt) ?></option>
                 <?php endforeach; ?>
             </select>
-
+             </div>
+             <!-- Input Group -->
+            
+             <div class="input_group input_group--flex">
             <input type="file" name="image" accept="image/jpeg,image/png,image/gif,image/webp">
-            <button name="add_ingredient">Add</button>
-        </form>
+             </div>
+             <!-- Input Group -->
+              </div>
+              <!-- Input Wrapper -->
 
-        <!-- Edit ingredient form (shown only when edit is triggered) -->
-        <?php if ($editIng): ?>
+              <div class="input_group input_group--flex">
+            <button class="add-btn" name="add_ingredient">Add</button>
+              </div>
+              <!-- Input Group -->
+             </div>
+             <!-- Input Btn Wrapper -->
+        </form>
+         </div>
+         <!-- Card -->
+
+        <div class="card card--flex   <?= !$editIng ? 'card--empty' : '' ?>">
+                <!-- Edit ingredient form (shown only when edit is triggered) -->
+          <?php if ($editIng): ?>
         <h3>Edit Ingredient</h3>
         <form method="POST" enctype="multipart/form-data">
+             <div class="input-btn-wrapper input-btn-wrapper--flex">
+             <div class="input_wrapper input_wrapper--flex">
+             <div class="input_group input_group--flex">
             <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($csrf_token) ?>">
             <input type="hidden" name="id" value="<?= intval($editIng['ingredient_id']) ?>">
 
             <input type="text"   name="ingredient_name"    value="<?= htmlspecialchars($editIng['ingredient_name']) ?>" required>
             <input type="number" name="stock"               value="<?= intval($editIng['stock']) ?>"               min="0" required>
+             </div>
+             <!-- Input Group -->
+
+              <div class="input_group input_group--flex">
             <input type="number" name="low_stock_threshold" value="<?= intval($editIng['low_stock_threshold']) ?>" min="0" required>
 
             <select name="unit">
@@ -401,14 +455,35 @@ if (!empty($_SESSION['notif'])) {
                     </option>
                 <?php endforeach; ?>
             </select>
+              </div>
+              <!-- Input Group -->
 
+        <div class="input_group input_group--flex">
             <input type="file" name="image" accept="image/jpeg,image/png,image/gif,image/webp">
-            <button name="update_ing">Save</button>
-            <a href="inventory.php"><button type="button">Cancel</button></a>
+        </div>
+        <!-- Input Group -->
+        </div>
+        <!-- Input Wrapper -->
+
+        <div class="input_group input_group--flex">
+            <button class="save-btn" name="update_ing">Save</button>
+            <a href="inventory.php"><button class="cancel-btn" type="button">Cancel</button></a>
+        </div>
+        <!-- Input Group -->
+             </div>
+             <!-- Input Btn Wrapper -->
         </form>
-        <?php endif; ?>
+          <?php endif; ?>
+        </div>
+        <!-- Card -->
+    </div>
+    <!-- Card Container -->
+
+      
 
         <!-- Ingredient cards list -->
+         <div class="grid-container">
+         <h3>Ingredients Lists</h3>
         <div class="ingredient-grid">
             <?php while ($row = $ingredients->fetch_assoc()):
 
@@ -416,15 +491,12 @@ if (!empty($_SESSION['notif'])) {
                 if ($row['stock'] <= $row['low_stock_threshold']) {
                     $cls      = 'low';
                     $barClass = 'bar-low';
-                    $icon     = '⚠️';
                 } elseif ($row['stock'] <= $row['low_stock_threshold'] * 3) {
                     $cls      = 'mid';
                     $barClass = 'bar-mid';
-                    $icon     = '⚠️';
                 } else {
                     $cls      = 'high';
                     $barClass = 'bar-high';
-                    $icon     = '✅';
                 }
 
                 // Calculate stock bar fill percentage
@@ -432,7 +504,7 @@ if (!empty($_SESSION['notif'])) {
                 $pct    = min(100, round(($row['stock'] / $maxRef) * 100));
             ?>
 
-            <div class="ingredient-card">
+            <div class="ingredient-card ingredient-card--flex">
 
                 <!-- Ingredient image or placeholder -->
                 <?php if (!empty($row['image'])): ?>
@@ -448,21 +520,23 @@ if (!empty($_SESSION['notif'])) {
                     <div class="stock-bar-wrap">
                         <div class="stock-bar-fill <?= $barClass ?>" style="width:<?= $pct ?>%"></div>
                     </div>
-                    <div class="card-stock-count <?= $cls ?>">
-                        <?= $icon ?> <?= intval($row['stock']) ?> LEFT
+                    <div class="card-stock-count card-stock-count--flex <?= $cls ?>">
+                     <?= intval($row['stock']) ?> LEFT
                     </div>
                 </div>
-
-                <div class="card-right">
-                    <div class="card-limit">Limit: <?= intval($row['low_stock_threshold']) ?></div>
+                
+            <div class="card-right-container card-right-container--flex">
+                <div class="card-right card-right--flex">
+                    <div class="card-limit">Low Stock at: <?= intval($row['low_stock_threshold']) ?></div>
                     <div class="card-unit"><?= htmlspecialchars($row['unit']) ?></div>
-                    <div class="card-actions">
+                </div>
+                 <div class="card-actions">
 
                         <!-- Edit button -->
                         <form method="POST" class="form-inline">
                             <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($csrf_token) ?>">
                             <input type="hidden" name="id" value="<?= intval($row['ingredient_id']) ?>">
-                            <button name="edit_ing" class="btn-edit">Edit</button>
+                            <button name="edit_ing" class="edit-btn">Edit</button>
                         </form>
 
                         <!-- Delete button with confirmation -->
@@ -470,16 +544,18 @@ if (!empty($_SESSION['notif'])) {
                               onsubmit="return confirm('Delete ingredient?')">
                             <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($csrf_token) ?>">
                             <input type="hidden" name="id" value="<?= intval($row['ingredient_id']) ?>">
-                            <button name="delete_ing" class="btn-delete">Delete</button>
+                            <button name="delete_ing" class="delete-btn">Delete</button>
                         </form>
 
                     </div>
-                </div>
-
+            </div>
+            <!-- Card-Right_Container -->
             </div>
             <?php endwhile; ?>
         </div>
-
+        <!-- Ingredient Grid -->
+        </div>
+        <!-- Grid Container -->
     </div>
 </div>
 
@@ -491,36 +567,47 @@ if (!empty($_SESSION['notif'])) {
     <!-- Action notification (added, updated, deleted) -->
     <?php if ($notif !== null): ?>
         <?php if ($notif['type'] === 'deleted'): ?>
-        <div class="notif-card notif-deleted">
-            <span class="notif-icon">ℹ️</span>
+        <div class="notif-card notif-card--flex notif-deleted">
+            <span class="notif-icon">
+                <img src="../../resources/images/icons/Communication/fi-sr-info-warning.svg" alt="Note">
+            </span>
             <div class="notif-body">
                 <div class="notif-title">Deleted Successfully</div>
                 <div class="notif-msg">
-                    <?= htmlspecialchars($notif['name']) ?> has been successfully removed.
+                   <span class="notif_topic">
+                    <?= htmlspecialchars($notif['name']) ?>
+                    <span class="notif_topic"> has been successfully removed.
+                   
                 </div>
             </div>
             <a href="inventory.php" class="notif-close-link">✕</a>
         </div>
 
         <?php elseif ($notif['type'] === 'added'): ?>
-        <div class="notif-card notif-added">
-            <span class="notif-icon">ℹ️</span>
+        <div class="notif-card notif-card--flex notif-added">
+            <span class="notif-icon">
+                <img src="../../resources/images/icons/Communication/fi-sr-info-success.svg" alt="Note">
+            </span>
             <div class="notif-body">
                 <div class="notif-title">Added Successfully</div>
                 <div class="notif-msg">
-                    <?= htmlspecialchars($notif['name']) ?> has been successfully added.
+                    <span class="notif_topic"><?= htmlspecialchars($notif['name']) ?> </span> has been successfully added.
                 </div>
             </div>
             <a href="inventory.php" class="notif-close-link">✕</a>
         </div>
 
         <?php elseif ($notif['type'] === 'updated'): ?>
-        <div class="notif-card notif-updated">
-            <span class="notif-icon">ℹ️</span>
+        <div class="notif-card notif-card--flex notif-updated">
+            <span class="notif-icon">
+                <img src="../../resources/images/icons/Communication/fi-sr-info-success.svg" alt="Note">
+            </span>
             <div class="notif-body">
                 <div class="notif-title">Updated Successfully</div>
                 <div class="notif-msg">
-                    <?= htmlspecialchars($notif['name']) ?> has been successfully updated.
+                     <span class="notif_topic">
+                    <?= htmlspecialchars($notif['name']) ?> 
+                     </span> has been successfully updated.
                 </div>
             </div>
             <a href="inventory.php" class="notif-close-link">✕</a>
@@ -530,8 +617,10 @@ if (!empty($_SESSION['notif'])) {
 
     <!-- Low stock notifications per ingredient -->
     <?php foreach ($lowStockAlerts as $alert): ?>
-    <div class="notif-card notif-lowstock">
-        <span class="notif-icon">ℹ️</span>
+    <div class="notif-card notif-card--flex notif-lowstock">
+        <span class="notif-icon">
+            <img src="../../resources/images/icons/Communication/fi-sr-info-warning.svg" alt="Note">
+        </span>
         <div class="notif-body">
             <div class="notif-title">Low Stock Alert!</div>
             <div class="notif-msg">
@@ -539,7 +628,9 @@ if (!empty($_SESSION['notif'])) {
                 Only <strong><?= intval($alert['stock']) ?> units remaining.</strong>
             </div>
         </div>
-        <a href="inventory.php?stock_level=low" class="notif-close-link">✕</a>
+        <a href="inventory.php" class="notif-close-link">
+            <img src="../../resources/images/icons/Menu/Close_MD.svg" alt="Close">
+        </a>
     </div>
     <?php endforeach; ?>
 
@@ -547,5 +638,6 @@ if (!empty($_SESSION['notif'])) {
 <?php endif; ?>
         <script src="../../resources/js/partials/sidebar.js" type="text/javascript" defer></script>
         <script src="../../resources/js/partials/menu_mobile.js" type="text/javascript" defer></script>
+        <script src="../../resources/js/partials/notif_control.js" type="text/javascript" defer></script>
 </body>
 </html>
