@@ -61,7 +61,7 @@ $username = $_GET['user'];
                     <p class="logo_text">al coffee</p>
                 </div>
 
-                <form action="db.php" method="POST">
+                <form action="../db.php" method="POST">
                     <input type="hidden" name="action" value="create_new_password">
                     <input type="hidden" name="username" value="<?php echo htmlspecialchars($username); ?>">
 

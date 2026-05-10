@@ -51,7 +51,7 @@ session_start();
                     <p class="logo_text">al coffee</p>
                 </div>
 
-                <form action="db.php" method="POST">
+                <form action="../db.php" method="POST">
                     <input type="hidden" name="action" value="register">
 
                     <div class="input_container input_container--flex">

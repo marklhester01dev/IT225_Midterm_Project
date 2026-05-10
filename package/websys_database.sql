@@ -32,11 +32,9 @@ CREATE TABLE IF NOT EXISTS `addons` (
 
 -- Dumping data for table login.addons: ~5 rows (approximately)
 INSERT INTO `addons` (`addon_id`, `addon_name`, `price`, `status`) VALUES
-	(1, 'Extra Shot', 15.00, 'Available'),
-	(2, 'Oat Milk', 20.00, 'Available'),
-	(3, 'Whipped Cream', 10.00, 'Available'),
-	(4, 'Almond Milk', 25.00, 'Available'),
-	(5, 'Brown Sugar Syrup', 15.00, 'Available');
+	(1, 'Extra Shot', 20.00, 'Available'),
+	(2, 'Sea Salt Cream', 20.00, 'Available'),
+	(3, 'Cold Foam', 10.00, 'Available');
 
 -- Dumping structure for table login.audit_logs
 DROP TABLE IF EXISTS `audit_logs`;
@@ -67,27 +65,27 @@ CREATE TABLE IF NOT EXISTS `ingredients` (
 
 -- Dumping data for table login.ingredients: ~21 rows (approximately)
 INSERT INTO `ingredients` (`ingredient_id`, `ingredient_name`, `stock`, `low_stock_threshold`, `unit`, `image`) VALUES
-	(3, 'Caramel Syrup', 20, 5, 'Bottle-based', '1776697458_Caramel_Syrup.webp'),
-	(4, 'Salted Caramel Syrup', 15, 5, 'Bottle-based', '1776697509_Salted_Caramel_Syrup.webp'),
-	(5, 'Caramel Sauce', 15, 5, 'Bottle-based', '1776697558_Caramel_Sauce.webp'),
-	(6, 'Chocolate Syrup', 20, 5, 'Bottle-based', '1776697594_Chocolate_Syrup.webp'),
-	(7, 'Chocolate Sauce', 20, 5, 'Bottle-based', '1776697622_Chocolate_Sauce.webp'),
-	(8, 'White Chocolate Sauce', 20, 5, 'Bottle-based', '1776697658_White_Chocolate_Sauce (1).webp'),
-	(9, 'Strawberry Syrup', 20, 5, 'Bottle-based', '1776701233_Strawberry_Syrup.webp'),
-	(10, 'Strawberry Puree', 20, 5, 'Bottle-based', '1776701277_Strawberry_Puree.webp'),
-	(11, 'Blueberry Syrup', 20, 5, 'Bottle-based', '1776701314_Blueberry_Syrup.webp'),
-	(12, 'Blueberry Puree', 15, 5, 'Bottle-based', '1776701338_Blueberry_Puree.webp'),
-	(13, 'Vanilla Syrup', 20, 5, 'Bottle-based', '1776701372_Vanilla_Syrup.webp'),
-	(14, 'Milk', 20, 5, 'Box-based', '1776701431_Milk.webp'),
-	(15, 'All Purpose Cream', 5, 5, 'Box-based', '1776701530_All_Purpose_Cream.webp'),
-	(16, 'Cups', 30, 5, 'Box-based', '1776701567_Cup.webp'),
-	(17, 'Straws', 100, 10, 'Pack-based', '1776701613_Straws.webp'),
-	(18, 'Biscoff Biscuits', 20, 5, 'Pack-based', '1776701711_Biscoff_Biscuits.webp'),
-	(19, 'Biscoff Sauce', 10, 3, 'Bottle-based', '1776701759_Biscoff_Sauce.webp'),
-	(20, 'Crushed Oreo', 20, 5, 'Pack-based', '1776701824_Crushed_Oreo.webp'),
-	(21, 'Matcha Powder', 20, 5, 'Pack-based', '1776701856_Matcha_Powder.webp'),
-	(22, 'Condensed Milk', 15, 5, 'Can-based', '1776701935_Condensed_Milk.webp'),
-	(23, ' Coffee Beans', 15, 5, 'Plastic-based', '1776702040_Coffee_Beans.webp');
+	(3, 'Caramel Syrup', 20, 5, 'Bottle', '1776697458_Caramel_Syrup.webp'),
+	(4, 'Salted Caramel Syrup', 15, 5, 'Bottle', '1776697509_Salted_Caramel_Syrup.webp'),
+	(5, 'Caramel Sauce', 15, 5, 'Bottle', '1776697558_Caramel_Sauce.webp'),
+	(6, 'Chocolate Syrup', 20, 5, 'Bottle', '1776697594_Chocolate_Syrup.webp'),
+	(7, 'Chocolate Sauce', 20, 5, 'Bottle', '1776697622_Chocolate_Sauce.webp'),
+	(8, 'White Chocolate Sauce', 20, 5, 'Bottle', '1776697658_White_Chocolate_Sauce (1).webp'),
+	(9, 'Strawberry Syrup', 20, 5, 'Bottle', '1776701233_Strawberry_Syrup.webp'),
+	(10, 'Strawberry Puree', 20, 5, 'Bottle', '1776701277_Strawberry_Puree.webp'),
+	(11, 'Blueberry Syrup', 20, 5, 'Bottle', '1776701314_Blueberry_Syrup.webp'),
+	(12, 'Blueberry Puree', 15, 5, 'Bottle', '1776701338_Blueberry_Puree.webp'),
+	(13, 'Vanilla Syrup', 20, 5, 'Bottle', '1776701372_Vanilla_Syrup.webp'),
+	(14, 'Milk', 20, 5, 'Box', '1776701431_Milk.webp'),
+	(15, 'All Purpose Cream', 5, 5, 'Box', '1776701530_All_Purpose_Cream.webp'),
+	(16, 'Cups', 30, 5, 'Box', '1776701567_Cup.webp'),
+	(17, 'Straws', 100, 10, 'Pack', '1776701613_Straws.webp'),
+	(18, 'Biscoff Biscuits', 20, 5, 'Pack', '1776701711_Biscoff_Biscuits.webp'),
+	(19, 'Biscoff Sauce', 10, 3, 'Bottle', '1776701759_Biscoff_Sauce.webp'),
+	(20, 'Crushed Oreo', 20, 5, 'Pack', '1776701824_Crushed_Oreo.webp'),
+	(21, 'Matcha Powder', 20, 5, 'Pack', '1776701856_Matcha_Powder.webp'),
+	(22, 'Condensed Milk', 15, 5, 'Can', '1776701935_Condensed_Milk.webp'),
+	(23, ' Coffee Beans', 15, 5, 'Plastic', '1776702040_Coffee_Beans.webp');
 
 -- Dumping structure for table login.products
 DROP TABLE IF EXISTS `products`;
@@ -213,10 +211,9 @@ CREATE TABLE IF NOT EXISTS `sale_addons` (
 
 -- Dumping data for table login.sale_addons: ~4 rows (approximately)
 INSERT INTO `sale_addons` (`id`, `sale_id`, `addon_id`, `addon_name`, `price`) VALUES
-	(1, 29, 3, 'Whipped Cream', 10.00),
-	(2, 30, 1, 'Extra Shot', 15.00),
-	(3, 31, 4, 'Almond Milk', 25.00),
-	(4, 32, 3, 'Whipped Cream', 10.00);
+	(1, 29, 1, 'Extra Shot', 20.00),
+	(2, 30, 2, 'Sea Salt Cream', 20.00),
+	(3, 31, 3, 'Cold Foam', 10.00);
 
 -- Dumping structure for table login.settings
 DROP TABLE IF EXISTS `settings`;
