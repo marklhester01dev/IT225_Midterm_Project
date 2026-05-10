@@ -18,7 +18,7 @@
 .sidenav_mobile {
   display: none;
   background: var(--screen-background);
-  position: absolute;
+  position: fixed;
   left: 0;
   right: 0;
   top: var(--val-60px);
