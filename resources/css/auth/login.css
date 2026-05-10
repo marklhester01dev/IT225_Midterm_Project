@@ -65,8 +65,6 @@ form {
 .form_container {
   border: var(--stroke-XSM) solid var(--stroke-login);
   width: 100%;
-  /* min-width: 320px;
-  max-width: 400px; */
   height: 100%;
 }
 
@@ -139,7 +137,6 @@ form {
   border-bottom-right-radius: var(--radius-MD);
 }
 
-/* Desktop */
 .form_logo_container,
 .form_logo {
   border-top-right-radius: var(--radius-MD);

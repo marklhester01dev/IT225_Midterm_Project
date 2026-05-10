@@ -5,7 +5,6 @@ if (session_status() === PHP_SESSION_NONE) {
 }
 
 if (!isset($conn) || !($conn instanceof mysqli)) {
-    // Fallback: create a connection
     $conn = new mysqli("localhost", "root", "", "login");
     if ($conn->connect_error) {
         $lowStockCount = 0;

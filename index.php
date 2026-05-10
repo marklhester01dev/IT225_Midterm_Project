@@ -34,7 +34,6 @@ session_start();
 </head>
 <body>
 
-    <!-- Flash message -->
      <div class="login_card login_card--flex">
     <div class="flash-message-container">
         <?php

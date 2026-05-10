@@ -37,7 +37,6 @@ function validateForm() {
   return isUsernameValid;
 }
 
-// Real-time validation
 userName.addEventListener("input", () => {
   const value = userName.value.trim();
   if (value) {
@@ -56,7 +55,6 @@ userName.addEventListener("blur", () => {
   }
 });
 
-// Form submission
 form.addEventListener("submit", (e) => {
   if (!validateForm()) {
     e.preventDefault();

@@ -41,7 +41,6 @@ function validateForm() {
   return validatePassword() && validateConfirm();
 }
 
-// Real-time validation
 userPassword.addEventListener("input", () => {
   const value = userPassword.value.trim();
   if (value) {
@@ -59,7 +58,6 @@ confirmPassword.addEventListener("input", () => {
     : addError(confirmPassword, inputMessages[1], messages.confirm);
 });
 
-// Blur events
 userPassword.addEventListener("blur", () => {
   const value = userPassword.value.trim();
   if (value && !validatePassword()) {
@@ -67,7 +65,6 @@ userPassword.addEventListener("blur", () => {
   }
 });
 
-// Form submission
 form.addEventListener("submit", (e) => {
   if (!validateForm()) {
     e.preventDefault();

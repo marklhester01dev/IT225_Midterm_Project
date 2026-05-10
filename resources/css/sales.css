@@ -1,10 +1,3 @@
-/* Layout */
-.title-bar {
-  background: #222;
-  color: white;
-  padding: 15px 20px;
-}
-
 table {
   width: 100%;
   background: var(--table-primary-bg);
@@ -87,7 +80,6 @@ h1 {
   color: var(--body-text-primary);
 }
 
-/* Flash messages */
 .flash {
   padding: var(--padding-12px) var(--padding-16px);
   border-radius: var(--radius-SM-3X);
@@ -106,7 +98,6 @@ h1 {
   border: var(--val-1px) solid var(--background-cancelled-bg);
 }
 
-/* Sale entry form */
 .sale-form {
   background: var(--background-card);
   padding: var(--padding-16px);
@@ -119,8 +110,6 @@ h1 {
 .sale-form h3 {
   margin-bottom: var(--margin-12px);
 }
-
-/* Entry table */
 
 .entry-table .hint {
   font-weight: var(--weight-REGULAR);
@@ -165,7 +154,6 @@ select:hover {
   border-color: var(--stroke-login);
 }
 
-/* Add-on chips */
 .addon-list {
   display: flex;
   flex-wrap: wrap;
@@ -299,6 +287,7 @@ select:hover {
 .product-thumb {
   width: 46px;
   height: 46px;
+  border: var(--val-1px) solid var(--card-stroke);
   border-radius: var(--radius-SM-4X);
   object-fit: cover;
   flex-shrink: 0;
@@ -383,4 +372,10 @@ select:hover {
   font-size: var(--size-XS);
   padding: var(--padding-12px) var(--padding-null);
   display: block;
+}
+
+@media (min-width: 767px) {
+  .add-btn {
+    padding: var(--padding-8px) var(--padding-16px);
+  }
 }

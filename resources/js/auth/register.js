@@ -67,7 +67,6 @@ function validateForm() {
   );
 }
 
-// Real-time validation
 [fullName, userName, userPassword, confirmPassword].forEach((input, index) => {
   input.addEventListener("input", () => {
     const value = input.value.trim();
@@ -103,7 +102,6 @@ confirmPassword.addEventListener("input", () => {
   }
 });
 
-// Blur events
 [fullName, userName, userPassword].forEach((input, index) => {
   input.addEventListener("blur", () => {
     const value = input.value.trim();
@@ -120,7 +118,6 @@ confirmPassword.addEventListener("input", () => {
   });
 });
 
-// Form submission
 form.addEventListener("submit", (e) => {
   if (!validateForm()) {
     e.preventDefault();

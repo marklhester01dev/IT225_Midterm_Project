@@ -7,7 +7,6 @@ if (!isset($_SESSION['user'])) {
     exit();
 }
 
-// Connect to database
 $conn = new mysqli("localhost", "root", "", "login");
 if ($conn->connect_error) die("DB Error");
 
@@ -62,7 +61,6 @@ function deleteImage(string $image): void {
     }
 }
 
-// Add new product
 if (isset($_POST['add_product'])) {
     validateCsrf();
 
@@ -84,7 +82,6 @@ if (isset($_POST['add_product'])) {
     exit();
 }
 
-// Delete product
 if (isset($_POST['delete'])) {
     validateCsrf();
 
@@ -126,7 +123,6 @@ if (isset($_POST['edit'])) {
     $stmt->close();
 }
 
-// Save edited product
 if (isset($_POST['save_edit'])) {
     validateCsrf();
 
@@ -221,7 +217,6 @@ if (!$products) {
 
 $stmt->close();
 
-// Category and status options (reused in multiple places)
 $categories = ["Hot Coffee", "Iced Coffee", "Matcha Series", "Non-Coffee", "Snacks", "Add Ons"];
 $statuses   = ["Available", "Unavailable"];
 ?>
@@ -233,7 +228,7 @@ $statuses   = ["Available", "Unavailable"];
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
      <!-- SEO -->
     <meta name="author" content="Al Coffee">
-    <meta name="description" content="Al Coffee Products Management - Manage product listings, update prices, organize categories, and monitor availability in real time. Ensure efficient product control and streamlined operations for your coffee business.">
+    <meta name="description" content="Al Coffee Products Management - Manage product listings, update prices, organize categories, and monitor availability in real time. Ensure efficient product control.">
      <!-- SEO -->
 
     <link rel="stylesheet" href="../../resources/css/general.css">
@@ -356,10 +351,8 @@ $statuses   = ["Available", "Unavailable"];
             <!-- Filter Container -->
 
           
-        
-
-        <!-- Edit product form, shown only when a product is selected for editing -->
-         <div class="edit_input-container edit_input-container--flex  <?= !$editProduct ? 'card--empty' : '' ?>">
+        <div class="edit-container-wrapper  <?= !$editProduct ? 'card--empty' : '' ?>">
+         <div class="edit_input-container edit_input-container--flex">
         <?php if ($editProduct): ?>
         <h3>Edit Product</h3>
         <form method="POST" enctype="multipart/form-data">
@@ -411,6 +404,8 @@ $statuses   = ["Available", "Unavailable"];
         <?php endif; ?>
                 </div>
                 <!-- Edit -->
+                 </div>
+                 <!-- Edit Wrapper -->
                   </div>
           <!-- Card Vertical Layout -->
         </div>
@@ -444,21 +439,20 @@ $statuses   = ["Available", "Unavailable"];
 
                 <td>
                     <?= $row['status'] === "Available"
-                        ? '<span class="available_state">✅Available</span>'
-                        : '<span class="unavailable_state">❌Unavailable</span>' ?>
+                        ? '<span class="available_state">Available</span>'
+                        : '<span class="unavailable_state"><p>Unavailable</p></span>' ?>
                 </td>
 
-                <td>
+                <td class="table-btn">
                     <!-- Edit button -->
-                    <form method="POST" style="display:inline;">
+                    <form method="POST">
                         <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($csrf_token) ?>">
                         <input type="hidden" name="id" value="<?= intval($row['product_id']) ?>">
                         <button class="edit-btn" name="edit">Edit</button>
                     </form>
 
-                    <!-- Delete button with confirmation -->
-                    <form method="POST" style="display:inline;"
-                          onsubmit="return confirm('Delete this product?')">
+                   
+                    <form method="POST" onsubmit="return confirm('Delete this product?')">
                         <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($csrf_token) ?>">
                         <input type="hidden" name="id" value="<?= intval($row['product_id']) ?>">
                         <button class="delete-btn" name="delete">Delete</button>

@@ -9,12 +9,9 @@ if (!isset($_SESSION['user'])) {
 
 $username = $_SESSION['user']['username'];
 
-// Connect to database
 $conn = new mysqli("localhost", "root", "", "login");
 if ($conn->connect_error) die("DB Error");
 
-
-// DATE FILTER
 
 $filter = $_GET['filter'] ?? 'daily';
 
@@ -28,8 +25,6 @@ if ($filter === 'daily') {
     $dateCondition = "1=1";
 }
 
-
-// FETCH SALES DATA
 
 // Summary totals based on selected filter
 $salesData = $conn->query("
@@ -70,7 +65,6 @@ while ($row = $res->fetch_assoc()) $salesRows[] = $row;
 
 
 // TOP SELLING PRODUCTS (daily / weekly / monthly)
-
 $topDaily = [];
 $res = $conn->query("
     SELECT s.product_id, s.product_name,
@@ -116,7 +110,6 @@ while ($row = $res->fetch_assoc()) $topMonthly[] = $row;
 
 
 // BEST SELLING CATEGORY
-
 $categoryRows = [];
 $res = $conn->query("
     SELECT p.category, SUM(s.quantity) as total_quantity, SUM(s.total) as total_sales
@@ -130,7 +123,6 @@ while ($row = $res->fetch_assoc()) $categoryRows[] = $row;
 
 
 // INVENTORY STATUS
-
 $allIngredients = [];
 $res = $conn->query("SELECT * FROM ingredients ORDER BY stock ASC");
 while ($row = $res->fetch_assoc()) $allIngredients[] = $row;
@@ -142,11 +134,9 @@ foreach ($allIngredients as $i) {
     if (!in_array($unit, $allUnitCats)) $allUnitCats[] = $unit;
 }
 
-// Inventory filters from GET
 $invStatus   = $_GET['inv_status']   ?? '';
 $invCategory = $_GET['inv_category'] ?? '';
 
-// Filter ingredients by status and/or category
 $filteredIngredients = [];
 foreach ($allIngredients as $i) {
     $thr = $i['low_stock_threshold'] ?? 5;
@@ -167,7 +157,6 @@ foreach ($allIngredients as $i) {
 
 
 // EXCEL EXPORT
-
 if (isset($_GET['export']) && $_GET['export'] === 'excel') {
     $filterLabel   = ucfirst($filter);
     $dateGenerated = date('Y-m-d H:i:s');
@@ -233,7 +222,6 @@ if (isset($_GET['export']) && $_GET['export'] === 'excel') {
 </head>
 <body>
 
-<!-- TITLE BAR + FILTER LINKS -->
 <div class="title-bar">
     <div class="filter-links">
         <a href="?filter=daily"    class="<?= $filter === 'daily'   ? 'active-filter' : '' ?>">Daily</a>
@@ -251,14 +239,12 @@ if (isset($_GET['export']) && $_GET['export'] === 'excel') {
 
     <div class="main">
 
-        <!-- HERO -->
         <div class="hero hero--flex">
             <div class="hero-label"><?= ucfirst($filter) ?> Sales</div>
             <div class="hero-amount">
                 <p>&#8369;<?= number_format($totalSales, 0) ?></p></div>
         </div>
 
-        <!-- Summary Stats -->
         <div class="statistics-container statistics-container--grid">
             <div class="statistics_card statistics_card--flex">
                 <div class="stat_card-label">Weekly Sales</div>
@@ -376,9 +362,9 @@ if (isset($_GET['export']) && $_GET['export'] === 'excel') {
             <div class="inv-filters">
                 <select name="inv_status">
                     <option value="">Filter Status</option>
-                    <option value="badge-bad"  <?= $invStatus === 'badge-bad'  ? 'selected' : '' ?>>⚠ Low</option>
-                    <option value="badge-mid"  <?= $invStatus === 'badge-mid'  ? 'selected' : '' ?>>⚠ Medium</option>
-                    <option value="badge-good" <?= $invStatus === 'badge-good' ? 'selected' : '' ?>>✓ Good</option>
+                    <option value="badge-bad"  <?= $invStatus === 'badge-bad'  ? 'selected' : '' ?>> Low</option>
+                    <option value="badge-mid"  <?= $invStatus === 'badge-mid'  ? 'selected' : '' ?>>Medium</option>
+                    <option value="badge-good" <?= $invStatus === 'badge-good' ? 'selected' : '' ?>>Good</option>
                 </select>
                 <select name="inv_category">
                     <option value="">All Categories</option>
@@ -390,7 +376,7 @@ if (isset($_GET['export']) && $_GET['export'] === 'excel') {
                 </select>
                 <button type="submit" class="inv-submit-btn">Apply Filter</button>
                 <?php if ($invStatus !== '' || $invCategory !== ''): ?>
-                    <a href="?filter=<?= htmlspecialchars($filter) ?>" class="inv-clear-btn">Clear</a>
+                    <a href="?filter=<?= htmlspecialchars($filter) ?>" class="inv-clear-btn"><span>Clear</span></a>
                 <?php endif; ?>
             </div>
             </div>
@@ -400,7 +386,7 @@ if (isset($_GET['export']) && $_GET['export'] === 'excel') {
             <?php if ($invStatus !== '' || $invCategory !== ''): ?>
             <div class="filter-container filter-container--flex">
                 <?php if ($invStatus !== ''):
-                    $statusLabel = ['badge-bad' => '⚠ Low', 'badge-mid' => '⚠ Medium', 'badge-good' => '✓ Good'][$invStatus] ?? $invStatus;
+                    $statusLabel = ['badge-bad' => 'Low', 'badge-mid' => 'Normal', 'badge-good' => 'Good'][$invStatus] ?? $invStatus;
                 ?>
                 <span class="filter-active-tag filter-active-tag--flex">
                     Status: <?= htmlspecialchars($statusLabel) ?>
@@ -437,9 +423,17 @@ if (isset($_GET['export']) && $_GET['export'] === 'excel') {
                 $cls = $i['_cls'];
                 $thr = $i['low_stock_threshold'] ?? 5;
 
-                if ($cls === 'badge-bad')     { $icon = '❗'; $label = 'Low';  $sc = 'stock-bad'; }
-                elseif ($cls === 'badge-mid') { $icon = '⚠️'; $label = 'Mid';  $sc = 'stock-mid'; }
-                else                         { $icon = '✅'; $label = 'Good'; $sc = 'stock-good'; }
+                if ($cls === 'badge-bad'){  
+                    $label = 'Low Stock';  
+                    $sc = 'stock-bad'; 
+                }
+                elseif ($cls === 'badge-mid'){ 
+                    $label = 'Normal Stock';  
+                    $sc = 'stock-mid'; 
+                }
+                else{ 
+                    $label = 'High Stock'; 
+                    $sc = 'stock-good'; }
             ?>
             <tr>
                 <td class="info-image_column info-image_column--flex">
@@ -452,7 +446,7 @@ if (isset($_GET['export']) && $_GET['export'] === 'excel') {
                 <td><?= htmlspecialchars($i['unit'] ?? '') ?></td>
                 <td><?= $i['stock'] ?></td>
                 <td><?= $thr ?></td>
-                <td class="info-status_column"><span class="<?= $sc ?>"><?= $icon ?> <?= $label ?></span></td>
+                <td class="info-status_column"><span class="<?= $sc ?>"><?= $label ?></span></td>
             </tr>
             <?php endforeach; ?>
         </table>

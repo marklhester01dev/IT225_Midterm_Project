@@ -7,7 +7,6 @@ if (!isset($_SESSION['user'])) {
     exit();
 }
 
-// Database connection
 $conn = new mysqli("localhost", "root", "", "login");
 if ($conn->connect_error) die("DB Error");
 
@@ -37,7 +36,6 @@ $monthly = $conn->query("
       AND YEAR(created_at) = YEAR(CURDATE())
 ")->fetch_assoc()['total'] ?? 0;
 
-// Number of orders placed today
 $today_orders = $conn->query("
     SELECT COUNT(*) as c
     FROM sales
@@ -48,7 +46,6 @@ $today_orders = $conn->query("
 // Monthly revenue estimate (10% above current month)
 $forecast = $monthly * 1.1;
 
-// All ingredients ordered by stock level (ascending)
 $ingredients = $conn->query("SELECT * FROM ingredients ORDER BY stock ASC");
 
 // Top selling products today (products with images only)
@@ -101,7 +98,7 @@ $best_monthly = $conn->query("
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
      <!-- SEO -->
     <meta name="author" content="Al Coffee">
-     <meta name="description" content="Al Coffee System Dashboard & Inventory - Monitor daily sales, track inventory levels, and analyze top-selling products. Access real-time insights to optimize your coffee business operations.">
+     <meta name="description" content="Al Coffee System Dashboard & Inventory - Monitor daily sales, track inventory levels, and analyze top-selling products. Access real-time insights to optimize coffee business operations.">
      <!-- SEO -->
 
     <link rel="stylesheet" href="../../resources/css/general.css">
@@ -122,17 +119,14 @@ $best_monthly = $conn->query("
     <?php include '../partials/header.php'; ?>
     <?php require '../partials/sidenav.php'; ?>
     
-    <!-- Main content -->
     <div class="main">
 
-        <!-- Today's sales hero -->
         <div class="hero hero--flex">
             <div class="hero-label">Today's Sales</div>
             <div class="hero-amount">
                 <p>₱<?= number_format($daily, 0) ?></p></div>
         </div>
 
-        <!-- Summary stats -->
         <div class="statistics-container statistics-container--grid">
             <div class="statistics_card statistics_card--flex">
                 <div class="stat_card-label">Weekly Sales</div>
@@ -169,14 +163,17 @@ $best_monthly = $conn->query("
             </tr>
             <?php while ($i = $ingredients->fetch_assoc()): ?>
                 <?php
-                // Determine stock status based on threshold
                 $thr = $i['low_stock_threshold'] ?? 5;
                 if ($i['stock'] <= $thr) {
-                    $sc = "stock-bad";  $icon = "❗"; $label = "Low";
-                } elseif ($i['stock'] <= $thr * 3) {
-                    $sc = "stock-mid";  $icon = "⚠️"; $label = "Mid";
+                    $sc = "stock-bad";   
+                    $label = "Low Stock";
+                } 
+                elseif ($i['stock'] <= $thr * 3) {
+                    $sc = "stock-mid";  
+                    $label = "Normal Stock";
                 } else {
-                    $sc = "stock-good"; $icon = "✅"; $label = "Good";
+                    $sc = "stock-good"; 
+                    $label = "High Stock";
                 }
                 ?>
                 <tr>
@@ -190,7 +187,7 @@ $best_monthly = $conn->query("
                     <td><?= htmlspecialchars($i['unit'] ?? '') ?></td>
                     <td><?= $i['stock'] ?></td>
                     <td><?= $thr ?></td>
-                    <td class="info-status_column"><span class="<?= $sc ?>"><?= $icon ?> <?= $label ?></span></td>
+                    <td class="info-status_column"><span class="<?= $sc ?>"> <?= $label ?></span></td>
                 </tr>
             <?php endwhile; ?>
         </table>
@@ -198,7 +195,6 @@ $best_monthly = $conn->query("
         <!-- Table Container -->
 
         <div class="table_container table_container--flex">
-        <!-- Top selling products -->
         <div class="section-title section-title--flex">
             <p>Top Selling Products</p></div>
 

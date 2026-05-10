@@ -9,16 +9,13 @@ if (!isset($_SESSION['user'])) {
 
 $username = $_SESSION['user']['username'];
 
-// Database connection
 $conn = new mysqli("localhost", "root", "", "login");
 if ($conn->connect_error) die("DB Error");
 
 
-// POST HANDLERS
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-    // Add sale
     if (isset($_POST['add_sale'])) {
         $product_id      = intval($_POST['product_id']);
         $qty             = intval($_POST['quantity']);
@@ -105,7 +102,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         header("Location: sales.php"); exit();
     }
 
-    // Void sale and log the reason
     if (isset($_POST['void_sale'])) {
         $id     = intval($_POST['id']);
         $reason = trim($_POST['reason'] ?? '');
@@ -140,9 +136,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 
 
-// GET DATA
-
-// Search and date filters
 $search = $_GET['search'] ?? '';
 $date   = $_GET['date']   ?? '';
 $where  = "1=1";
@@ -165,14 +158,13 @@ $sales = $conn->query("
     ORDER BY s.created_at DESC
 ");
 
-// Fetch all sale add-ons grouped by sale_id
 $all_addons = [];
 $res = $conn->query("SELECT sale_id, addon_name, price FROM sale_addons ORDER BY sale_id");
 while ($row = $res->fetch_assoc()) {
     $all_addons[$row['sale_id']][] = $row;
 }
 
-// Summary totals (Completed sales only)
+// Summary totals (Completed sales)
 $totalSales = $conn->query("
     SELECT SUM(total) as total FROM sales WHERE status = 'Completed'
 ")->fetch_assoc()['total'] ?? 0;
@@ -181,20 +173,17 @@ $totalTransactions = $conn->query("
     SELECT COUNT(*) as c FROM sales WHERE status = 'Completed'
 ")->fetch_assoc()['c'] ?? 0;
 
-// Products available for the sale entry form
 $products = $conn->query(
     "SELECT product_id, product_name, category, price
      FROM products WHERE status = 'Available' ORDER BY category, product_name"
 );
 
-// Add-ons available for the sale entry form
 $addons_res  = $conn->query(
     "SELECT addon_id, addon_name, price FROM addons WHERE status = 'Available' ORDER BY addon_name"
 );
 $addons_list = [];
 while ($a = $addons_res->fetch_assoc()) $addons_list[] = $a;
 
-// Pull flash message and clear it from session
 $flash = $_SESSION['flash'] ?? null;
 unset($_SESSION['flash']);
 ?>
@@ -205,7 +194,7 @@ unset($_SESSION['flash']);
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
      <!-- SEO -->
     <meta name="author" content="Al Coffee">
-     <meta name="description" content="Al Coffee Sales Management - Track transactions, monitor income, analyze sales trends, and generate real-time reports to support data-driven decisions and efficient sales operations.">
+     <meta name="description" content="Al Coffee Sales Management - Track transactions, monitor income for efficient sales operations.">
      <!-- SEO -->
 
     <link rel="stylesheet" href="../../resources/css/general.css">
@@ -259,7 +248,7 @@ unset($_SESSION['flash']);
                     <tbody>
                         <tr>
 
-                            <!-- Product dropdown grouped by category -->
+                            <!-- Product dropdown -->
                             <td class="entry-cell">
                                 <select name="product_id" required>
                                     <option value="">Select Product</option>
@@ -300,13 +289,9 @@ unset($_SESSION['flash']);
                                     <span class="no-data">No add-ons available</span>
                                 <?php endif; ?>
                             </td>
-
-                            <!-- Quantity input -->
                             <td class="entry-cell">
                                 <input type="number" name="quantity" min="1" value="1" required>
                             </td>
-
-                            <!-- Submit -->
                             <td class="entry-cell">
                                 <button type="submit" name="add_sale" class="add-btn">Add Sale</button>
                             </td>
@@ -352,11 +337,10 @@ unset($_SESSION['flash']);
                 $sale_addons = $all_addons[$row['sales_id']] ?? [];
             ?>
                 <tr>
-                    <!-- Sale ID -->
                     <td><?= $row['sales_id'] ?></td>
 
                     <!-- Product name and image -->
-                    <td style="text-align: left; padding-left: 16px;">
+                    <td>
                         <div class="product-cell">
                             <?php if (!empty($imageFile)): ?>
                                 <img src="../../resources/images/uploads/<?= htmlspecialchars($imageFile) ?>"
@@ -387,7 +371,7 @@ unset($_SESSION['flash']);
                         <?php endif; ?>
                     </td>
 
-                    <!-- Unit price (total divided by quantity) -->
+                    <!-- Unit pricing-->
                     <td>&#8369;<?= number_format($row['total'] / max($row['quantity'], 1), 2) ?></td>
 
                     <!-- Quantity -->
@@ -399,12 +383,9 @@ unset($_SESSION['flash']);
                     <!-- Date -->
                     <td><?= $row['created_at'] ?></td>
 
-                    <!-- Status badge -->
                     <td>
                         <span class="badge <?= $badgeClass ?>"><?= htmlspecialchars($row['status']) ?></span>
                     </td>
-
-                    <!-- Cancel action (only available for Completed sales) -->
                     <td>
                         <?php if ($row['status'] === 'Completed'): ?>
                             <form method="POST" style="display: inline;">

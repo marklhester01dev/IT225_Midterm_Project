@@ -141,7 +141,6 @@ form {
   border-bottom-right-radius: var(--radius-MD);
 }
 
-/* Desktop */
 .form_logo_container,
 .form_logo {
   border-top-right-radius: var(--radius-MD);

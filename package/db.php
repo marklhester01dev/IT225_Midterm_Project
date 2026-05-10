@@ -3,13 +3,11 @@ if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
 
-// Database connection
 $conn = new mysqli("localhost", "root", "", "login");
 if ($conn->connect_error) {
     die("Database connection failed: " . $conn->connect_error);
 }
 
-// Store a flash message in session
 function flash($type, $text) {
     $_SESSION['flash'] = [
         'type' => $type,
@@ -17,13 +15,11 @@ function flash($type, $text) {
     ];
 }
 
-// Redirect back to login page (index.php at project root)
 function back() {
     header("Location: ../index.php");
     exit;
 }
 
-// Block direct access — only accept POST requests
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     exit("Invalid access");
 }

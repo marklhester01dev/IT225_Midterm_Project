@@ -670,4 +670,11 @@ select {
     display: flex;
     position: fixed;
   }
+  .add-btn,
+  .search-btn,
+  .save-btn,
+  .cancel-btn,
+  .clear-btn {
+    padding: var(--padding-8px) var(--padding-16px);
+  }
 }

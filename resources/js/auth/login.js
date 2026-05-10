@@ -52,7 +52,6 @@ function validateForm() {
   return isUsernameValid && isPasswordValid;
 }
 
-// Real-time validation on input and blur
 userName.addEventListener("input", () => {
   const value = userName.value.trim();
   if (value) {
@@ -89,7 +88,6 @@ userPassword.addEventListener("blur", () => {
   }
 });
 
-// Form submission
 form.addEventListener("submit", (e) => {
   if (!validateForm()) {
     e.preventDefault();

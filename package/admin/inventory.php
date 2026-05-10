@@ -7,7 +7,6 @@ if (!isset($_SESSION['user'])) {
     exit();
 }
 
-// Connect to database
 $conn = new mysqli("localhost", "root", "", "login");
 if ($conn->connect_error) die("Connection failed");
 
@@ -34,18 +33,16 @@ function handleUpload(): string {
         return "";
     }
 
-    // Check upload error
     if ($_FILES['image']['error'] !== UPLOAD_ERR_OK) {
         die("File upload failed.");
     }
 
-    // Validate file size (max 2MB)
     $max_size = 2 * 1024 * 1024;
     if ($_FILES['image']['size'] > $max_size) {
         die("File too large. Max size is 2MB.");
     }
 
-    // Validate actual MIME type using finfo (not spoofable unlike $_FILES['type'])
+    // Validate actual MIME type using finfo
     $finfo = new finfo(FILEINFO_MIME_TYPE);
     $mime  = $finfo->file($_FILES['image']['tmp_name']);
 
@@ -73,7 +70,6 @@ function deleteImage(string $image): void {
     }
 }
 
-// Add new ingredient
 if (isset($_POST['add_ingredient'])) {
     validateCsrf();
 
@@ -116,7 +112,6 @@ if (isset($_POST['delete_ing'])) {
     $delName = $row ? $row['ingredient_name'] : 'Ingredient';
     $stmt->close();
 
-    // Delete image file from server
     if ($row && !empty($row['image'])) {
         deleteImage($row['image']);
     }
@@ -146,7 +141,6 @@ if (isset($_POST['edit_ing'])) {
     $stmt->close();
 }
 
-// Update an existing ingredient
 if (isset($_POST['update_ing'])) {
     validateCsrf();
 
@@ -205,7 +199,7 @@ $search     = trim($_GET['search']      ?? '');
 $stockLevel = trim($_GET['stock_level'] ?? '');
 $category   = trim($_GET['category']    ?? '');
 
-// Build dynamic WHERE clause for ingredient search/filter
+// Dynamic WHERE clause for ingredient search/filter
 $conditions = [];
 $ingParams  = [];
 $ingTypes   = "";
@@ -266,7 +260,6 @@ while ($r = $lowIngResult->fetch_assoc()) {
     $lowStockAlerts[] = $r;
 }
 
-// Unit/category options
 $unitOptions = ["Can-based", "Bottle-based", "Box-based", "Plastic-based", "Pack-based"];
 
 // Read and clear session notification
@@ -284,7 +277,7 @@ if (!empty($_SESSION['notif'])) {
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
      <!-- SEO -->
     <meta name="author" content="Al Coffee">
-    <meta name="description" content="Al Coffee Inventory System - Efficiently manage stock levels, record inventory transactions, track product availability, and generate real-time insights to support accurate and streamlined inventory operations.">
+    <meta name="description" content="Al Coffee Inventory System - Efficiently manage stock levels, record inventory transactions, track product availability, and generate real-time insights to support accurate and effective inventory operations.">
      <!-- SEO -->
 
     <link rel="stylesheet" href="../../resources/css/general.css">
@@ -429,7 +422,7 @@ if (!empty($_SESSION['notif'])) {
          <!-- Card -->
 
         <div class="card card--flex   <?= !$editIng ? 'card--empty' : '' ?>">
-                <!-- Edit ingredient form (shown only when edit is triggered) -->
+            
           <?php if ($editIng): ?>
         <h3>Edit Ingredient</h3>
         <form method="POST" enctype="multipart/form-data">
@@ -487,7 +480,6 @@ if (!empty($_SESSION['notif'])) {
         <div class="ingredient-grid">
             <?php while ($row = $ingredients->fetch_assoc()):
 
-                // Determine stock level class and icon
                 if ($row['stock'] <= $row['low_stock_threshold']) {
                     $cls      = 'low';
                     $barClass = 'bar-low';
@@ -499,7 +491,7 @@ if (!empty($_SESSION['notif'])) {
                     $barClass = 'bar-high';
                 }
 
-                // Calculate stock bar fill percentage
+                // Calculate stock bar progress percentage
                 $maxRef = max($row['low_stock_threshold'] * 3, 1);
                 $pct    = min(100, round(($row['stock'] / $maxRef) * 100));
             ?>
@@ -564,7 +556,7 @@ if (!empty($_SESSION['notif'])) {
 <?php if ($hasNotifs): ?>
 <div id="notif-container">
 
-    <!-- Action notification (added, updated, deleted) -->
+    <!-- Action notifications-->
     <?php if ($notif !== null): ?>
         <?php if ($notif['type'] === 'deleted'): ?>
         <div class="notif-card notif-card--flex notif-deleted">
@@ -615,7 +607,7 @@ if (!empty($_SESSION['notif'])) {
         <?php endif; ?>
     <?php endif; ?>
 
-    <!-- Low stock notifications per ingredient -->
+    <!-- Low stock notifications -->
     <?php foreach ($lowStockAlerts as $alert): ?>
     <div class="notif-card notif-card--flex notif-lowstock">
         <span class="notif-icon">

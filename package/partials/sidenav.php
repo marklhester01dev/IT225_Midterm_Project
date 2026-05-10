@@ -3,8 +3,6 @@
 $currentPage = basename(parse_url($_SERVER['REQUEST_URI'] ?? '', PHP_URL_PATH));
 $activePage = $currentPage;
 
-// Low stock badge count for Inventory linkage
-// Must have $conn defined or the include will create a fallback connection.
 require_once __DIR__ . '/low_stock_badge.php';
 ?>
 

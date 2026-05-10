@@ -1,5 +1,4 @@
 <?php
-// Start session and check if user is logged in
 session_start();
 
 if (!isset($_SESSION['user'])) {
@@ -7,7 +6,6 @@ if (!isset($_SESSION['user'])) {
     exit();
 }
 
-// Connect to database
 $conn = new mysqli("localhost", "root", "", "login");
 if ($conn->connect_error) die("DB Error");
 
@@ -15,7 +13,6 @@ include("log.php");
 
 $username = $_SESSION['user']['username'];
 
-// Reset all audit logs
 if (isset($_POST['reset_logs'])) {
     $conn->query("DELETE FROM audit_logs");
     logAction($conn, $username, "Reset Logs", "All audit logs cleared");
@@ -46,7 +43,6 @@ if (isset($_POST['update_settings'])) {
     exit();
 }
 
-// Add new user
 if (isset($_POST['add_user'])) {
     $user     = $_POST['username'];
     $pass     = password_hash($_POST['password'], PASSWORD_DEFAULT);
@@ -71,7 +67,6 @@ if (isset($_POST['add_user'])) {
     logAction($conn, $username, "Add User", "Added user: $user");
 }
 
-// Delete a user
 if (isset($_POST['delete_user'])) {
     $stmt = $conn->prepare("DELETE FROM users WHERE user_id=?");
     $stmt->bind_param("i", $_POST['id']);
@@ -80,7 +75,6 @@ if (isset($_POST['delete_user'])) {
     logAction($conn, $username, "Delete User", "Deleted user ID: " . $_POST['id']);
 }
 
-// Update existing user
 if (isset($_POST['update_user'])) {
     $id       = $_POST['id'];
     $fullname = $_POST['fullname'];
@@ -122,10 +116,8 @@ if (isset($_GET['edit'])) {
     $editUser = $stmt->get_result()->fetch_assoc();
 }
 
-// Fetch all users
 $users = $conn->query("SELECT * FROM users");
 
-// Fetch latest 20 audit logs
 $logs = $conn->query("SELECT * FROM audit_logs ORDER BY created_at DESC LIMIT 20");
 ?>
 
@@ -163,7 +155,6 @@ $logs = $conn->query("SELECT * FROM audit_logs ORDER BY created_at DESC LIMIT 20
     <div class="main">
 
         <h1>Admin Panel</h1>
-        <!-- System settings form -->
          <div class="card-container card-container--grid">
         <div class="card card--flex">
             <h3>System Settings</h3>
@@ -183,7 +174,6 @@ $logs = $conn->query("SELECT * FROM audit_logs ORDER BY created_at DESC LIMIT 20
             </form>
         </div>
 
-        <!-- Add new user form -->
         <div class="card card--flex">
             <h3>Add User</h3>
 
@@ -212,7 +202,6 @@ $logs = $conn->query("SELECT * FROM audit_logs ORDER BY created_at DESC LIMIT 20
         </div>
         <!-- Card Flex -->
 
-        <!-- Edit user form (shown only when edit is triggered) -->
         <?php if ($editUser): ?>
         <div class="card card--flex   <?= !$editUser ? 'card--empty' : '' ?>">
             <h3>Edit User</h3>
@@ -261,7 +250,7 @@ $logs = $conn->query("SELECT * FROM audit_logs ORDER BY created_at DESC LIMIT 20
 
                 <?php while ($u = $users->fetch_assoc()): ?>
                 <tr>
-                    <td>
+                    <td class="avatar--flex">
                         <?php if ($u['avatar']): ?>
                             <img class="avatar_img" src="../../resources/images/uploads/<?= $u['avatar'] ?>" alt="Avatar">
                         <?php endif; ?>

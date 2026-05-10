@@ -216,7 +216,6 @@
   pointer-events: none;
 }
 
-/* Icon mode: tooltip when hovering the icon link : FIRST HARD REFRESH*/
 .sidenav.collapsed .sidenav_main:hover .tooltip,
 .sidenav.collapsed
   .sidenav_footer-container
@@ -231,7 +230,6 @@
   pointer-events: none;
 }
 
-/* Expanded mode: show Collapse tooltip when hovering the header icon */
 .sidenav:not(.collapsed)
   .sidenav_header-container
   .sidenav_header_icon-container:hover
@@ -319,6 +317,7 @@
   text-align: center;
   margin-left: 4px;
   vertical-align: middle;
+  font-family: var(--tf-CAPTION);
 }
 
 @media (min-width: 767px) {
