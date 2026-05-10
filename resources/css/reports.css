@@ -90,7 +90,7 @@ td {
 }
 
 .product_ranking {
-  color: var(--caption-text-gray);
+  color: var(--caption-text-primary);
 }
 
 .product_ranking,
@@ -217,6 +217,7 @@ td {
   font-weight: var(--weight-BOLD);
 }
 .info-status_column {
+  padding-right: var(--padding-18px);
   font-weight: var(--weight-BOLD);
 }
 

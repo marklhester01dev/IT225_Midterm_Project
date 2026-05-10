@@ -416,7 +416,7 @@ if (isset($_GET['export']) && $_GET['export'] === 'excel') {
                 <th>Ingredient</th>
                 <th>Unit</th>
                 <th>Stock</th>
-                <th>Limit</th>
+                <th>Low Stock</th>
                 <th>Status</th>
             </tr>
             <?php foreach ($filteredIngredients as $i):
@@ -424,15 +424,15 @@ if (isset($_GET['export']) && $_GET['export'] === 'excel') {
                 $thr = $i['low_stock_threshold'] ?? 5;
 
                 if ($cls === 'badge-bad'){  
-                    $label = 'Low Stock';  
+                    $label = 'Low';  
                     $sc = 'stock-bad'; 
                 }
                 elseif ($cls === 'badge-mid'){ 
-                    $label = 'Normal Stock';  
+                    $label = 'Normal';  
                     $sc = 'stock-mid'; 
                 }
                 else{ 
-                    $label = 'High Stock'; 
+                    $label = 'High'; 
                     $sc = 'stock-good'; }
             ?>
             <tr>

@@ -25,6 +25,7 @@ td {
 }
 
 .info-status_column {
+  padding-right: var(--padding-18px);
   font-weight: var(--weight-BOLD);
 }
 

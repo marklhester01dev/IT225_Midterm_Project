@@ -145,7 +145,7 @@ if ($action === 'forgot_password') {
 
     if ($result->num_rows > 0) {
         $stmt->close();
-        header("Location: create_new_password.php?user=" . urlencode($username));
+        header("Location: auth/create_new_password.php?user=" . urlencode($username));
         exit;
     } else {
         flash('err', 'User not found.');
@@ -167,7 +167,7 @@ if ($action === 'create_new_password') {
 
     if ($password !== $confirm) {
         flash('err', 'Passwords do not match.');
-        header("Location: create_new_password.php?user=" . urlencode($username));
+        header("Location: auth/create_new_password.php?user=" . urlencode($username));
         exit;
     }
 

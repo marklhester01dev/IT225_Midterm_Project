@@ -158,7 +158,7 @@ $best_monthly = $conn->query("
                 <th>Ingredient</th>
                 <th>Unit</th>
                 <th>Stock</th>
-                <th>Limit</th>
+                <th>Low Stock</th>
                 <th>Status</th>
             </tr>
             <?php while ($i = $ingredients->fetch_assoc()): ?>
@@ -166,14 +166,14 @@ $best_monthly = $conn->query("
                 $thr = $i['low_stock_threshold'] ?? 5;
                 if ($i['stock'] <= $thr) {
                     $sc = "stock-bad";   
-                    $label = "Low Stock";
+                    $label = "Low";
                 } 
                 elseif ($i['stock'] <= $thr * 3) {
                     $sc = "stock-mid";  
-                    $label = "Normal Stock";
+                    $label = "Normal";
                 } else {
                     $sc = "stock-good"; 
-                    $label = "High Stock";
+                    $label = "High";
                 }
                 ?>
                 <tr>
