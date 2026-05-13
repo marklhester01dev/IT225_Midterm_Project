@@ -227,7 +227,6 @@ if (isset($_GET['export']) && $_GET['export'] === 'excel') {
         <a href="?filter=daily"    class="<?= $filter === 'daily'   ? 'active-filter' : '' ?>">Daily</a>
         <a href="?filter=weekly"   class="<?= $filter === 'weekly'  ? 'active-filter' : '' ?>">Weekly</a>
         <a href="?filter=monthly"  class="<?= $filter === 'monthly' ? 'active-filter' : '' ?>">Monthly</a>
-        <a href="reports_analysis.php" class="<?= !in_array($filter, ['daily','weekly','monthly']) ? 'active-filter' : '' ?>">All</a>
         <a href="?filter=<?= $filter ?>&export=excel" class="btn-excel">&#11015; Excel</a>
     </div>
 </div>
