@@ -18,6 +18,7 @@ $daily = $conn->query("
     FROM sales
     WHERE created_at >= CURDATE()
       AND created_at < CURDATE() + INTERVAL 1 DAY
+      AND status = 'Completed'
 ")->fetch_assoc()['total'] ?? 0;
 
 // Weekly sales total (last 7 days including today)
@@ -26,6 +27,7 @@ $weekly = $conn->query("
     FROM sales
     WHERE created_at >= CURDATE() - INTERVAL 6 DAY
       AND created_at < CURDATE() + INTERVAL 1 DAY
+      AND status = 'Completed'
 ")->fetch_assoc()['total'] ?? 0;
 
 // Monthly sales total (current month)
@@ -34,6 +36,7 @@ $monthly = $conn->query("
     FROM sales
     WHERE MONTH(created_at) = MONTH(CURDATE())
       AND YEAR(created_at) = YEAR(CURDATE())
+      AND status = 'Completed'
 ")->fetch_assoc()['total'] ?? 0;
 
 $today_orders = $conn->query("
@@ -41,6 +44,7 @@ $today_orders = $conn->query("
     FROM sales
     WHERE created_at >= CURDATE()
       AND created_at < CURDATE() + INTERVAL 1 DAY
+      AND status = 'Completed'
 ")->fetch_assoc()['c'] ?? 0;
 
 // Monthly revenue estimate (10% above current month)

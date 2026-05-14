@@ -19,7 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['add_sale'])) {
         $product_id      = intval($_POST['product_id']);
         $qty             = intval($_POST['quantity']);
-        $selected_addons = $_POST['addon_ids'] ?? [];
+        $selected_addons = isset($_POST['addon_ids']) ? (array)$_POST['addon_ids'] : [];
 
         if ($product_id <= 0 || $qty <= 0) {
             $_SESSION['flash'] = ['type' => 'error', 'msg' => 'Invalid product or quantity.'];
@@ -40,19 +40,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
 
         // Fetch selected add-ons and compute add-on total
-        $addon_total = 0;
-        $addons_data = [];
-        if (!empty($selected_addons)) {
-            $ids = implode(',', array_map('intval', $selected_addons));
+       $addon_total = 0;
+       $addons_data = [];
+    if (!empty($selected_addons)) {
+        $ids = implode(',', array_map('intval', $selected_addons));
+        if (!empty($ids)) {
             $res = $conn->query("SELECT addon_id, addon_name, price FROM addons WHERE addon_id IN ($ids) AND status='Available'");
-            while ($a = $res->fetch_assoc()) {
-                $addon_total += $a['price'];
-                $addons_data[] = $a;
+            if ($res && $res->num_rows > 0) {
+                while ($a = $res->fetch_assoc()) {
+                    $addon_total += floatval($a['price']);
+                    $addons_data[] = $a;
             }
         }
+    }
+}
 
-        // Compute total: (base price + addons) * quantity
-        $total = ($qty * $price) + ($addon_total * $qty);
+// Compute total: (base price + addons) * quantity
+$total = ($qty * floatval($price)) + ($addon_total * $qty);
 
         // Insert sale record
         $stmt = $conn->prepare(
@@ -314,7 +318,7 @@ unset($_SESSION['flash']);
             <thead>
                 <tr>
                     <th>ID</th>
-                    <th style="text-align: left; padding-left: 16px;">Product</th>
+                    <th>Product</th>
                     <th>Add-ons</th>
                     <th>Unit Price</th>
                     <th>Qty</th>
@@ -372,7 +376,11 @@ unset($_SESSION['flash']);
                     </td>
 
                     <!-- Unit pricing-->
-                    <td>&#8369;<?= number_format($row['total'] / max($row['quantity'], 1), 2) ?></td>
+                    <td>&#8369;<?= number_format($row['total'] / max($row['quantity'], 1), 2) ?>
+                    <?php if (!empty($all_addons[$row['sales_id']])): ?>
+                        <div class="product-category">incl. add-ons</div>
+                        <?php endif; ?>
+                        </td>
 
                     <!-- Quantity -->
                     <td><?= $row['quantity'] ?></td>
