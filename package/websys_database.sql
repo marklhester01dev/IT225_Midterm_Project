@@ -16,12 +16,10 @@
 
 
 -- Dumping database structure for login
-DROP DATABASE IF EXISTS `login`;
 CREATE DATABASE IF NOT EXISTS `login` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
 USE `login`;
 
 -- Dumping structure for table login.addons
-DROP TABLE IF EXISTS `addons`;
 CREATE TABLE IF NOT EXISTS `addons` (
   `addon_id` int NOT NULL AUTO_INCREMENT,
   `addon_name` varchar(100) NOT NULL,
@@ -30,14 +28,13 @@ CREATE TABLE IF NOT EXISTS `addons` (
   PRIMARY KEY (`addon_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Dumping data for table login.addons: ~5 rows (approximately)
+-- Dumping data for table login.addons: ~3 rows (approximately)
 INSERT INTO `addons` (`addon_id`, `addon_name`, `price`, `status`) VALUES
 	(1, 'Extra Shot', 20.00, 'Available'),
 	(2, 'Sea Salt Cream', 20.00, 'Available'),
 	(3, 'Cold Foam', 10.00, 'Available');
 
 -- Dumping structure for table login.audit_logs
-DROP TABLE IF EXISTS `audit_logs`;
 CREATE TABLE IF NOT EXISTS `audit_logs` (
   `log_id` int NOT NULL AUTO_INCREMENT,
   `user` varchar(100) DEFAULT NULL,
@@ -45,14 +42,13 @@ CREATE TABLE IF NOT EXISTS `audit_logs` (
   `details` text,
   `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`log_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- Dumping data for table login.audit_logs: ~1 rows (approximately)
 INSERT INTO `audit_logs` (`log_id`, `user`, `action`, `details`, `created_at`) VALUES
-	(18, 'cent', 'Reset Logs', 'All audit logs cleared', '2026-04-29 16:18:33');
+	(29, 'juan05', 'Reset Logs', 'All audit logs cleared', '2026-05-16 03:04:19');
 
 -- Dumping structure for table login.ingredients
-DROP TABLE IF EXISTS `ingredients`;
 CREATE TABLE IF NOT EXISTS `ingredients` (
   `ingredient_id` int NOT NULL AUTO_INCREMENT,
   `ingredient_name` varchar(255) DEFAULT NULL,
@@ -61,9 +57,9 @@ CREATE TABLE IF NOT EXISTS `ingredients` (
   `unit` varchar(50) DEFAULT 'pcs',
   `image` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`ingredient_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Dumping data for table login.ingredients: ~21 rows (approximately)
+-- Dumping data for table login.ingredients: ~22 rows (approximately)
 INSERT INTO `ingredients` (`ingredient_id`, `ingredient_name`, `stock`, `low_stock_threshold`, `unit`, `image`) VALUES
 	(3, 'Caramel Syrup', 20, 5, 'Bottle-based', '1776697458_Caramel_Syrup.webp'),
 	(4, 'Salted Caramel Syrup', 15, 5, 'Bottle-based', '1776697509_Salted_Caramel_Syrup.webp'),
@@ -85,10 +81,10 @@ INSERT INTO `ingredients` (`ingredient_id`, `ingredient_name`, `stock`, `low_sto
 	(20, 'Crushed Oreo', 20, 5, 'Pack-based', '1776701824_Crushed_Oreo.webp'),
 	(21, 'Matcha Powder', 20, 5, 'Pack-based', '1776701856_Matcha_Powder.webp'),
 	(22, 'Condensed Milk', 15, 5, 'Can-based', '1776701935_Condensed_Milk.webp'),
-	(23, ' Coffee Beans', 15, 5, 'Plastic-based', '1776702040_Coffee_Beans.webp');
+	(23, ' Coffee Beans', 15, 5, 'Plastic-based', '1776702040_Coffee_Beans.webp'),
+	(24, 'Caramel Sauce', 20, 10, 'Bottle-based', '');
 
 -- Dumping structure for table login.products
-DROP TABLE IF EXISTS `products`;
 CREATE TABLE IF NOT EXISTS `products` (
   `product_id` int NOT NULL AUTO_INCREMENT,
   `product_name` varchar(255) DEFAULT NULL,
@@ -97,7 +93,7 @@ CREATE TABLE IF NOT EXISTS `products` (
   `status` varchar(50) DEFAULT NULL,
   `image` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`product_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=72 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=73 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- Dumping data for table login.products: ~52 rows (approximately)
 INSERT INTO `products` (`product_id`, `product_name`, `category`, `price`, `status`, `image`) VALUES
@@ -155,7 +151,6 @@ INSERT INTO `products` (`product_id`, `product_name`, `category`, `price`, `stat
 	(71, 'Cold Foam', 'Add Ons', 10.00, 'Available', '1776271758_cold_foam.webp');
 
 -- Dumping structure for table login.sales
-DROP TABLE IF EXISTS `sales`;
 CREATE TABLE IF NOT EXISTS `sales` (
   `sales_id` int NOT NULL AUTO_INCREMENT,
   `product_id` int DEFAULT NULL,
@@ -168,22 +163,30 @@ CREATE TABLE IF NOT EXISTS `sales` (
   PRIMARY KEY (`sales_id`),
   KEY `fk_sales_product` (`product_id`),
   CONSTRAINT `fk_sales_product` FOREIGN KEY (`product_id`) REFERENCES `products` (`product_id`) ON DELETE SET NULL ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=44 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Dumping data for table login.sales: ~9 rows (approximately)
+-- Dumping data for table login.sales: ~18 rows (approximately)
 INSERT INTO `sales` (`sales_id`, `product_id`, `product_name`, `quantity`, `total`, `created_at`, `status`, `product_image`) VALUES
 	(25, 17, 'Americano', 1, 59.00, '2026-04-30 16:15:26', 'Cancelled', '1775783489_Americano.webp'),
 	(26, 22, 'Matcha Latte', 2, 170.00, '2026-04-30 16:22:57', 'Completed', '1775784311_Matcha_Latte.webp'),
 	(27, 60, 'Dirty Matcha', 1, 99.00, '2026-04-30 16:46:34', 'Completed', '1775879536_Dirty_Matcha.webp'),
 	(28, 17, 'Americano', 1, 59.00, '2026-04-30 23:54:16', 'Completed', '1775783489_Americano.webp'),
-	(29, 21, 'Latte', 1, 85.00, '2026-04-30 23:58:43', 'Completed', '1775784292_Latte.webp'),
-	(30, 25, 'Spanish Latte', 1, 100.00, '2026-05-01 14:15:23', 'Completed', '1775784363_Spanish_Latte.webp'),
-	(31, 39, 'Biscoff Milk', 3, 342.00, '2026-05-01 14:16:32', 'Completed', '1775784886_Biscoff_Milk.webp'),
-	(32, 29, 'Strawberry Milk', 2, 198.00, '2026-05-01 14:23:49', 'Completed', '1775784548_Strawberry_Milk.webp'),
-	(33, 42, 'Sea Salt Matcha', 1, 89.00, '2026-05-01 16:00:09', 'Completed', '1775785427_Sea_Salt_Sub_Oat.webp');
+	(29, 21, 'Latte', 1, 95.00, '2026-04-30 23:58:43', 'Completed', '1775784292_Latte.webp'),
+	(30, 25, 'Spanish Latte', 1, 105.00, '2026-05-01 14:15:23', 'Completed', '1775784363_Spanish_Latte.webp'),
+	(31, 39, 'Biscoff Milk', 3, 297.00, '2026-05-01 14:16:32', 'Completed', '1775784886_Biscoff_Milk.webp'),
+	(32, 29, 'Strawberry Milk', 2, 178.00, '2026-05-01 14:23:49', 'Completed', '1775784548_Strawberry_Milk.webp'),
+	(33, 42, 'Sea Salt Matcha', 1, 89.00, '2026-05-01 16:00:09', 'Completed', '1775785427_Sea_Salt_Sub_Oat.webp'),
+	(34, 26, 'Vietnamese', 1, 89.00, '2026-05-13 11:54:36', 'Completed', '1775784378_Vietnamese.webp'),
+	(35, 22, 'Matcha Latte', 10, 1050.00, '2026-05-13 11:54:43', 'Completed', '1775784311_Matcha_Latte.webp'),
+	(37, 26, 'Vietnamese', 2, 178.00, '2026-05-13 12:00:05', 'Completed', '1775784378_Vietnamese.webp'),
+	(38, 25, 'Spanish Latte', 1, 105.00, '2026-05-14 08:55:34', 'Completed', '1775784363_Spanish_Latte.webp'),
+	(39, 27, 'White Mocha Latte', 2, 210.00, '2026-05-14 12:23:16', 'Completed', '1775784428_White_Mocha_Latte.webp'),
+	(40, 59, 'Americano', 1, 65.00, '2026-05-14 12:23:39', 'Completed', '1775879479_Americano.webp'),
+	(41, 26, 'Vietnamese', 2, 138.00, '2026-05-14 12:23:59', 'Cancelled', '1775784378_Vietnamese.webp'),
+	(42, 24, 'Salted Caramel', 1, 95.00, '2026-05-16 02:36:11', 'Cancelled', '1775784347_Salted_Caramel.webp'),
+	(43, 22, 'Matcha Latte', 3, 315.00, '2026-05-16 03:26:23', 'Completed', '1775784311_Matcha_Latte.webp');
 
 -- Dumping structure for table login.sales_void
-DROP TABLE IF EXISTS `sales_void`;
 CREATE TABLE IF NOT EXISTS `sales_void` (
   `void_id` int NOT NULL AUTO_INCREMENT,
   `sale_id` int DEFAULT NULL,
@@ -197,7 +200,6 @@ CREATE TABLE IF NOT EXISTS `sales_void` (
 -- Dumping data for table login.sales_void: ~0 rows (approximately)
 
 -- Dumping structure for table login.sale_addons
-DROP TABLE IF EXISTS `sale_addons`;
 CREATE TABLE IF NOT EXISTS `sale_addons` (
   `id` int NOT NULL AUTO_INCREMENT,
   `sale_id` int NOT NULL,
@@ -207,16 +209,22 @@ CREATE TABLE IF NOT EXISTS `sale_addons` (
   PRIMARY KEY (`id`),
   KEY `sale_id` (`sale_id`),
   CONSTRAINT `sale_addons_ibfk_1` FOREIGN KEY (`sale_id`) REFERENCES `sales` (`sales_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Dumping data for table login.sale_addons: ~4 rows (approximately)
+-- Dumping data for table login.sale_addons: ~10 rows (approximately)
 INSERT INTO `sale_addons` (`id`, `sale_id`, `addon_id`, `addon_name`, `price`) VALUES
 	(1, 29, 1, 'Extra Shot', 20.00),
 	(2, 30, 2, 'Sea Salt Cream', 20.00),
-	(3, 31, 3, 'Cold Foam', 10.00);
+	(3, 31, 3, 'Cold Foam', 10.00),
+	(5, 34, 1, 'Extra Shot', 20.00),
+	(6, 35, 2, 'Sea Salt Cream', 20.00),
+	(7, 37, 1, 'Extra Shot', 20.00),
+	(8, 38, 1, 'Extra Shot', 20.00),
+	(9, 39, 1, 'Extra Shot', 20.00),
+	(10, 42, 3, 'Cold Foam', 10.00),
+	(11, 43, 1, 'Extra Shot', 20.00);
 
 -- Dumping structure for table login.settings
-DROP TABLE IF EXISTS `settings`;
 CREATE TABLE IF NOT EXISTS `settings` (
   `setting_id` int NOT NULL AUTO_INCREMENT,
   `store_name` varchar(150) DEFAULT NULL,
@@ -230,7 +238,6 @@ INSERT INTO `settings` (`setting_id`, `store_name`, `business_hours`, `currency`
 	(1, 'My Coffee Shop', '8AM - 10PM', 'PHP');
 
 -- Dumping structure for table login.users
-DROP TABLE IF EXISTS `users`;
 CREATE TABLE IF NOT EXISTS `users` (
   `user_id` int NOT NULL AUTO_INCREMENT,
   `username` varchar(50) NOT NULL,
@@ -241,15 +248,17 @@ CREATE TABLE IF NOT EXISTS `users` (
   `avatar` varchar(255) DEFAULT '',
   PRIMARY KEY (`user_id`),
   UNIQUE KEY `username` (`username`)
-) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Dumping data for table login.users: ~5 rows (approximately)
+-- Dumping data for table login.users: ~7 rows (approximately)
 INSERT INTO `users` (`user_id`, `username`, `password`, `role`, `fullname`, `status`, `avatar`) VALUES
 	(18, 'Alcoffee', '$2y$10$/SkVGKghlr2EgRczQY6Eh.wGmLksJp73iut8W1o9O7T686Im8doD2', 'staff', 'Alcoffee', 'active', '1776734079_ari.jpg'),
 	(19, 'cent', '$2y$10$DAgkgzeBAHPjUARf7pjp1OE5p13/VMy5KTZoHcdtzZlsNcjp6ntWe', 'admin', 'cent', 'active', '1776733093_gojo.jpeg'),
 	(23, 'piolo', '$2y$10$ycdPo3CPghUsPl1nJW6ISu2loH/Ww84hPjuNPjXjPdI.M9jCa.Psm', 'user', 'Piolo Pascual', 'active', ''),
 	(24, 'alden', '$2y$10$VfgTg6fIppVk7YEfA3WAtOIhjk7PeXbK.RBR37VHyS69N965f7pya', 'cashier', 'Alden Richards', 'active', ''),
-	(25, 'Jenruby', '$2y$10$3dUndxEwLJvAVnorJF8/suQsEQ0QEWQ/RSiXE1Q2kBTv0xIIOjJOi', 'user', 'Jennie Ruby', 'active', '');
+	(25, 'Jenruby', '$2y$10$3dUndxEwLJvAVnorJF8/suQsEQ0QEWQ/RSiXE1Q2kBTv0xIIOjJOi', 'user', 'Jennie Ruby', 'active', ''),
+	(26, 'juan05', '$2y$10$dYMxkB8S1Z6NQMkp53HChOlaBPOW30bEyUFPOBwEQihyHOtbMxfDe', 'user', 'Mark Lhester Pile', 'active', ''),
+	(35, 'Hello', '$2y$10$BSPuuWwDDZv.2SqkF/Ivdej76Q3ObRI.K/MkKYIf5w33RsE9OATVu', 'admin', 'Mark Lhester Pile', 'active', '');
 
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
